@@ -234,32 +234,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 );*/
 
                               }),
-                          googleAuthOnPressed: () async{
-                            Uri url = Uri.parse(
-                                'http://${AppConstants.workTypeLink}84?offline_place[]=1');
-                            var response = await http.put(url,
-                              headers: {
-                                'Authorization': 'Bearer 482|zQ3nGWnWf6JWvjNAp3CGZWQ24uysapQWn0RtDPMz',
-                              },
-                            );
-                            print(response.body);
-                          },
-                          facebookAuthOnPressed: () async{
-                            Uri url = Uri.parse(
-                                'http://${AppConstants.workTypeLink}84?');
-                            var response = await Dio().put('$url',
-                              data: {
-                                'offline_place':['1','2','3']
-                              },
-                              options: Options(
-                                headers: {
-                                  'Authorization': 'Bearer 482|zQ3nGWnWf6JWvjNAp3CGZWQ24uysapQWn0RtDPMz',
-                                },
-                              ),
-
-                            );
-                            print(response.data);
-                          },
+                          googleAuthOnPressed: () async{},
+                          facebookAuthOnPressed: () async{},
                         ),
                       ),
                        // account component

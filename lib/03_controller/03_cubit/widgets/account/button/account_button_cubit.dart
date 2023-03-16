@@ -15,7 +15,6 @@ class AccButtonCubit extends Cubit<AccButtonStates>{
   Color labelColor = AppColors.white;
   Color backgroundColor = AppColors.kPrimaryColor;
 
-  bool isChecked = false;
 
 
   signupOnPressed({String? name, String? email, String? pass, GlobalKey<FormState>? formKey, BuildContext? context}) {
@@ -54,16 +53,5 @@ class AccButtonCubit extends Cubit<AccButtonStates>{
     }
   }
 
-  changeCheckBoxValue(bool? value){
-    if(value == true){
-      isChecked = true;
-      //---------Shared logic preferences location
-      emit(CheckBoxCheckedState());
-    }
-    else{
-      isChecked = false;
-      //---------Shared logic preferences location
-      emit(CheckBoxUnCheckedState());
-    }
-  }
+
 }

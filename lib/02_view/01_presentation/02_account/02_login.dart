@@ -6,6 +6,8 @@ import 'package:jobsque/03_controller/00_navigation/routes.dart';
 import 'package:jobsque/03_controller/01_helper/validation.dart';
 import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/auth/auth_states.dart';
+import 'package:jobsque/03_controller/03_cubit/shared/shared_prefs_cubit.dart';
+import 'package:jobsque/03_controller/03_cubit/shared/shared_prefs_states.dart';
 import 'package:jobsque/03_controller/03_cubit/widgets/account/textfield/text_field_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/widgets/account/textfield/text_field_states.dart';
 import 'package:sizer/sizer.dart';
@@ -42,6 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
     AccButtonCubit accButtonCubit = AccButtonCubit.get(context);
     TextFieldCubit textFieldCubit = TextFieldCubit.get(context);
     AuthCubit authCubit = AuthCubit.get(context);
+    SharedPCubit sharedPCubit = SharedPCubit.get(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       key: scaffoldKey,
@@ -104,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             focusedBorderColor: AppColors.kPrimaryColor,
                             errorBorderColor: AppColors.red,
                             prefixIcon: Icons.person_outline_rounded,
-                            hintText: AppStrings.username,
+                            hintText: AppStrings.email,
                             hintColor: AppColors.lightGrey,
                             prefixIconColor: AppColors.lightGrey,
                             borderRadius: 3.w,
@@ -146,20 +149,24 @@ class _LoginScreenState extends State<LoginScreen> {
                               SizedBox(
                                 width: 5.w,
                                 height: 5.w,
-                                child: Checkbox(
-                                  value: accButtonCubit.isChecked,
-                                  onChanged: (value) {
-                                    accButtonCubit.changeCheckBoxValue(value);
-                                  },
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(1.w),
-                                  ),
-                                  activeColor: AppColors.kPrimaryColor,
-                                  side: BorderSide(
-                                    color: AppColors.lightGrey,
-                                    width: (1 / 3).w,
+                                child: BlocConsumer<SharedPCubit,SharedPStates>(
+                                  listener: (context,state){},
+                                  builder: (context,state)=> Checkbox(
+                                    value: sharedPCubit.isLoggedIn,
+                                    onChanged: (value) {
+                                      sharedPCubit.storeInSharedPrefs(value);
+                                    },
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(1.w),
+                                    ),
+                                    activeColor: AppColors.kPrimaryColor,
+                                    side: BorderSide(
+                                      color: AppColors.lightGrey,
+                                      width: (1 / 3).w,
+                                    ),
                                   ),
                                 ),
+
                               ),
                               SizedBox(
                                 width: 2.w,
@@ -232,7 +239,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   photo: cubit.registerUser.photo,
                                   id: cubit.registerUser.id,
                                 );*/
-
                               }),
                           googleAuthOnPressed: () async{},
                           facebookAuthOnPressed: () async{},

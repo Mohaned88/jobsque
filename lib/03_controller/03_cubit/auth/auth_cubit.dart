@@ -29,7 +29,10 @@ class AuthCubit extends Cubit<AuthStates> {
       if (response.statusCode == 200) {
         authorizationToken = data['token'];
         print('success \n token = $authorizationToken');
-        userModel = UserModel.fromMap(data, '\$user', password);
+        userModel!.id =data['\$user']['id'];
+        userModel!.name =data['\$user']['name'];
+        userModel!.email =data['\$user']['email'];
+        userModel!.password =password;
         print(userModel!.name);
         emit(LoginSuccessfullyState());
       } else {
@@ -55,7 +58,10 @@ class AuthCubit extends Cubit<AuthStates> {
       if (response.statusCode == 200) {
         authorizationToken = data['token'];
         print('success \n token = $authorizationToken');
-        userModel = UserModel.fromMap(data, 'data', password);
+        userModel!.id =data['data']['id'];
+        userModel!.name =data['data']['name'];
+        userModel!.email =data['data']['email'];
+        userModel!.password =password;
         print(userModel!.name);
         emit(RegisterSuccessfullyState());
       } else {

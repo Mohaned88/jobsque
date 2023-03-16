@@ -7,6 +7,7 @@ import 'package:jobsque/03_controller/03_cubit/screens/messages/messages_cubit.d
 import 'package:jobsque/03_controller/03_cubit/screens/notifications/notifications_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/saved_cubit/saved_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/type_selection/work_type_cubit.dart';
+import 'package:jobsque/03_controller/03_cubit/shared/shared_prefs_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/widgets/body/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/widgets/body/filter_bottom_sheet/filter_bottom_sheet_cubit.dart';
 import 'package:sizer/sizer.dart';
@@ -62,6 +63,9 @@ void main() async {
         ),
         BlocProvider(
           create: (context) => AuthCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SharedPCubit(),
         ),
       ],
       child: MyApp(),

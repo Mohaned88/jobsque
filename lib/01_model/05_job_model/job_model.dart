@@ -1,3 +1,5 @@
+import 'package:jobsque/02_view/04_utilities/res/assets.dart';
+
 class JobModel {
   int? id;
   String? name;
@@ -59,7 +61,7 @@ class JobModel {
     return JobModel(
       id: data['id'] as int,
       name: data['name'] as String,
-      image: data['image'] as String,
+      image: data['image'] == null ? AppAssets.twitterLogo :data['image'] as String ,
       types: [data['job_time_type'],data['job_type'],data['job_level']] as List<String>,
       description: data['job_description'] as String,
       skills: data['job_skill'] as String,

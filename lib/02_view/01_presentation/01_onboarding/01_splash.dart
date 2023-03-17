@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/02_view/04_utilities/res/assets.dart';
+import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
+import 'package:jobsque/03_controller/03_cubit/screens/home/home_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/shared/shared_prefs_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/shared/shared_prefs_states.dart';
 
@@ -16,6 +18,13 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SharedPCubit sharedPCubit = SharedPCubit.get(context);
     sharedPCubit.getFromSharedPrefs();
+    //sharedPCubit.getAuthTokenInSharedPrefs();
+    HomeCubit homeCubit = HomeCubit.get(context);
+    if((sharedPCubit.isFirstTime == false) && (sharedPCubit.isLoggedIn == true)){
+      print(sharedPCubit.token);
+      homeCubit.getRecentJobList(token: AuthCubit.authorizationToken);
+    }
+
     Timer(
       const Duration(seconds: 3),
           () => Navigator.pushReplacementNamed(

@@ -7,6 +7,7 @@ import 'package:jobsque/02_view/03_widgets/custom_text.dart';
 import 'package:jobsque/02_view/03_widgets/custom_text_field_ver2.dart';
 import 'package:jobsque/02_view/04_utilities/res/constants.dart';
 import 'package:jobsque/02_view/05_styles/colors.dart';
+import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/home/home_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/home/home_states.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/saved_cubit/saved_cubit.dart';
@@ -14,17 +15,28 @@ import 'package:jobsque/03_controller/03_cubit/screens/saved_cubit/saved_states.
 import 'package:sizer/sizer.dart';
 
 import '../../../03_controller/00_navigation/routes.dart';
-import '../../02_components/cards/job_type_card.dart';
 import '../../04_utilities/res/assets.dart';
 import '../../04_utilities/res/strings.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  @override
+  void initState() {
+    HomeCubit.get(context).getRecentJobList(token: AuthCubit.authorizationToken);
+  }
 
   @override
   Widget build(BuildContext context) {
     HomeCubit homeCubit = HomeCubit.get(context);
     SavedCubit savedCubit = SavedCubit.get(context);
+    AuthCubit authCubit = AuthCubit.get(context);
     return Scaffold(
       body: DefaultTabController(
         length: 3,
@@ -188,18 +200,31 @@ class HomeScreen extends StatelessWidget {
                 SliverList(
                   delegate: SliverChildListDelegate(
                     List.generate(
-                      AppConstants.suggestedJobs.length,
+                      homeCubit.recentJobs.length,
                       (index) => BlocConsumer<SavedCubit, SavedStates>(
-                        listener: (context, state) {},
-                        builder: (context, state) => JobPreviewCard(
-                          jobModel: AppConstants.suggestedJobs[index],
-                          saveOnPressed: () {
-                            savedCubit.addToSavedJobs(
-                                jobModel: AppConstants.suggestedJobs[index],
-                            );
+                        listener: (context,state){},
+                        builder: (context,state)=> BlocConsumer<HomeCubit,HomeStates>(
+                          listener: (context, state) {},
+                          builder: (context, state) {
+                            if(state is LoadingJobsListState){
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            else{
+                              return JobPreviewCard(
+                                jobModel: homeCubit.recentJobs[index],
+                                saveOnPressed: () {
+                                  savedCubit.addToSavedJobs(
+                                    jobModel: AppConstants.suggestedJobs[index],
+                                  );
+                                },
+                              );
+                            }
                           },
                         ),
                       ),
+
                     ),
                   ),
                 ),

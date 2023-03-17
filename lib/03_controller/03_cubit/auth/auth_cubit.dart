@@ -110,4 +110,5 @@ class AuthCubit extends Cubit<AuthStates> {
           "Work selection failed with error =========================>>>>>>>>>> $e");
     }
   }
+
 }

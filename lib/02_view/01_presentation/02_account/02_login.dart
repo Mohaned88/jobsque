@@ -11,6 +11,7 @@ import 'package:jobsque/03_controller/03_cubit/widgets/account/textfield/text_fi
 import 'package:jobsque/03_controller/03_cubit/widgets/account/textfield/text_field_states.dart';
 import 'package:sizer/sizer.dart';
 import '../../../03_controller/01_helper/snack_bar.dart';
+import '../../../03_controller/03_cubit/screens/home/home_cubit.dart';
 import '../../../03_controller/03_cubit/widgets/account/button/account_button_cubit.dart';
 import '../../../03_controller/03_cubit/widgets/account/button/account_button_states.dart';
 import '../../02_components/acc_screen_component.dart';
@@ -33,12 +34,14 @@ class _LoginScreenState extends State<LoginScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
+
   @override
   Widget build(BuildContext context) {
     AccButtonCubit accButtonCubit = AccButtonCubit.get(context);
     TextFieldCubit textFieldCubit = TextFieldCubit.get(context);
     AuthCubit authCubit = AuthCubit.get(context);
     SharedPCubit sharedPCubit = SharedPCubit.get(context);
+    HomeCubit homeCubit = HomeCubit.get(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       key: scaffoldKey,
@@ -199,7 +202,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushNamed(context, AppRoutes.bodyMainPageRoute);
                             ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
                             sharedPCubit.setUserDataInPrefs(userModel: authCubit.userModel);
-
+                            sharedPCubit.storeAuthTokenInSharedPrefs(AuthCubit.authorizationToken);
+                            //homeCubit.getRecentJobList(token: AuthCubit.authorizationToken);
                           }
                           if(state is LoginFailedState){
                             ScaffoldMessenger.of(context).showSnackBar(snackBarError);

@@ -11,3 +11,6 @@ class RegisterFailedState extends AuthStates{}
 
 class CollectedDataSuccessState extends AuthStates{}
 class CollectedDataFailState extends AuthStates{}
+
+class RetrieveListSuccessState extends AuthStates{}
+class RetrieveListFailState extends AuthStates{}

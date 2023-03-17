@@ -11,6 +11,9 @@ class SetIsLoggedInValueFalseState extends SharedPStates{}
 
 class SetIsFirstTimeValueFalseState extends SharedPStates{}
 
+class SetTokenInSharedPrefsState extends SharedPStates{}
+class GetTokenFromSharedPrefsState extends SharedPStates{}
+
 class SetUserDataInPrefs extends SharedPStates{}
 class GetUserDataInPrefs extends SharedPStates{}
 

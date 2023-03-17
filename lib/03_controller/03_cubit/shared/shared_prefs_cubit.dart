@@ -40,11 +40,26 @@ class SharedPCubit extends Cubit<SharedPStates>{
     }
   }
 
+  String token = '';
+
+  storeAuthTokenInSharedPrefs(String token) async{
+    final SharedPreferences prefs = await _prefs;
+      prefs.setString('token', token);
+      emit(SetTokenInSharedPrefsState());
+  }
+
+  getAuthTokenInSharedPrefs() async{
+    final SharedPreferences prefs = await _prefs;
+    token = prefs.getString('token')!;
+    emit(GetTokenFromSharedPrefsState());
+    return prefs.getString('token')!;
+  }
+
   setUserDataInPrefs({UserModel? userModel})async{
     final SharedPreferences prefs = await _prefs;
     prefs.setString('email', userModel!.email!);
     prefs.setString('name', userModel.name!);
-    prefs.setString('photo', userModel.photo!);
+    //prefs.setString('photo', userModel.photo!);
     prefs.setString('id', userModel.id.toString());
     emit(SetUserDataInPrefs());
   }

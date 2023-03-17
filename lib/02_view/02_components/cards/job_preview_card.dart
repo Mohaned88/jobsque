@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/apply_job/01_apply_job_main.dart';
-import 'package:jobsque/03_controller/00_navigation/routes.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../01_model/05_job_model/job_model.dart';
@@ -51,7 +50,7 @@ class JobPreviewCard extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 3.w),
                     child: Image.asset(
-                      jobModel!.photo ?? AppAssets.twitterLogo,
+                      jobModel!.image ?? AppAssets.twitterLogo,
                       width: 10.w,
                       height: 10.w,
                     ),
@@ -61,7 +60,7 @@ class JobPreviewCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomText(
-                          text: jobModel!.title ?? AppStrings.applyJobTitle,
+                          text: jobModel!.name ?? AppStrings.applyJobTitle,
                           fontWeight: FontWeight.w500,
                           fontSize: 18,
                           height: 1.3,
@@ -69,7 +68,7 @@ class JobPreviewCard extends StatelessWidget {
                         ),
                         CustomText(
                           text:
-                              '${jobModel!.company ?? AppStrings.applyJobLocationCompany} • ${jobModel!.city ?? AppStrings.applyJobLocationCity} , ${jobModel!.country ?? AppStrings.applyJobLocationCountry}',
+                              '${jobModel!.company ?? AppStrings.applyJobLocationCompany} • ${jobModel!.location ?? AppStrings.applyJobLocationCity}',
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
                           height: 1.5,
@@ -121,7 +120,7 @@ class JobPreviewCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       CustomText(
-                        text: '\$${jobModel!.maxSalary!}',
+                        text: '\$${jobModel!.salary!.split('-')[1].toString()}',
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                         height: 1.3,

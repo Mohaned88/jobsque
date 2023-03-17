@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jobsque/02_view/01_presentation/02_account/03_type_selection.dart';
 import 'package:jobsque/03_controller/00_navigation/routes.dart';
 import 'package:jobsque/03_controller/01_helper/validation.dart';
 import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
@@ -11,7 +10,6 @@ import 'package:jobsque/03_controller/03_cubit/shared/shared_prefs_states.dart';
 import 'package:jobsque/03_controller/03_cubit/widgets/account/textfield/text_field_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/widgets/account/textfield/text_field_states.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../../03_controller/01_helper/snack_bar.dart';
 import '../../../03_controller/03_cubit/widgets/account/button/account_button_cubit.dart';
 import '../../../03_controller/03_cubit/widgets/account/button/account_button_states.dart';
@@ -19,13 +17,9 @@ import '../../02_components/acc_screen_component.dart';
 import '../../03_widgets/custom_text.dart';
 import '../../03_widgets/custom_text_field.dart';
 import '../../04_utilities/res/assets.dart';
-import '../../04_utilities/res/constants.dart';
 import '../../04_utilities/res/strings.dart';
 import '../../05_styles/colors.dart';
 
-import 'package:http/http.dart' as http;
-
-import 'package:dio/dio.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -69,11 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Form(
               key: formKey,
               child: BlocConsumer<AccButtonCubit, AccButtonStates>(
-                listener: (BuildContext context, state) {
-                  if(state is LoginSuccessfullyState){
-                    sharedPCubit.setUserDataInPrefs(userModel: authCubit.userModel);
-                  }
-                },
+                listener: (BuildContext context, state) {},
                 builder: (BuildContext context, Object? state) {
                   return Column(
                     mainAxisSize: MainAxisSize.max,
@@ -206,8 +196,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       BlocConsumer<AuthCubit,AuthStates>(
                         listener: (context,state){
                           if(state is LoginSuccessfullyState){
-                            Navigator.pushNamed(context, AppRoutes.workTypeRoute);
+                            Navigator.pushNamed(context, AppRoutes.bodyMainPageRoute);
                             ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess);
+                            sharedPCubit.setUserDataInPrefs(userModel: authCubit.userModel);
 
                           }
                           if(state is LoginFailedState){
@@ -225,24 +216,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           buttonOnPressed: accButtonCubit.loginOnPressed(
                               email: nameController.text,
                               pass: passController.text,
-                              formKey: formKey,
                               onPressed: () async{
                                 if (formKey.currentState!.validate()) {
                                   authCubit.login(password: passController.text, mail: nameController.text);
-                                  //Navigator.pushNamed(context, AppRoutes.workTypeRoute);
                                 }
-                                /*await cubit.registerByEmailAndPassword(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  name: nameController.text,
-                                );
-                            sharedPCubit.storeInSharedPrefs(logState: true);
-                            sharedPCubit.setUserDataInPrefs(
-                                  email:emailController.text,
-                                  name:cubit.registerUser.name,
-                                  photo: cubit.registerUser.photo,
-                                  id: cubit.registerUser.id,
-                                );*/
                               }),
                           googleAuthOnPressed: () async{},
                           facebookAuthOnPressed: () async{},

@@ -8,7 +8,7 @@ import '../../../../04_utilities/res/strings.dart';
 class ApplyJobTab1 extends StatelessWidget {
 
   final String jobDescription;
-  final List<String> requiredSills;
+  final String requiredSills;
 
   const ApplyJobTab1({
     Key? key,
@@ -52,21 +52,14 @@ class ApplyJobTab1 extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 2.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.generate(
-              requiredSills.length,
-              (index) => CustomText(
-                text: '• ${requiredSills[index]}',
+          child:  CustomText(
+                text: requiredSills,
                 fontWeight: FontWeight.w400,
                 fontSize: 12,
                 height: 1.5,
                 color: AppColors.textGrey2,
-
               ),
-            ),
           ),
-        ),
       ],
     );
   }

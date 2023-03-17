@@ -20,7 +20,7 @@ class SplashScreen extends StatelessWidget {
       const Duration(seconds: 3),
           () => Navigator.pushReplacementNamed(
         context,
-        sharedPCubit.isFirstTime == true? AppRoutes.onBoardingRoute : sharedPCubit.isLoggedIn == true? AppRoutes.bodyMainPageRoute : AppRoutes.signUpRoute,
+        sharedPCubit.isFirstTime == true? AppRoutes.onBoardingRoute : sharedPCubit.isLoggedIn == true? AppRoutes.bodyMainPageRoute : AppRoutes.logInRoute,
       ),
     );
     return Scaffold(

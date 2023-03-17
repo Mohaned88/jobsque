@@ -6,6 +6,7 @@ import 'package:jobsque/03_controller/03_cubit/widgets/account/button/account_bu
 import '../../../../../02_view/05_styles/colors.dart';
 import '../../../auth/auth_cubit.dart';
 
+
 class AccButtonCubit extends Cubit<AccButtonStates>{
 
   AccButtonCubit() :super(InitialButtonState());
@@ -14,8 +15,6 @@ class AccButtonCubit extends Cubit<AccButtonStates>{
 
   Color labelColor = AppColors.white;
   Color backgroundColor = AppColors.kPrimaryColor;
-
-
 
   signupOnPressed({String? name, String? email, String? pass, GlobalKey<FormState>? formKey, BuildContext? context}) {
     AuthCubit authCubit = AuthCubit.get(context!);
@@ -39,7 +38,7 @@ class AccButtonCubit extends Cubit<AccButtonStates>{
     }
   }
 
-  loginOnPressed({String? email, String? pass, GlobalKey<FormState>? formKey, VoidCallback? onPressed}) {
+  loginOnPressed({String? email, String? pass, VoidCallback? onPressed}) {
     if (email!.isEmpty && pass!.isEmpty) {
       labelColor = AppColors.grey;
       backgroundColor = AppColors.midLightGrey;

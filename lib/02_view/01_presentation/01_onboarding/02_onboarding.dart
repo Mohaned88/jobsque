@@ -62,7 +62,7 @@ class OnBoardingScreen extends StatelessWidget {
                                 sharedPCubit.storeFirstTimeInSharedPrefs();
                                 Navigator.pushReplacementNamed(
                                   context,
-                                  AppRoutes.logInRoute,
+                                  AppRoutes.signUpRoute,
                                 );
                               },
                               child: const CustomText(
@@ -106,7 +106,7 @@ class OnBoardingScreen extends StatelessWidget {
                               sharedPCubit.storeFirstTimeInSharedPrefs();
                               Navigator.pushReplacementNamed(
                                 context,
-                                AppRoutes.logInRoute,
+                                AppRoutes.signUpRoute,
                               );
                             } else {
                               pageController.nextPage(

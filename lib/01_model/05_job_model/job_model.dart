@@ -1,71 +1,76 @@
-class JobModel{
-  final int? id;
-  final String? photo;
-  final String? title;
-  final List<String>? types;
-  final String? minSalary;
-  final String? maxSalary;
-  final String? company;
-  final String? country;
-  final String? city;
-  final String? description;
-  final List<String>? skills;
-  final String? companyMail;
-  final String? companyWebSite;
-  final String? aboutCompany;
+class JobModel {
+  int? id;
+  String? name;
+  String? image;
+  List<String>? types;
+  String? description;
+  String? skills;
+  String? company;
+  String? companyMail;
+  String? companyWebSite;
+  String? aboutCompany;
+  String? location;
+  String? salary;
+  int? favorites;
+  int? expired;
 
-  const JobModel({
+  JobModel({
     this.id,
-    this.photo,
-    this.title,
+    this.name,
+    this.image,
     this.types,
-    this.minSalary,
-    this.maxSalary,
-    this.company,
-    this.country,
-    this.city,
     this.description,
     this.skills,
+    this.company,
     this.companyMail,
     this.companyWebSite,
     this.aboutCompany,
+    this.location,
+    this.salary,
+    this.favorites,
+    this.expired,
   });
 
   Map<String, dynamic> toMap() {
-    return {
-      'id': id,
-      'photo': photo,
-      'title': title,
-      'types': types,
-      'minSalary': minSalary,
-      'maxSalary': maxSalary,
-      'company': company,
-      'country': country,
-      'city': city,
-      'description': description,
-      'skills': skills,
-      'companyMail': companyMail,
-      'companyWebSite': companyWebSite,
-      'aboutCompany': aboutCompany,
-    };
+    Map<String, dynamic> data = {};
+
+    data['data']['id'] = id;
+    data['data']['name'] = name;
+    data['data']['image'] = image;
+    data['data']['job_time_type'] = types![0];
+    data['data']['job_type'] = types![1];
+    data['data']['job_level'] = types![2];
+    data['data']['job_description'] = description;
+    data['data']['job_skill'] = skills;
+    data['data']['comp_name'] = company;
+    data['data']['comp_email'] = companyMail;
+    data['data']['comp_website'] = companyWebSite;
+    data['data']['about_comp'] = aboutCompany;
+    data['data']['location'] = location;
+    data['data']['salary'] = salary;
+    data['data']['expired'] = expired;
+    data['data']['favorites'] = favorites;
+
+    return data;
   }
 
   factory JobModel.fromMap(Map<String, dynamic> map) {
+    var data = map['data'];
     return JobModel(
-      id: map['id'] as int,
-      photo: map['photo'] as String,
-      title: map['title'] as String,
-      types: map['types'] as List<String>,
-      minSalary: map['minSalary'] as String,
-      maxSalary: map['maxSalary'] as String,
-      company: map['company'] as String,
-      country: map['country'] as String,
-      city: map['city'] as String,
-      description: map['description'] as String,
-      skills: map['skills'] as List<String>,
-      companyMail: map['companyMail'] as String,
-      companyWebSite: map['companyWebSite'] as String,
-      aboutCompany: map['aboutCompany'] as String,
+      id: data['id'] as int,
+      name: data['name'] as String,
+      image: data['image'] as String,
+      types: [data['job_time_type'],data['job_type'],data['job_level']] as List<String>,
+      description: data['job_description'] as String,
+      skills: data['job_skill'] as String,
+      company: data['comp_name'] as String,
+      companyMail: data['comp_email'] as String,
+      companyWebSite: data['comp_website'] as String,
+      aboutCompany: data['about_comp'] as String,
+      location: data['location'] as String,
+      salary: data['salary'] as String,
+      expired: data['expired'],
+      favorites: data['favorites'],
     );
   }
 }

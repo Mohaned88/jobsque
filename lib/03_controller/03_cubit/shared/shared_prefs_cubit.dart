@@ -59,19 +59,21 @@ class SharedPCubit extends Cubit<SharedPStates>{
 
   getFromSharedPrefs()async{
     final SharedPreferences prefs = await _prefs;
-    isLoggedIn = prefs.getBool('loggedIn');
-    isFirstTime = prefs.getBool('isFirstTime');
     emit(SetIsLoggedInValueState());
-    if(prefs.getBool('loggedIn')! == true){
+    if(prefs.getBool('loggedIn') == true){
+      isLoggedIn = prefs.getBool('loggedIn');
       emit(LoggedInState());
     }
     else {
+      isLoggedIn = false;
       emit(SignedOutState());
     }
-    if(prefs.getBool('isFirstTime')! == false){
+    if(prefs.getBool('isFirstTime') == false){
+      isFirstTime = prefs.getBool('isFirstTime');
       emit(NotFirstTimeState());
     }
     else {
+      isFirstTime = true;
       emit(FirstTimeState());
     }
   }

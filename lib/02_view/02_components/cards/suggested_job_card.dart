@@ -50,10 +50,10 @@ class SuggestedJobCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(2.w),
                 color: AppColors.white,
               ),
-              child: Image.asset(jobModel!.photo ?? AppAssets.excelLogo),
+              child: Image.asset(jobModel!.image ?? AppAssets.excelLogo),
             ),
             title: CustomText(
-              text: jobModel!.title ?? '',
+              text: jobModel!.name ?? '',
               fontWeight: FontWeight.w500,
               fontSize: 18,
               height: 1.3,
@@ -62,7 +62,7 @@ class SuggestedJobCard extends StatelessWidget {
                   : AppColors.kPrimaryBlack,
             ),
             subtitle: CustomText(
-              text: '${jobModel!.company} • ${jobModel!.country}',
+              text: '${jobModel!.company} • ${jobModel!.location}',
               fontWeight: FontWeight.w400,
               fontSize: 12,
               height: 1.5,
@@ -115,7 +115,7 @@ class SuggestedJobCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       CustomText(
-                        text: '\$${jobModel!.minSalary}-${jobModel!.maxSalary}',
+                        text: '\$${jobModel!.salary}',
                         fontWeight: FontWeight.w500,
                         fontSize: 20,
                         height: 1.2,

@@ -78,7 +78,7 @@ class ApplyJobScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Image.asset(
-                        jobModel!.photo ?? AppAssets.twitterLogo,
+                        jobModel!.image ?? AppAssets.twitterLogo,
                         width: 13.w,
                         height: 13.w,
                       ),
@@ -86,7 +86,7 @@ class ApplyJobScreen extends StatelessWidget {
                         height: 3.w,
                       ),
                       CustomText(
-                        text: jobModel!.title ?? AppStrings.applyJobTitle,
+                        text: jobModel!.name ?? AppStrings.applyJobTitle,
                         textAlign: TextAlign.center,
                         fontWeight: FontWeight.w500,
                         fontSize: 20,
@@ -95,7 +95,7 @@ class ApplyJobScreen extends StatelessWidget {
                       ),
                       CustomText(
                         text:
-                        '${jobModel!.company ?? AppStrings.applyJobLocationCompany} • ${jobModel!.city ??AppStrings.applyJobLocationCity} , ${jobModel!.country ?? AppStrings.applyJobLocationCountry}',
+                        '${jobModel!.company ?? AppStrings.applyJobLocationCompany} • ${jobModel!.location ??AppStrings.applyJobLocationCity}',
                         textAlign: TextAlign.center,
                         fontWeight: FontWeight.w400,
                         fontSize: 12,
@@ -166,7 +166,7 @@ class ApplyJobScreen extends StatelessWidget {
                             ApplyJobTab1(
                               jobDescription:
                               jobModel!.description ?? AppStrings.applyJobDescriptionSubTitle,
-                              requiredSills: jobModel!.skills ?? AppStrings.applyJobRequiredSkills,
+                              requiredSills: jobModel!.skills ?? '',
                             ),
                             ApplyJobTab2(
                               email: jobModel!.companyMail ?? AppStrings.applyJobCompanyEmail,

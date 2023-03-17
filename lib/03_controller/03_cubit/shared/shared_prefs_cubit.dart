@@ -13,9 +13,10 @@ class SharedPCubit extends Cubit<SharedPStates>{
   final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
   bool? isLoggedIn = false;
 
+
   UserModel? userModel;
 
-  storeInSharedPrefs(bool? value) async{
+  storeLoggedInSharedPrefs(bool? value) async{
     final SharedPreferences prefs = await _prefs;
     if(value == true){
       prefs.setBool('loggedIn', true);
@@ -25,6 +26,17 @@ class SharedPCubit extends Cubit<SharedPStates>{
       prefs.setBool('loggedIn', false);
       isLoggedIn = false;
       emit(SetIsLoggedInValueFalseState());
+    }
+  }
+
+  bool? isFirstTime = true;
+
+  storeFirstTimeInSharedPrefs() async{
+    final SharedPreferences prefs = await _prefs;
+    if(isFirstTime == true){
+      prefs.setBool('isFirstTime', false);
+      isLoggedIn = false;
+      emit(SetIsFirstTimeValueFalseState());
     }
   }
 
@@ -48,12 +60,19 @@ class SharedPCubit extends Cubit<SharedPStates>{
   getFromSharedPrefs()async{
     final SharedPreferences prefs = await _prefs;
     isLoggedIn = prefs.getBool('loggedIn');
+    isFirstTime = prefs.getBool('isFirstTime');
     emit(SetIsLoggedInValueState());
     if(prefs.getBool('loggedIn')! == true){
       emit(LoggedInState());
     }
     else {
       emit(SignedOutState());
+    }
+    if(prefs.getBool('isFirstTime')! == false){
+      emit(NotFirstTimeState());
+    }
+    else {
+      emit(FirstTimeState());
     }
   }
 }

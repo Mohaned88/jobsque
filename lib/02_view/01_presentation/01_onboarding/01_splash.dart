@@ -1,34 +1,44 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/02_view/04_utilities/res/assets.dart';
+import 'package:jobsque/03_controller/03_cubit/shared/shared_prefs_cubit.dart';
+import 'package:jobsque/03_controller/03_cubit/shared/shared_prefs_states.dart';
 
 import '../../../03_controller/00_navigation/routes.dart';
-import '02_onboarding.dart';
+
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    SharedPCubit sharedPCubit = SharedPCubit.get(context);
+    sharedPCubit.getFromSharedPrefs();
     Timer(
       const Duration(seconds: 3),
-      () => Navigator.pushReplacementNamed(
+          () => Navigator.pushReplacementNamed(
         context,
-        AppRoutes.onBoardingRoute,
+        sharedPCubit.isFirstTime == true? AppRoutes.onBoardingRoute : sharedPCubit.isLoggedIn == true? AppRoutes.bodyMainPageRoute : AppRoutes.signUpRoute,
       ),
     );
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        fit: StackFit.expand,
-        children: [
-          Image.asset(
-            AppAssets.blurPath,
-            fit: BoxFit.cover,
-          ),
-          Image.asset(AppAssets.logoPath),
-        ],
+      body: BlocConsumer<SharedPCubit,SharedPStates>(
+        listener: (context,state){},
+        builder: (context,state){
+          return Stack(
+            alignment: Alignment.center,
+            fit: StackFit.expand,
+            children: [
+              Image.asset(
+                AppAssets.blurPath,
+                fit: BoxFit.cover,
+              ),
+              Image.asset(AppAssets.logoPath),
+            ],
+          );
+        },
       ),
     );
   }

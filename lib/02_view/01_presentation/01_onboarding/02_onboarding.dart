@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/02_view/02_components/cards/page_card.dart';
 import 'package:jobsque/02_view/03_widgets/custom_elevated_button.dart';
 import 'package:jobsque/02_view/04_utilities/res/assets.dart';
+import 'package:jobsque/03_controller/03_cubit/shared/shared_prefs_cubit.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../03_controller/00_navigation/routes.dart';
@@ -18,6 +19,7 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     OnBoardingButtonCubit cubit = OnBoardingButtonCubit.get(context);
+    SharedPCubit sharedPCubit = SharedPCubit.get(context);
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -57,6 +59,7 @@ class OnBoardingScreen extends StatelessWidget {
                             alignment: Alignment.centerRight,
                             child: TextButton(
                               onPressed: () {
+                                sharedPCubit.storeFirstTimeInSharedPrefs();
                                 Navigator.pushReplacementNamed(
                                   context,
                                   AppRoutes.logInRoute,
@@ -100,6 +103,7 @@ class OnBoardingScreen extends StatelessWidget {
                         return CustomElevatedButton(
                           onPressed: () {
                             if (cubit.pageIndex == 2) {
+                              sharedPCubit.storeFirstTimeInSharedPrefs();
                               Navigator.pushReplacementNamed(
                                 context,
                                 AppRoutes.logInRoute,

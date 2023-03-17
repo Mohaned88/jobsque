@@ -69,7 +69,11 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Form(
               key: formKey,
               child: BlocConsumer<AccButtonCubit, AccButtonStates>(
-                listener: (BuildContext context, state) {},
+                listener: (BuildContext context, state) {
+                  if(state is LoginSuccessfullyState){
+                    sharedPCubit.setUserDataInPrefs(userModel: authCubit.userModel);
+                  }
+                },
                 builder: (BuildContext context, Object? state) {
                   return Column(
                     mainAxisSize: MainAxisSize.max,
@@ -154,7 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   builder: (context,state)=> Checkbox(
                                     value: sharedPCubit.isLoggedIn,
                                     onChanged: (value) {
-                                      sharedPCubit.storeInSharedPrefs(value);
+                                      sharedPCubit.storeLoggedInSharedPrefs(value);
                                     },
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(1.w),

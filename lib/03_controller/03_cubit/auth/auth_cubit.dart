@@ -17,7 +17,7 @@ class AuthCubit extends Cubit<AuthStates> {
 
   static String authorizationToken = "";
 
-  UserModel? userModel;
+  UserModel userModel = UserModel();
 
   login({required String password, required String mail}) async {
     try {
@@ -29,11 +29,12 @@ class AuthCubit extends Cubit<AuthStates> {
       if (response.statusCode == 200) {
         authorizationToken = data['token'];
         print('success \n token = $authorizationToken');
-        userModel!.id =data['\$user']['id'];
-        userModel!.name =data['\$user']['name'];
-        userModel!.email =data['\$user']['email'];
-        userModel!.password =password;
-        print(userModel!.name);
+        //print(password);
+        userModel.id =data['\$user']['id'];
+        userModel.name =data['\$user']['name'];
+        userModel.email =data['\$user']['email'];
+        userModel.password =password;
+        print(userModel.name);
         emit(LoginSuccessfullyState());
       } else {
         print('failed');

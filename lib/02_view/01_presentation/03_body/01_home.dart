@@ -26,10 +26,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   void initState() {
-    HomeCubit.get(context).getRecentJobList(token: AuthCubit.authorizationToken);
+    HomeCubit.get(context)
+        .getRecentJobList(token: AuthCubit.authorizationToken);
+    HomeCubit.get(context).getSuggestJobList(
+        token: AuthCubit.authorizationToken,
+        userID: AuthCubit.get(context).userModel.id!);
   }
 
   @override
@@ -42,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
         length: 3,
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 4.w),
+            padding: EdgeInsets.symmetric(horizontal: 2.w),
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
@@ -53,8 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const CustomText(
-                            text: AppStrings.homeScreenTitle,
+                          CustomText(
+                            text: '${AppStrings.homeScreenTitle}${authCubit.userModel.name}👋',
                             fontWeight: FontWeight.w500,
                             fontSize: 24,
                             height: 1.4,
@@ -104,71 +107,84 @@ class _HomeScreenState extends State<HomeScreen> {
                       errorBorderColor: AppColors.red,
                       hintText: AppStrings.homeScreenSearch,
                       hintColor: AppColors.textsGrey,
+                      hintHeight: 1.4,
+                      cursorHeight: 5.w,
                       onTap: () {
                         Navigator.pushNamed(context, AppRoutes.searchPageRoute);
                       },
                     ),
                   ),
                 ),
-                SliverToBoxAdapter(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const CustomText(
-                            text: AppStrings.homeScreenSuggestedJob,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 18,
-                            height: 1.3,
-                            color: AppColors.kPrimaryBlack,
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: const CustomText(
-                              text: AppStrings.homeScreenViewAll,
+                if(homeCubit.suggestJobs.isNotEmpty)...[
+                  SliverToBoxAdapter(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const CustomText(
+                              text: AppStrings.homeScreenSuggestedJob,
                               fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                              height: 1.4,
-                              color: AppColors.kPrimaryColor,
+                              fontSize: 18,
+                              height: 1.3,
+                              color: AppColors.kPrimaryBlack,
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.w,
-                      ),
-                      BlocConsumer<HomeCubit, HomeStates>(
-                        listener: (context, state) {},
-                        builder: (context, state) => SizedBox(
-                          height: 50.w,
-                          child: BannerCarousel(
-                            viewportFraction: 0.9,
-                            showIndicator: false,
-                            disableColor: Colors.green,
-                            indicatorBottom: false,
-                            margin: const EdgeInsets.all(0),
-                            height: 50.w,
-                            onPageChanged: (int index) {
-                              homeCubit.changeEnabledItemColor(index);
-                            },
-                            customizedBanners: List.generate(
-                              AppConstants.suggestedJobs.length,
-                              (index) => SuggestedJobCard(
-                                fillColor: homeCubit.itemColors[index],
-                                jobModel: AppConstants.suggestedJobs[index],
-                                saveOnPressed: () {},
+                            InkWell(
+                              onTap: () {},
+                              child: const CustomText(
+                                text: AppStrings.homeScreenViewAll,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                                height: 1.4,
+                                color: AppColors.kPrimaryColor,
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 5.w,
+                        ),
+                        BlocConsumer<HomeCubit, HomeStates>(
+                          listener: (context, state) {},
+                          builder: (context, state) {
+                            if(state is LoadingSuggestColorListState){
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            else {
+                              return SizedBox(
+                                height: 50.w,
+                                child: BannerCarousel(
+                                  viewportFraction: 0.9,
+                                  showIndicator: false,
+                                  disableColor: Colors.green,
+                                  indicatorBottom: false,
+                                  margin: const EdgeInsets.all(0),
+                                  height: 50.w,
+                                  onPageChanged: (int index) {
+                                    homeCubit.changeEnabledItemColor(index);
+                                  },
+                                  customizedBanners: List.generate(
+                                    homeCubit.suggestJobs.length,
+                                        (index) => SuggestedJobCard(
+                                      fillColor: homeCubit.itemColors[index],
+                                      jobModel: homeCubit.suggestJobs[index],
+                                      saveOnPressed: () {},
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                ], // Banner Carousel
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 3.w),
@@ -202,16 +218,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     List.generate(
                       homeCubit.recentJobs.length,
                       (index) => BlocConsumer<SavedCubit, SavedStates>(
-                        listener: (context,state){},
-                        builder: (context,state)=> BlocConsumer<HomeCubit,HomeStates>(
+                        listener: (context, state) {},
+                        builder: (context, state) =>
+                            BlocConsumer<HomeCubit, HomeStates>(
                           listener: (context, state) {},
                           builder: (context, state) {
-                            if(state is LoadingJobsListState){
+                            if (state is LoadingJobsListState) {
                               return const Center(
                                 child: CircularProgressIndicator(),
                               );
-                            }
-                            else{
+                            } else {
                               return JobPreviewCard(
                                 jobModel: homeCubit.recentJobs[index],
                                 saveOnPressed: () {
@@ -224,7 +240,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                         ),
                       ),
-
                     ),
                   ),
                 ),

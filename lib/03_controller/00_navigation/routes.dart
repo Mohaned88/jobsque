@@ -18,11 +18,12 @@ class AppRoutes {
   //--------------Body
 
   static const String bodyMainPageRoute = "bodyMainPageRoute";
-  static const String homePageRoute = "homePageRoute";
+  //static const String homePageRoute = "homePageRoute";
   static const String searchPageRoute = "searchPageRoute";
   static const String profilePageRoute = "profilePageRoute";
   static const String notificationsPageRoute = "notificationsPageRoute";
   static const String savedPageRoute = "savedPageRoute";
+  static const String chatPageRoute = "chatPageRoute";
 
   //--------------Apply Job
 

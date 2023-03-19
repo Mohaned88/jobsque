@@ -57,22 +57,22 @@ class JobModel {
   }
 
   factory JobModel.fromMap(Map<String, dynamic> map) {
-    var data = map['data'];
+    //var data = map['data'];
     return JobModel(
-      id: data['id'] as int,
-      name: data['name'] as String,
-      image: data['image'] == null ? AppAssets.twitterLogo :data['image'] as String ,
-      types: [data['job_time_type'],data['job_type'],data['job_level']] as List<String>,
-      description: data['job_description'] as String,
-      skills: data['job_skill'] as String,
-      company: data['comp_name'] as String,
-      companyMail: data['comp_email'] as String,
-      companyWebSite: data['comp_website'] as String,
-      aboutCompany: data['about_comp'] as String,
-      location: data['location'] as String,
-      salary: data['salary'] as String,
-      expired: data['expired'],
-      favorites: data['favorites'],
+      id: map['id'],
+      name: map['name'],
+      image: map['image'] ?? AppAssets.twitterLogo,
+      types: [map['job_time_type'],map['job_type'],map['job_level']],
+      description: map['job_description'],
+      skills: map['job_skill'],
+      company: map['comp_name'],
+      companyMail: map['comp_email'],
+      companyWebSite: map['comp_website'],
+      aboutCompany: map['about_comp'],
+      location: map['location'],
+      salary: map['salary'],
+      expired: map['expired'],
+      favorites: map['favorites'],
     );
   }
 }

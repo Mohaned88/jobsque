@@ -11,15 +11,13 @@ class MessagesCubit extends Cubit<MessagesStates> {
   static MessagesCubit get(BuildContext context) =>
       BlocProvider.of<MessagesCubit>(context);
 
-  List<MessageModel> messages = [
-    MessageModel(
-      id: 0,
-      time: DateTime.now().toString(),
-      date: DateTime.now().weekday.toString(),
-      message: 'welcome mohaned we have received your application',
-      receiverID: 'ri1',
-      senderID: 'si1',
-      senderName: 'Twitter',
-    ),
-  ];
+  List<MessageModel> messages = List.generate(5, (index) => MessageModel(
+    id: 0,
+    time: DateTime.now().toString(),
+    date: DateTime.now().weekday.toString(),
+    message: 'welcome mohaned we have received your application',
+    receiverID: 'ri1',
+    senderID: 'si1',
+    senderName: 'Twitter',
+  ),);
 }

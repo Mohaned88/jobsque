@@ -12,25 +12,27 @@ import 'package:dio/dio.dart';
 
 import '../../../../02_view/04_utilities/res/assets.dart';
 
-class HomeCubit extends Cubit<HomeStates>{
-
-  HomeCubit() :super(InitialHomeState());
+class HomeCubit extends Cubit<HomeStates> {
+  HomeCubit() : super(InitialHomeState());
 
   static HomeCubit get(context) => BlocProvider.of<HomeCubit>(context);
 
   Color enabledColor = AppColors.kDarkBlue;
 
-  List<Color> itemColors = List.generate(AppConstants.suggestedJobs.length, (index) => index == 0 ? AppColors.kDarkBlue : AppColors.whiteGrey);
+  List<Color> itemColors = [];
 
-  changeEnabledItemColor(int index){
-    itemColors = List.generate(AppConstants.suggestedJobs.length, (index) => AppColors.whiteGrey);
-    itemColors[index] = enabledColor;
+  changeEnabledItemColor(int index) {
+    emit(LoadingSuggestColorListState());
+    List<Color> itemColors2 = List.generate(
+        suggestJobs.length, (index) => AppColors.whiteGrey);
+    itemColors2[index] = enabledColor;
+    itemColors = itemColors2;
     emit(EnabledItemColorState());
   }
 
-  List<JobModel> recentJobs =[];
+  List<JobModel> recentJobs = [];
 
-  getRecentJobList({required String token})async{
+  getRecentJobList({required String token}) async {
     emit(LoadingJobsListState());
     try {
       Uri url = Uri.parse('http://${AppConstants.jobsLink}');
@@ -47,26 +49,51 @@ class HomeCubit extends Cubit<HomeStates>{
       print(response.statusCode);
       print(response.data['data']);
       if (response.statusCode == 200) {
-        response.data['data'].forEach((element){
-          recentJobs.add(
-              JobModel(
-            id: element['id'],
-            name: element['name'],
-            image: element['image'] ?? AppAssets.twitterLogo,
-            types: [element['job_time_type'],element['job_type'],element['job_level']],
-            description: element['job_description'],
-            skills: element['job_skill'],
-            company: element['comp_name'],
-            companyMail: element['comp_email'],
-            companyWebSite: element['comp_website'],
-            aboutCompany: element['about_comp'],
-            location: element['location'],
-            salary: element['salary'],
-            expired: element['expired'],
-            favorites: element['favorites'],
-          )
-          );
-        });
+        response.data['data'].forEach(
+          (element) {
+            recentJobs.add(
+              JobModel.fromMap(element),
+            );
+          },
+        );
+        print(response.data['data'][1]);
+        emit(RetrieveListSuccessState());
+      } else {
+        emit(RetrieveListFailState());
+      }
+    } catch (e) {
+      print(
+          "Retrieve List failed with error =========================>>>>>>>>>> $e");
+    }
+  }
+
+  List<JobModel> suggestJobs = [];
+
+  getSuggestJobList({required String token,required int userID}) async {
+    emit(LoadingJobsListState());
+    try {
+      Uri url = Uri.parse('http://${AppConstants.suggestJobsLink}$userID');
+      var headers = {
+        'Authorization': 'Bearer $token',
+      };
+      print(headers);
+      var response = await Dio().get(
+        '$url',
+        options: Options(
+          headers: headers,
+        ),
+      );
+      print(response.statusCode);
+      print(response.data['data']);
+      if (response.statusCode == 200) {
+        response.data['data'].forEach(
+              (element) {
+                suggestJobs.add(
+              JobModel.fromMap(element),
+            );
+          },
+        );
+        changeEnabledItemColor(0);
         print(response.data['data'][1]);
         emit(RetrieveListSuccessState());
       } else {

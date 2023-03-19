@@ -8,6 +8,7 @@ import 'package:jobsque/03_controller/03_cubit/screens/messages/messages_states.
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../03_controller/00_navigation/routes.dart';
 import '../../03_widgets/custom_elevated_button_ver2.dart';
 import '../../03_widgets/custom_text.dart';
 import '../../04_utilities/res/strings.dart';
@@ -227,7 +228,12 @@ class MessageScreen extends StatelessWidget {
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
                     childCount: messagesCubit.messages.length,
-                    (context, index) => MessagePreviewCard(),
+                    (context, index) => MessagePreviewCard(
+                      onTap: (){
+                        Navigator.pushNamed(context, AppRoutes.chatPageRoute);
+                      },
+                    ),
+
                   ),
                 );
                 //if not empty

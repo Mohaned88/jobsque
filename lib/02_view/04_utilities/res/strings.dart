@@ -287,7 +287,7 @@ class AppStrings {
 
   //--------------Home Screens
 
-  static const String homeScreenTitle = 'Hi, Rafif Dian👋';
+  static const String homeScreenTitle = 'Hi, ';
   static const String homeScreenSubTitle =
       'Create a better future for yourself here';
   static const String homeScreenSearch = 'Search....';

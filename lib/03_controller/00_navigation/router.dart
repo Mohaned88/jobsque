@@ -8,6 +8,7 @@ import 'package:jobsque/02_view/01_presentation/03_body/apply_job/02_personal_In
 import 'package:jobsque/02_view/01_presentation/03_body/apply_job/03_type_of_work.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/apply_job/04_uploade_docs.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/apply_job/05_back_to_home.dart';
+import 'package:jobsque/02_view/01_presentation/03_body/message_tab/chat_screen.dart';
 //---------------------------OnBoarding
 import '../../02_view/01_presentation/01_onboarding/01_splash.dart';
 import '../../02_view/01_presentation/01_onboarding/02_onboarding.dart';
@@ -137,6 +138,12 @@ Route<dynamic> onGenerate(RouteSettings routeSettings) {
     case AppRoutes.savedPageRoute:
       return MaterialPageRoute(
         builder: (context) => const SavedScreen(),
+        settings: routeSettings,
+      );
+
+    case AppRoutes.chatPageRoute:
+      return MaterialPageRoute(
+        builder: (context) => const ChatScreen(),
         settings: routeSettings,
       );
 

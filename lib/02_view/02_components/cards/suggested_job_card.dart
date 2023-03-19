@@ -34,130 +34,134 @@ class SuggestedJobCard extends StatelessWidget {
         color: fillColor,
         borderRadius: BorderRadius.circular(5.w),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ListTile(
-            contentPadding: const EdgeInsets.all(0),
-            minVerticalPadding: 0,
-            leading: Container(
-              width: 12.w,
-              height: 12.w,
-              padding: EdgeInsets.all(2.w),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(2.w),
-                color: AppColors.white,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 1.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            ListTile(
+              contentPadding: const EdgeInsets.all(0),
+              minVerticalPadding: 0,
+              leading: Container(
+                width: 12.w,
+                height: 12.w,
+                padding: EdgeInsets.all(2.w),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(2.w),
+                  color: AppColors.white,
+                ),
+                child: Image.asset(jobModel!.image ?? AppAssets.excelLogo),
               ),
-              child: Image.asset(jobModel!.image ?? AppAssets.excelLogo),
-            ),
-            title: CustomText(
-              text: jobModel!.name ?? '',
-              fontWeight: FontWeight.w500,
-              fontSize: 18,
-              height: 1.3,
-              color: fillColor == AppColors.kDarkBlue
-                  ? AppColors.white
-                  : AppColors.kPrimaryBlack,
-            ),
-            subtitle: CustomText(
-              text: '${jobModel!.company} • ${jobModel!.location}',
-              fontWeight: FontWeight.w400,
-              fontSize: 12,
-              height: 1.5,
-              color: fillColor == AppColors.kDarkBlue
-                  ? AppColors.midLightGrey
-                  : AppColors.grey,
-            ),
-            trailing: IconButton(
-              onPressed: saveOnPressed,
-              padding: const EdgeInsets.all(0),
-              icon: Image.asset(
-                AppAssets.bottomBarIcon[3],
+              title: CustomText(
+                text: jobModel!.name ?? '',
+                fontWeight: FontWeight.w500,
+                fontSize: 18,
+                height: 1.3,
                 color: fillColor == AppColors.kDarkBlue
                     ? AppColors.white
                     : AppColors.kPrimaryBlack,
               ),
+              subtitle: CustomText(
+                text: '${jobModel!.company} • ${jobModel!.location}',
+                fontWeight: FontWeight.w400,
+                fontSize: 12,
+                height: 1.5,
+                color: fillColor == AppColors.kDarkBlue
+                    ? AppColors.midLightGrey
+                    : AppColors.grey,
+              ),
+              trailing: IconButton(
+                onPressed: saveOnPressed,
+                padding: const EdgeInsets.all(0),
+                icon: Image.asset(
+                  AppAssets.bottomBarIcon[3],
+                  color: fillColor == AppColors.kDarkBlue
+                      ? AppColors.white
+                      : AppColors.kPrimaryBlack,
+                ),
+              ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.generate(
-              jobModel!.types!.length,
-              (index) => Expanded(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 1.w),
-                  child: JobTypeCard(
-                    label: jobModel!.types![index],
-                    fillColor: fillColor == AppColors.kDarkBlue
-                        ? AppColors.white.withOpacity(0.15)
-                        : AppColors.kBlue200,
-                    labelColor: fillColor == AppColors.kDarkBlue
-                        ? AppColors.white
-                        : AppColors.kPrimaryColor,
+            SizedBox(height: 2.w,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(
+                jobModel!.types!.length,
+                (index) => Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 1.w),
+                    child: JobTypeCard(
+                      label: jobModel!.types![index],
+                      fillColor: fillColor == AppColors.kDarkBlue
+                          ? AppColors.white.withOpacity(0.15)
+                          : AppColors.kBlue200,
+                      labelColor: fillColor == AppColors.kDarkBlue
+                          ? AppColors.white
+                          : AppColors.kPrimaryColor,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 9.w,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      CustomText(
-                        text: '\$${jobModel!.salary}',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
-                        height: 1.2,
-                        color: fillColor == AppColors.kDarkBlue
-                            ? AppColors.white
-                            : AppColors.kPrimaryBlack,
-                      ),
-                      const CustomText(
-                        text: AppStrings.suggestedJobsSalaryPer,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                        height: 1.4,
-                        color: AppColors.grey,
-                      ),
-                    ],
-                  ),
-                ),
-                CustomElevatedButton(
-                  width: 27.w,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ApplyJobScreen(
-                          jobModel: jobModel,
+            SizedBox(height: 2.w,),
+            SizedBox(
+              height: 9.w,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        CustomText(
+                          text: '\$${jobModel!.salary}',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          height: 1.2,
+                          color: fillColor == AppColors.kDarkBlue
+                              ? AppColors.white
+                              : AppColors.kPrimaryBlack,
                         ),
-                      ),
-                    );
-                  },
-                  borderRadius: 10.w,
-                  labelColor: AppColors.white,
-                  label: 'Apply Now',
-                  labelFontSize: 12,
-                  labelFontWeight: FontWeight.w500,
-                  backgroundColor: AppColors.kPrimaryColor,
-                  alignment: Alignment.center,
-                  height: 9.w,
-                ),
-              ],
+                        const CustomText(
+                          text: AppStrings.suggestedJobsSalaryPer,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                          height: 1.4,
+                          color: AppColors.grey,
+                        ),
+                      ],
+                    ),
+                  ),
+                  CustomElevatedButton(
+                    width: 27.w,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ApplyJobScreen(
+                            jobModel: jobModel,
+                          ),
+                        ),
+                      );
+                    },
+                    borderRadius: 10.w,
+                    labelColor: AppColors.white,
+                    label: 'Apply Now',
+                    labelFontSize: 12,
+                    labelFontWeight: FontWeight.w500,
+                    backgroundColor: AppColors.kPrimaryColor,
+                    alignment: Alignment.center,
+                    height: 9.w,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

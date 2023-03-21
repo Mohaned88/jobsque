@@ -141,11 +141,6 @@ Route<dynamic> onGenerate(RouteSettings routeSettings) {
         settings: routeSettings,
       );
 
-    case AppRoutes.chatPageRoute:
-      return MaterialPageRoute(
-        builder: (context) => const ChatScreen(),
-        settings: routeSettings,
-      );
 
     default:
       return MaterialPageRoute(

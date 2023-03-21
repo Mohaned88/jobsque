@@ -192,4 +192,5 @@ class AppConstants {
   static const String workTypeLink ='134.209.132.80/api/user/profile/';
   static const String jobsLink = '134.209.132.80/api/jobs';
   static const String suggestJobsLink = '134.209.132.80/api/jobs/sugest/';
+  static const String getChatLink = '134.209.132.80/api/chat?';
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jobsque/02_view/01_presentation/03_body/message_tab/chat_screen.dart';
 import 'package:jobsque/02_view/02_components/cards/message_preview_card.dart';
 import 'package:jobsque/02_view/03_widgets/custom_text_field_ver2.dart';
 import 'package:jobsque/02_view/04_utilities/res/assets.dart';
+import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/messages/messages_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/messages/messages_states.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -21,6 +23,7 @@ class MessageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MessagesCubit messagesCubit = MessagesCubit.get(context);
+    AuthCubit authCubit = AuthCubit.get(context);
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -175,7 +178,7 @@ class MessageScreen extends StatelessWidget {
           BlocConsumer<MessagesCubit, MessagesStates>(
             listener: (context, state) {},
             builder: (context, state) {
-              if (messagesCubit.messages.isEmpty) {
+              if (messagesCubit.companies.isEmpty) {
                 //if empty
                 return SliverToBoxAdapter(
                   child: Column(
@@ -227,13 +230,17 @@ class MessageScreen extends StatelessWidget {
                 //if Not Empty
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
-                    childCount: messagesCubit.messages.length,
+                    childCount: 3,
                     (context, index) => MessagePreviewCard(
-                      onTap: (){
-                        Navigator.pushNamed(context, AppRoutes.chatPageRoute);
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => ChatScreen(userID: authCubit.userModel.id!, compID: index+1,),
+                          ),
+                        );
                       },
                     ),
-
                   ),
                 );
                 //if not empty

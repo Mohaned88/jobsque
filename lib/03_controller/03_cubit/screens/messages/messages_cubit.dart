@@ -13,11 +13,11 @@ class MessagesCubit extends Cubit<MessagesStates> {
   static MessagesCubit get(BuildContext context) =>
       BlocProvider.of<MessagesCubit>(context);
 
-  List<MessageModel> messages =[];
+  List<MessageModel> messagesList =[];
   List companies =[1,2,3];
 
   getChatList({required int userId,required int compId,required String token}) async{
-    messages =[];
+    messagesList =[];
     emit(LoadingMessagesListState());
     try {
       Uri url = Uri.parse('http://${AppConstants.getChatLink}user_id=$userId&comp_id=$compId');
@@ -34,7 +34,7 @@ class MessagesCubit extends Cubit<MessagesStates> {
         print(response.data);
         response.data['data'].forEach(
               (element) {
-            messages.add(
+            messagesList.add(
               MessageModel.fromMap(element),
             );
           },
@@ -47,6 +47,32 @@ class MessagesCubit extends Cubit<MessagesStates> {
     } catch (e) {
       print(
           '====================>>>>>>>>>>>>> Get Chat List Failed With Error $e');
+    }
+  }
+
+  sendMessage({required int userId,required int compId,required String message,required String token}) async{
+    try {
+      Uri url = Uri.parse('http://${AppConstants.userSendLink}massage=$message&user_id=$userId&comp_id=$compId');
+      var headers = {
+        'Authorization': 'Bearer $token',
+      };
+      var response = await Dio().post(
+        '$url',
+        options: Options(
+          headers: headers,
+        ),
+      );
+      if(response.statusCode == 200) {
+        print(response.data);
+        getChatList(userId: userId, compId: compId, token: token);
+        emit(SentMessageSuccessState());
+      }
+      else{
+        emit(SentMessageFailState());
+      }
+    } catch (e) {
+      print(
+          '====================>>>>>>>>>>>>> Sending Message Failed With Error $e');
     }
   }
 }

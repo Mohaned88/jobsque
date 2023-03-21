@@ -19,87 +19,97 @@ class MessageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (isIncoming == 'company') {
-      return Align(
-        alignment: Alignment.centerLeft,
-        child: Padding(
-          padding: EdgeInsets.only(left: 4.w, right: 10.w),
-          child: Container(
-            margin: EdgeInsets.only(bottom: 3.w),
-            decoration: BoxDecoration(
-              color: AppColors.offWhite2,
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(3.w),
-                bottomLeft: Radius.circular(3.w),
-                topRight: Radius.circular(3.w),
+      return Padding(
+        padding: EdgeInsets.only(left: 4.w,right: 10.w),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Flexible(
+              child: Container(
+                margin: EdgeInsets.only(bottom: 3.w),
+                decoration: BoxDecoration(
+                  color: AppColors.offWhite2,
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(3.w),
+                    bottomLeft: Radius.circular(3.w),
+                    topRight: Radius.circular(3.w),
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(3.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText(
+                        text: message,
+                        color: AppColors.kPrimaryBlack,
+                        textAlign: TextAlign.left,
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: CustomText(
+                          text: DateFormat.Hm().format(dateTime),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          height: 1.5,
+                          color: AppColors.midLightGrey,
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-            child: Padding(
-              padding: EdgeInsets.all(3.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  CustomText(
-                    text: message,
-                    color: AppColors.kPrimaryBlack,
-                    textAlign: TextAlign.left,
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: CustomText(
-                      text: DateFormat.Hm().format(dateTime),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      height: 1.5,
-                      color: AppColors.midLightGrey,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+            const Expanded(child: SizedBox()),
+          ],
         ),
       );
     } else {
-      return Align(
-        alignment: Alignment.centerRight,
-        child: Padding(
-          padding: EdgeInsets.only(left: 10.w, right: 4.w),
-          child: Container(
-            margin: EdgeInsets.only(bottom: 3.w),
-            decoration: BoxDecoration(
-              color: AppColors.kPrimaryColor,
-              borderRadius: BorderRadius.only(
-                bottomRight: Radius.circular(3.w),
-                bottomLeft: Radius.circular(3.w),
-                topLeft: Radius.circular(3.w),
+      return Padding(
+        padding: EdgeInsets.only(left: 10.w,right: 4.w),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            const Expanded(child: SizedBox()),
+            Flexible(
+              child: Container(
+                margin: EdgeInsets.only(bottom: 3.w),
+                decoration: BoxDecoration(
+                  color: AppColors.kPrimaryColor,
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(3.w),
+                    bottomLeft: Radius.circular(3.w),
+                    topLeft: Radius.circular(3.w),
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(3.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      CustomText(
+                        text: message,
+                        color: AppColors.whiteGrey,
+                        textAlign: TextAlign.left,
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: CustomText(
+                          text: DateFormat.Hm().format(dateTime),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          height: 1.5,
+                          color: AppColors.offWhite2,
+                          textAlign: TextAlign.right,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
-            child: Padding(
-              padding: EdgeInsets.all(3.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  CustomText(
-                    text: message,
-                    color: AppColors.whiteGrey,
-                    textAlign: TextAlign.left,
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: CustomText(
-                      text: DateFormat.Hm().format(dateTime),
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      height: 1.5,
-                      color: AppColors.offWhite2,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          ],
         ),
       );
     }

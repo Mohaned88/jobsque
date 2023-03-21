@@ -81,4 +81,5 @@ class AppAssets{
   static const String noSavedJobsImage = 'assets/01_images/03_body/saved/no_saved_jobs_image.png';
   static const String savedJobsMoreIcon = 'assets/01_images/03_body/saved/more.png';
   static const String noMessagesImage = 'assets/01_images/03_body/messages/no_messages_image.png';
+  static const String pinIcon = 'assets/01_images/03_body/messages/pin.png';
 }

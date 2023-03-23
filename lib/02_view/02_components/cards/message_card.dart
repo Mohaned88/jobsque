@@ -25,6 +25,7 @@ class MessageCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Flexible(
+              fit: FlexFit.tight,
               child: Container(
                 margin: EdgeInsets.only(bottom: 3.w),
                 decoration: BoxDecoration(
@@ -73,6 +74,7 @@ class MessageCard extends StatelessWidget {
           children: [
             const Expanded(child: SizedBox()),
             Flexible(
+              fit: FlexFit.tight,
               child: Container(
                 margin: EdgeInsets.only(bottom: 3.w),
                 decoration: BoxDecoration(

@@ -13,6 +13,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../02_components/job_filter_bottom_sheet.dart';
+import '../../../02_components/message3bottomsheet.dart';
 import '../../../03_widgets/custom_text_field.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -99,6 +100,9 @@ class _ChatScreenState extends State<ChatScreen> {
                       IconButton(
                         onPressed: () {
                           showMaterialModalBottomSheet(
+                            ///////////////////
+                            useRootNavigator: true,
+
                             context: context,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
@@ -106,7 +110,16 @@ class _ChatScreenState extends State<ChatScreen> {
                                 topLeft: Radius.circular(5.w),
                               ),
                             ),
-                            builder: (_) => const MyCustomBottomSheet(),
+                            builder: (context) => BlocProvider.value(
+                              value: messagesCubit,
+                              child: Padding(
+                                padding: EdgeInsets.all(5.w),
+                                child: SizedBox(
+                                  height: 55.h,
+                                  child: const Message3BottomSheet(),
+                                ),
+                              ),
+                            ),
                           );
                         },
                         icon: Image.asset(

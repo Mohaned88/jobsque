@@ -353,6 +353,7 @@ class AppStrings {
   static const String profileReviewed = 'Reviewed';
   static const String profileContacted = 'Contacted';
   static const String profileAbout = 'About';
+  static const String profileAboutInfo = "I'm Rafif Dian Axelingga, I’m UI/UX Designer, I have experience designing UI Design for approximately 1 year. I am currently joining the Vektora studio team based in Surakarta, Indonesia.I am a person who has a high spirit and likes to work to achieve what I dream of.";
   static const String profileGeneral = 'General';
   static const String profileEdit = 'Edit';
   static const String profileEditProfile = 'Edit Profile';

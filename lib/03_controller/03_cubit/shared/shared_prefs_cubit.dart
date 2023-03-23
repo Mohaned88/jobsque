@@ -66,9 +66,9 @@ class SharedPCubit extends Cubit<SharedPStates>{
 
   getUserDataInPrefs()async{
     final SharedPreferences prefs = await _prefs;
-   /* var response = await firebaseFirestore.collection('users').doc(prefs.getString('id')).get();
-    //print('-----------------------------------------${response.data()}');
-    userModel = UserModel.fromMap(response.data());*/
+    userModel!.name = prefs.getString('name');
+    userModel!.email = prefs.getString('email');
+    //userModel.id = int.parse(prefs.getString('id').toString());
     emit(GetUserDataInPrefs());
   }
 

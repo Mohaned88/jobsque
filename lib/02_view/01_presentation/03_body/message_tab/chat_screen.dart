@@ -13,7 +13,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../02_components/job_filter_bottom_sheet.dart';
-import '../../../02_components/message3bottomsheet.dart';
+import '../../../03_widgets/messages_filter.dart';
 import '../../../03_widgets/custom_text_field.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -116,7 +116,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                 padding: EdgeInsets.all(5.w),
                                 child: SizedBox(
                                   height: 55.h,
-                                  child: const Message3BottomSheet(),
+                                  child: const MessagesFilterBottomSheet(),
                                 ),
                               ),
                             ),

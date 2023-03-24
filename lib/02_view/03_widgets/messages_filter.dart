@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import '../03_widgets/custom_elevated_button_ver3.dart';
+import 'custom_elevated_button_ver3.dart';
 import '../04_utilities/res/assets.dart';
 import '../05_styles/colors.dart';
 
-class Message3BottomSheet extends StatelessWidget {
-  const Message3BottomSheet({Key? key}) : super(key: key);
+class MessagesFilterBottomSheet extends StatelessWidget {
+  const MessagesFilterBottomSheet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

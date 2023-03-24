@@ -277,7 +277,9 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         ProfileSettingsCard(
                           hasIcon: true,
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.pushNamed(context, AppRoutes.profilePortfolioRoute);
+                          },
                           title: AppStrings.profilePortfolio,
                           icon: AppAssets.profilePortfolioImage,
                         ),

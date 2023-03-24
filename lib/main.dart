@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/apply_job/apply_job_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/home/home_cubit.dart';
+import 'package:jobsque/03_controller/03_cubit/screens/language/language_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/location_selection/preferred_loaction_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/messages/messages_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/notifications/notifications_cubit.dart';
@@ -66,6 +67,9 @@ void main() async {
         ),
         BlocProvider(
           create: (context) => SharedPCubit(),
+        ),
+        BlocProvider(
+          create: (context) => LanguageCubit(),
         ),
       ],
       child: MyApp(),

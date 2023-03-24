@@ -9,6 +9,7 @@ import 'package:jobsque/02_view/01_presentation/03_body/apply_job/04_uploade_doc
 import 'package:jobsque/02_view/01_presentation/03_body/apply_job/05_back_to_home.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/01_edit_profile.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/02_portfolio.dart';
+import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/03_languages.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/privacy_policy.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/terms_and_conditions.dart';
 //---------------------------OnBoarding
@@ -146,6 +147,12 @@ Route<dynamic> onGenerate(RouteSettings routeSettings) {
     case AppRoutes.profileEditProfileRoute:
       return MaterialPageRoute(
         builder: (context) => const EditProfileScreen(),
+        settings: routeSettings,
+      );
+
+    case AppRoutes.profileLanguageSelectionRoute:
+      return MaterialPageRoute(
+        builder: (context) => const LanguageSelectionScreen(),
         settings: routeSettings,
       );
 

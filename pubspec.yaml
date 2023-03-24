@@ -103,6 +103,7 @@ flutter:
    - assets/01_images/03_body/messages/
    - assets/01_images/03_body/profile/
    - assets/01_images/03_body/profile/edit_profile/
+   - assets/01_images/03_body/profile/country_flags/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

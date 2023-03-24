@@ -285,7 +285,9 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         ProfileSettingsCard(
                           hasIcon: true,
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.pushNamed(context, AppRoutes.profileLanguageSelectionRoute);
+                          },
                           title: AppStrings.profileLanguage,
                           icon: AppAssets.profileLanguagesImage,
                         ),

@@ -90,4 +90,16 @@ class AppAssets{
   static const String profilePortfolioImage = 'assets/01_images/03_body/profile/portfolio.png';
   static const String profileLogout = 'assets/01_images/03_body/profile/logout.png';
   static const String cameraIcon = 'assets/01_images/03_body/profile/edit_profile/camera.png';
+  static const List<String> languagesFlags = [
+    'assets/01_images/03_body/profile/country_flags/01_England.png',
+    'assets/01_images/03_body/profile/country_flags/02_Indonesia.png',
+    'assets/01_images/03_body/profile/country_flags/03_Saudi_Arabia.png',
+    'assets/01_images/03_body/profile/country_flags/04_China.png',
+    'assets/01_images/03_body/profile/country_flags/05_Netherlands.png',
+    'assets/01_images/03_body/profile/country_flags/06_France.png',
+    'assets/01_images/03_body/profile/country_flags/07_Germany.png',
+    'assets/01_images/03_body/profile/country_flags/08_Japan.png',
+    'assets/01_images/03_body/profile/country_flags/09_South_Korea.png',
+    'assets/01_images/03_body/profile/country_flags/10_Portugal.png'
+  ];
 }

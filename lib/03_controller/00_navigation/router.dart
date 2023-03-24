@@ -3,12 +3,12 @@ import 'package:jobsque/02_view/01_presentation/03_body/00_body_main.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/02_search.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/03_notifications.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/04_saved.dart';
-import 'package:jobsque/02_view/01_presentation/03_body/apply_job/01_apply_job_main.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/apply_job/02_personal_Info_apply_form.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/apply_job/03_type_of_work.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/apply_job/04_uploade_docs.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/apply_job/05_back_to_home.dart';
-import 'package:jobsque/02_view/01_presentation/03_body/message_tab/chat_screen.dart';
+import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/privacy_policy.dart';
+import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/terms_and_conditions.dart';
 //---------------------------OnBoarding
 import '../../02_view/01_presentation/01_onboarding/01_splash.dart';
 import '../../02_view/01_presentation/01_onboarding/02_onboarding.dart';
@@ -138,6 +138,18 @@ Route<dynamic> onGenerate(RouteSettings routeSettings) {
     case AppRoutes.savedPageRoute:
       return MaterialPageRoute(
         builder: (context) => const SavedScreen(),
+        settings: routeSettings,
+      );
+
+    case AppRoutes.profileTermsNConditionsRoute:
+      return MaterialPageRoute(
+        builder: (context) => TermsNConditionsScreen(),
+        settings: routeSettings,
+      );
+
+    case AppRoutes.profilePrivacyPolicyRoute:
+      return MaterialPageRoute(
+        builder: (context) => PrivacyPolicyScreen(),
         settings: routeSettings,
       );
 

@@ -18,7 +18,6 @@ class AppRoutes {
   //--------------Body
 
   static const String bodyMainPageRoute = "bodyMainPageRoute";
-  //static const String homePageRoute = "homePageRoute";
   static const String searchPageRoute = "searchPageRoute";
   static const String profilePageRoute = "profilePageRoute";
   static const String notificationsPageRoute = "notificationsPageRoute";
@@ -32,4 +31,9 @@ class AppRoutes {
   static const String applyJobTypeOfWorkPageRoute = "applyJobTypeOfWorkPageRoute";
   static const String applyJobUploadDocsPageRoute = "applyJobUploadDocsPageRoute";
   static const String applyJobBackToHomePageRoute = "applyJobBackToHomePageRoute";
+
+  //--------------Profile
+
+  static const String profileTermsNConditionsRoute = "profileTermsNConditionsRoute";
+  static const String profilePrivacyPolicyRoute = "profilePrivacyPolicyRoute";
 }

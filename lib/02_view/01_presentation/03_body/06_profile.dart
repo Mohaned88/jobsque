@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/02_view/04_utilities/res/assets.dart';
 import 'package:jobsque/02_view/04_utilities/res/strings.dart';
 import 'package:jobsque/02_view/05_styles/colors.dart';
+import 'package:jobsque/03_controller/00_navigation/routes.dart';
 import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/shared/shared_prefs_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/shared/shared_prefs_states.dart';
@@ -24,15 +25,7 @@ class ProfileScreen extends StatelessWidget {
         builder: (context, state) => CustomScrollView(
           slivers: [
             SliverAppBar(
-              leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.arrow_back,
-                  color: AppColors.iconsBlack,
-                ),
-              ),
+              automaticallyImplyLeading: false,
               title: const CustomText(
                 text: AppStrings.profileScreenTitle,
                 fontWeight: FontWeight.w500,
@@ -276,7 +269,9 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         ProfileSettingsCard(
                           hasIcon: true,
-                          onTap: (){},
+                          onTap: (){
+
+                          },
                           title: AppStrings.profileEditProfile,
                           icon: AppAssets.profileEditProfileImage,
                         ),
@@ -341,12 +336,16 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         ProfileSettingsCard(
                           hasIcon: false,
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.pushNamed(context, AppRoutes.profileTermsNConditionsRoute);
+                          },
                           title: AppStrings.profileTermsNConditions,
                         ),
                         ProfileSettingsCard(
                           hasIcon: false,
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.pushNamed(context, AppRoutes.profilePrivacyPolicyRoute);
+                          },
                           title: AppStrings.profilePrivacyPolicy,
                         ),
                       ],

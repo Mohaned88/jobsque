@@ -270,7 +270,7 @@ class ProfileScreen extends StatelessWidget {
                         ProfileSettingsCard(
                           hasIcon: true,
                           onTap: (){
-
+                            Navigator.pushNamed(context, AppRoutes.profileEditProfileRoute);
                           },
                           title: AppStrings.profileEditProfile,
                           icon: AppAssets.profileEditProfileImage,

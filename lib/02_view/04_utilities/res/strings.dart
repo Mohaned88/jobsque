@@ -368,6 +368,7 @@ class AppStrings {
   static const String profilePrivacyPolicy = 'Privacy Policy';
 
   static const String editProfileChangePhoto = 'Change Photo';
+  static const String editProfileName = 'Name';
   static const String editProfileBio = 'Bio';
   static const String editProfileAddress = 'Address';
   static const String editProfileSave = 'Save';

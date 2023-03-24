@@ -89,4 +89,5 @@ class AppAssets{
   static const String profileNotificationImage = 'assets/01_images/03_body/profile/notification.png';
   static const String profilePortfolioImage = 'assets/01_images/03_body/profile/portfolio.png';
   static const String profileLogout = 'assets/01_images/03_body/profile/logout.png';
+  static const String cameraIcon = 'assets/01_images/03_body/profile/edit_profile/camera.png';
 }

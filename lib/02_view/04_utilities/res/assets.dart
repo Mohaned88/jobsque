@@ -83,4 +83,10 @@ class AppAssets{
   static const String noMessagesImage = 'assets/01_images/03_body/messages/no_messages_image.png';
   static const String pinIcon = 'assets/01_images/03_body/messages/pin.png';
   static const String profileStandardImage = 'assets/01_images/03_body/profile_picture_standard.png';
+  static const String profileEditProfileImage = 'assets/01_images/03_body/profile/edit_profile.png';
+  static const String profileLanguagesImage = 'assets/01_images/03_body/profile/languages.png';
+  static const String profileLoginNSecurityImage = 'assets/01_images/03_body/profile/login&security.png';
+  static const String profileNotificationImage = 'assets/01_images/03_body/profile/notification.png';
+  static const String profilePortfolioImage = 'assets/01_images/03_body/profile/portfolio.png';
+  static const String profileLogout = 'assets/01_images/03_body/profile/logout.png';
 }

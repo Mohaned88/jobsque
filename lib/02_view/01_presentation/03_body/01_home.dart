@@ -57,7 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomText(
-                            text: '${AppStrings.homeScreenTitle}${authCubit.userModel.name}👋',
+                            text:
+                                '${AppStrings.homeScreenTitle}${authCubit.userModel.name}👋',
                             fontWeight: FontWeight.w500,
                             fontSize: 24,
                             height: 1.4,
@@ -115,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                if(homeCubit.suggestJobs.isNotEmpty)...[
+                if (homeCubit.suggestJobs.isNotEmpty) ...[
                   SliverToBoxAdapter(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -150,12 +151,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         BlocConsumer<HomeCubit, HomeStates>(
                           listener: (context, state) {},
                           builder: (context, state) {
-                            if(state is LoadingSuggestColorListState){
+                            if (state is LoadingSuggestColorListState) {
                               return const Center(
                                 child: CircularProgressIndicator(),
                               );
-                            }
-                            else {
+                            } else {
                               return SizedBox(
                                 height: 50.w,
                                 child: BannerCarousel(
@@ -170,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   customizedBanners: List.generate(
                                     homeCubit.suggestJobs.length,
-                                        (index) => SuggestedJobCard(
+                                    (index) => SuggestedJobCard(
                                       fillColor: homeCubit.itemColors[index],
                                       jobModel: homeCubit.suggestJobs[index],
                                       saveOnPressed: () {},
@@ -213,32 +213,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    List.generate(
-                      homeCubit.recentJobs.length,
-                      (index) => BlocConsumer<SavedCubit, SavedStates>(
-                        listener: (context, state) {},
-                        builder: (context, state) =>
-                            BlocConsumer<HomeCubit, HomeStates>(
-                          listener: (context, state) {},
-                          builder: (context, state) {
-                            if (state is LoadingJobsListState) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            } else {
-                              return JobPreviewCard(
-                                jobModel: homeCubit.recentJobs[index],
-                                saveOnPressed: () {
-                                  savedCubit.addToSavedJobs(
-                                    jobModel: AppConstants.suggestedJobs[index],
-                                  );
-                                },
-                              );
-                            }
+                BlocConsumer<HomeCubit,HomeStates>(
+                  listener: (context,state){},
+                  builder: (context,state)=> SliverList(
+                    delegate: SliverChildListDelegate(
+                      List.generate(
+                        homeCubit.recentJobs.length,
+                            (index) =>JobPreviewCard(
+                          jobModel: homeCubit.recentJobs[index],
+                          saveOnPressed: () {
+                            savedCubit.addToSavedJobs(
+                              jobModel: AppConstants.suggestedJobs[index],
+                            );
                           },
                         ),
+
                       ),
                     ),
                   ),

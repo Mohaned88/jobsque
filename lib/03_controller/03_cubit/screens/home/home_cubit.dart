@@ -33,21 +33,22 @@ class HomeCubit extends Cubit<HomeStates> {
   List<JobModel> recentJobs = [];
 
   getRecentJobList({required String token}) async {
+    recentJobs = [];
     emit(LoadingJobsListState());
     try {
       Uri url = Uri.parse('http://${AppConstants.jobsLink}');
       var headers = {
         'Authorization': 'Bearer $token',
       };
-      print(headers);
+      //print(headers);
       var response = await Dio().get(
         '$url',
         options: Options(
           headers: headers,
         ),
       );
-      print(response.statusCode);
-      print(response.data['data']);
+      /*print(response.statusCode);
+      print(response.data['data']);*/
       if (response.statusCode == 200) {
         response.data['data'].forEach(
           (element) {
@@ -56,7 +57,7 @@ class HomeCubit extends Cubit<HomeStates> {
             );
           },
         );
-        print(response.data['data'][1]);
+       // print(response.data['data'][1]);
         emit(RetrieveListSuccessState());
       } else {
         emit(RetrieveListFailState());
@@ -70,21 +71,22 @@ class HomeCubit extends Cubit<HomeStates> {
   List<JobModel> suggestJobs = [];
 
   getSuggestJobList({required String token,required int userID}) async {
+    suggestJobs = [];
     emit(LoadingJobsListState());
     try {
       Uri url = Uri.parse('http://${AppConstants.suggestJobsLink}$userID');
       var headers = {
         'Authorization': 'Bearer $token',
       };
-      print(headers);
+      //print(headers);
       var response = await Dio().get(
         '$url',
         options: Options(
           headers: headers,
         ),
       );
-      print(response.statusCode);
-      print(response.data['data']);
+      /*print(response.statusCode);
+      print(response.data['data']);*/
       if (response.statusCode == 200) {
         response.data['data'].forEach(
               (element) {
@@ -94,14 +96,14 @@ class HomeCubit extends Cubit<HomeStates> {
           },
         );
         changeEnabledItemColor(0);
-        print(response.data['data'][1]);
+        /*print(response.data['data'][1]);*/
         emit(RetrieveListSuccessState());
       } else {
         emit(RetrieveListFailState());
       }
     } catch (e) {
       print(
-          "Retrieve List failed with error =========================>>>>>>>>>> $e");
+          "Suggested List failed with error =========================>>>>>>>>>> $e");
     }
   }
 }

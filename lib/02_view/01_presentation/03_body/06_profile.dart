@@ -293,7 +293,9 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         ProfileSettingsCard(
                           hasIcon: true,
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.pushNamed(context, AppRoutes.profileNotificationSettingsRoute);
+                          },
                           title: AppStrings.profileNotification,
                           icon: AppAssets.profileNotificationImage,
                         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jobsque/02_view/02_components/cards/language_selection_card.dart';
 import 'package:jobsque/02_view/04_utilities/res/assets.dart';
 import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/language/language_cubit.dart';
@@ -44,36 +45,15 @@ class LanguageSelectionScreen extends StatelessWidget {
         builder: (context,state)=>ListView.separated(
             padding: EdgeInsets.symmetric(horizontal: 5.w),
             itemBuilder: (BuildContext context, int index) =>
-                GestureDetector(
-                  onTap: (){
-                    languageCubit.changeIconColor(index, token: AuthCubit.authorizationToken, userID: authCubit.userModel.id!);
-                  },
-                  child: SizedBox(
-                    height: 12.w,
-                    width: double.infinity,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Image.asset(
-                          AppAssets.languagesFlags[index],
-                          width: 8.w,
-                        ),
-                        SizedBox(width: 3.w,),
-                        Expanded(
-                          child: CustomText(
-                            text: AppStrings.languages[index],
-                            color: AppColors.kPrimaryBlack,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            height: 1.3,
-                          ),
-                        ),
-                        Icon(languageCubit.iconType[index],color: languageCubit.iconColors[index],),
-                      ],
-                    ),
-                  ),
-                ),
+            LanguageSelectionCard(
+              onTap: (){
+                languageCubit.changeIconColor(index, token: AuthCubit.authorizationToken, userID: authCubit.userModel.id!);
+              },
+              flag: AppAssets.languagesFlags[index],
+              language: AppStrings.languages[index],
+              icon: languageCubit.iconType[index],
+              iconColor: languageCubit.iconColors[index],
+            ),
             separatorBuilder: (BuildContext context, int index) => const Divider(
               color: AppColors.midLightGrey,
             ),

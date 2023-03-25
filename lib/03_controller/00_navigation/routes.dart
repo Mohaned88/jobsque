@@ -37,6 +37,7 @@ class AppRoutes {
   static const String profileEditProfileRoute = "profileEditProfileRoute";
   static const String profilePortfolioRoute = "profilePortfolioRoute";
   static const String profileLanguageSelectionRoute = "profileLanguageSelectionRoute";
+  static const String profileNotificationSettingsRoute = "profileNotificationSettingsRoute";
   static const String profileTermsNConditionsRoute = "profileTermsNConditionsRoute";
   static const String profilePrivacyPolicyRoute = "profilePrivacyPolicyRoute";
 }

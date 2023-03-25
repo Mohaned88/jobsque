@@ -24,4 +24,11 @@ class NotificationCubit extends Cubit<NotificationStates> {
       logo: AppAssets.twitterLogo,
     ),
   );
+
+  List<bool> notificationSettingValue = List.generate(8, (index) => false);
+
+  changeSettingValue(int index,bool value){
+    notificationSettingValue[index] = value;
+    emit(ChangeSettingValueState());
+  }
 }

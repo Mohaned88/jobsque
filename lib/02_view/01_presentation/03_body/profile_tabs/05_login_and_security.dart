@@ -68,7 +68,9 @@ class LoginNSecurityScreen extends StatelessWidget {
                 ),
                 LoginNSecurityWidget(
                   settingTitle: AppStrings.loginNSecurityPhoneNumber,
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.pushNamed(context, AppRoutes.profileLoginNSecurityPhoneNoRoute);
+                  },
                 ),
                 LoginNSecurityWidget(
                   settingTitle: AppStrings.loginNSecurityChangePassword,

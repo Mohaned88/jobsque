@@ -40,6 +40,7 @@ class AppRoutes {
   static const String profileNotificationSettingsRoute = "profileNotificationSettingsRoute";
   static const String profileLoginNSecurityRoute = "profileLoginNSecurityRoute";
     static const String profileLoginNSecurityEmailAddressRoute = "profileLoginNSecurityEmailAddressRoute";
+    static const String profileLoginNSecurityPhoneNoRoute = "profileLoginNSecurityPhoneNoRoute";
   static const String profileTermsNConditionsRoute = "profileTermsNConditionsRoute";
   static const String profilePrivacyPolicyRoute = "profilePrivacyPolicyRoute";
 }

@@ -64,6 +64,7 @@ class AppStrings {
 
   // Password messages
   static const String shortPassword = "Short Password";
+  static const String passwordsNotEqual = "Doesn't match old password";
   static const String mustEqualPassword = "The two passwords must be equal";
 
   // Email messages
@@ -411,6 +412,9 @@ class AppStrings {
   static const String emailAddressMainEmailAddress = 'Main e-mail address';
   static const String phoneNumberMainPhoneNumber = 'Main phone number';
   static const String phoneNumberResetMsg = 'Use the phone number to reset your password';
+  static const String changePasswordOldPassword = 'Enter your old password';
+  static const String changePasswordNewPassword = 'Enter your new password';
+  static const String changePasswordConfirmPassword = 'Confirm your new password';
   static const String twoStepVerificationSecureMsg = 'Secure your account with two-step verification';
   static const String twoStepVerificationGSTR1 = 'Two-step verification provides additional security by asking for a verification code every time you log in on another device.';
   static const String twoStepVerificationGSTR2 = 'Adding a phone number or using an authenticator will help keep your account safe from harm.';

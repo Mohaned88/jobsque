@@ -74,7 +74,9 @@ class LoginNSecurityScreen extends StatelessWidget {
                 ),
                 LoginNSecurityWidget(
                   settingTitle: AppStrings.loginNSecurityChangePassword,
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.pushNamed(context, AppRoutes.profileLoginNSecurityChangePassRoute);
+                  },
                 ),
                 LoginNSecurityWidget(
                   settingTitle: AppStrings.loginNSecurity2StepVerification,

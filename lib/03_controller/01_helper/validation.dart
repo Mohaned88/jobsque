@@ -1,4 +1,7 @@
+import 'package:flutter/material.dart';
+
 import '../../02_view/04_utilities/res/strings.dart';
+import '../03_cubit/auth/auth_cubit.dart';
 
 String? nameValidation(String value) {
   if(value.isEmpty){
@@ -19,6 +22,14 @@ String? passwordValidation(String value) {
   }
   return null;
 }
+
+String? oldPasswordValidation(String value,BuildContext context) {
+  if (value != AuthCubit.get(context).userModel.password) {
+    return AppStrings.passwordsNotEqual;
+  }
+  return null;
+}
+
 
 String? confirmPassValidation(String value,String pass) {
   if (value != pass) {

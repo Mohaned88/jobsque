@@ -8,3 +8,6 @@ class VisibleTextState extends TextFieldStates{}
 class EmptyPasswordState extends TextFieldStates{}
 class GoodPasswordState extends TextFieldStates{}
 class BadPasswordState extends TextFieldStates{}
+
+class ListItemObscureTextState extends TextFieldStates{}
+class ListItemVisibleTextState extends TextFieldStates{}

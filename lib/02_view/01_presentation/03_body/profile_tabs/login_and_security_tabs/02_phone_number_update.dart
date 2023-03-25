@@ -24,6 +24,8 @@ class _PhoneNoUpdateScreenState extends State<PhoneNoUpdateScreen> {
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  bool value = false;
+
   @override
   Widget build(BuildContext context) {
     AuthCubit authCubit = AuthCubit.get(context);
@@ -110,8 +112,12 @@ class _PhoneNoUpdateScreenState extends State<PhoneNoUpdateScreen> {
                       ),
                       SizedBox(width: 10.w,),
                       FlutterSwitch(
-                        value: false,
-                        onToggle: (bool value){},
+                        value: value,
+                        onToggle: (bool value){
+                          setState(() {
+                            this.value = value;
+                          });
+                        },
                         width: 12.w,
                         height: 7.w,
                         toggleSize: 6.w,

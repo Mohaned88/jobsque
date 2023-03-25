@@ -40,26 +40,30 @@ class LanguageSelectionScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: BlocConsumer<LanguageCubit,LanguageStates>(
-        listener: (context,state){},
-        builder: (context,state)=>ListView.separated(
+      body: BlocConsumer<LanguageCubit, LanguageStates>(
+        listener: (context, state) {},
+        builder: (context, state) => ListView.separated(
             padding: EdgeInsets.symmetric(horizontal: 5.w),
             itemBuilder: (BuildContext context, int index) =>
-            LanguageSelectionCard(
-              onTap: (){
-                languageCubit.changeIconColor(index, token: AuthCubit.authorizationToken, userID: authCubit.userModel.id!);
-              },
-              flag: AppAssets.languagesFlags[index],
-              language: AppStrings.languages[index],
-              icon: languageCubit.iconType[index],
-              iconColor: languageCubit.iconColors[index],
-            ),
-            separatorBuilder: (BuildContext context, int index) => const Divider(
-              color: AppColors.midLightGrey,
-            ),
+                LanguageSelectionCard(
+                  onTap: () {
+                    languageCubit.changeIconColor(
+                      index,
+                      token: AuthCubit.authorizationToken,
+                      userID: authCubit.userModel.id!,
+                    );
+                  },
+                  flag: AppAssets.languagesFlags[index],
+                  language: AppStrings.languages[index],
+                  icon: languageCubit.iconType[index],
+                  iconColor: languageCubit.iconColors[index],
+                ),
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(
+                  color: AppColors.midLightGrey,
+                ),
             itemCount: AppStrings.languages.length),
       ),
-
     );
   }
 }

@@ -235,7 +235,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               onPressed: () {
                 //Navigation
               },
-              label: AppStrings.onBoardingNext,
+              label: AppStrings.editProfileSave,
               width: 88.w,
               alignment: Alignment.center,
               height: 13.w,

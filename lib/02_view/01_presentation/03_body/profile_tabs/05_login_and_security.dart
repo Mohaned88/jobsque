@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jobsque/02_view/03_widgets/login_and_security_widget.dart';
+import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../03_controller/00_navigation/routes.dart';
 import '../../../03_widgets/custom_text.dart';
 import '../../../04_utilities/res/strings.dart';
 import '../../../05_styles/colors.dart';
@@ -10,6 +13,7 @@ class LoginNSecurityScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthCubit authCubit = AuthCubit.get(context);
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -55,7 +59,30 @@ class LoginNSecurityScreen extends StatelessWidget {
           SliverList(
             delegate: SliverChildListDelegate(
               [
-
+                LoginNSecurityWidget(
+                  settingTitle: AppStrings.loginNSecurityEmailAddress,
+                  onTap: (){
+                    Navigator.pushNamed(context, AppRoutes.profileLoginNSecurityEmailAddressRoute);
+                  },
+                  description: authCubit.userModel.email,
+                ),
+                LoginNSecurityWidget(
+                  settingTitle: AppStrings.loginNSecurityPhoneNumber,
+                  onTap: (){},
+                ),
+                LoginNSecurityWidget(
+                  settingTitle: AppStrings.loginNSecurityChangePassword,
+                  onTap: (){},
+                ),
+                LoginNSecurityWidget(
+                  settingTitle: AppStrings.loginNSecurity2StepVerification,
+                  onTap: (){},
+                  description: 'Non Active',
+                ),
+                LoginNSecurityWidget(
+                  settingTitle: AppStrings.loginNSecurityFaceID,
+                  onTap: (){},
+                ),
               ],
             ),
           ),

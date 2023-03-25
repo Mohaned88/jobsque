@@ -12,6 +12,7 @@ import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/02_portfoli
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/03_languages.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/04_notification_settings.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/05_login_and_security.dart';
+import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/login_and_security_tabs/01_email_update.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/privacy_policy.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/terms_and_conditions.dart';
 //---------------------------OnBoarding
@@ -175,6 +176,12 @@ Route<dynamic> onGenerate(RouteSettings routeSettings) {
         builder: (context) => const LoginNSecurityScreen(),
         settings: routeSettings,
       );
+
+      case AppRoutes.profileLoginNSecurityEmailAddressRoute:
+        return MaterialPageRoute(
+          builder: (context) => const EmailUpdateScreen(),
+          settings: routeSettings,
+        );
 
     case AppRoutes.profileTermsNConditionsRoute:
       return MaterialPageRoute(

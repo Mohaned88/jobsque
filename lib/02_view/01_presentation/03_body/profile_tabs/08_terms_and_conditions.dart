@@ -36,6 +36,7 @@ class TermsNConditionsScreen extends StatelessWidget {
             height: 1.2,
             color: AppColors.kPrimaryBlack,
         ),
+        centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),

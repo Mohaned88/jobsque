@@ -339,7 +339,9 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         ProfileSettingsCard(
                           hasIcon: false,
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.pushNamed(context, AppRoutes.profileHelpCenterRoute);
+                          },
                           title: AppStrings.profileHelpCenter,
                         ),
                         ProfileSettingsCard(

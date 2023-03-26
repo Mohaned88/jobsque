@@ -12,14 +12,15 @@ import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/02_portfoli
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/03_languages.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/04_notification_settings.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/05_login_and_security.dart';
+import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/06_help_center.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/login_and_security_tabs/01_email_update.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/login_and_security_tabs/02_phone_number_update.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/login_and_security_tabs/03_change_password.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/login_and_security_tabs/04_two_step_verification.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/login_and_security_tabs/two_step_verification_tabs/01_add_phone_number.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/login_and_security_tabs/two_step_verification_tabs/02_6_digit_verification.dart';
-import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/privacy_policy.dart';
-import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/terms_and_conditions.dart';
+import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/07_privacy_policy.dart';
+import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/08_terms_and_conditions.dart';
 //---------------------------OnBoarding
 import '../../02_view/01_presentation/01_onboarding/01_splash.dart';
 import '../../02_view/01_presentation/01_onboarding/02_onboarding.dart';
@@ -216,6 +217,12 @@ Route<dynamic> onGenerate(RouteSettings routeSettings) {
             builder: (context) => const TwoStep6DigitVerificationScreen(),
             settings: routeSettings,
           );
+
+      case AppRoutes.profileHelpCenterRoute:
+        return MaterialPageRoute(
+          builder: (context) => const HelpCenterScreen(),
+          settings: routeSettings,
+        );
 
     case AppRoutes.profileTermsNConditionsRoute:
       return MaterialPageRoute(

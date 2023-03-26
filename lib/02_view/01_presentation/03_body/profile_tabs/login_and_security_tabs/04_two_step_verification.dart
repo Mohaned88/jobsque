@@ -20,10 +20,10 @@ class TwoStepVerificationScreen extends StatefulWidget {
 }
 
 class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
+
   @override
   Widget build(BuildContext context) {
-    TwoStepVerificationCubit twoStepVerificationCubit =
-        TwoStepVerificationCubit.get(context);
+    TwoStepVerificationCubit twoStepVerificationCubit = TwoStepVerificationCubit.get(context);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -48,8 +48,7 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
       ),
       body: Padding(
         padding: EdgeInsets.all(5.w),
-        child:
-            BlocConsumer<TwoStepVerificationCubit, TwoStepVerificationStates>(
+        child: BlocConsumer<TwoStepVerificationCubit, TwoStepVerificationStates>(
           listener: (context, state) {},
           builder: (context, state) => Stack(
             fit: StackFit.expand,
@@ -178,23 +177,48 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
                         children: [
                           Expanded(
                             child: CustomText(
-                              text: AppStrings.twoStepVerificationMethods[0],
+                              text: twoStepVerificationCubit.method,
                               fontWeight: FontWeight.w500,
                               fontSize: 14,
                               height: 1.4,
                               color: AppColors.kPrimaryBlack,
                             ),
                           ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          IconButton(
-                            onPressed: () {},
-                            padding: const EdgeInsets.all(0),
-                            icon: const Icon(
-                              Icons.keyboard_arrow_down_rounded,
-                              color: AppColors.iconsBlack,
-                            ),
+                          SizedBox(width: 10.w),
+                          PopupMenuButton(
+                            itemBuilder: (BuildContext context){
+                              return [
+                                PopupMenuItem(
+                                  onTap: () {
+                                    twoStepVerificationCubit.selectVerificationMethod(methodName: AppStrings.twoStepVerificationMethods[0]);
+
+                                  },
+                                  value: AppStrings.twoStepVerificationMethods[0],
+                                  child: CustomText(
+                                    text: AppStrings.twoStepVerificationMethods[0],
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    height: 1.4,
+                                    color: AppColors.kPrimaryBlack,
+                                  ),
+                                ),
+                                PopupMenuItem(
+                                  onTap: () {
+                                    twoStepVerificationCubit.selectVerificationMethod(methodName: AppStrings.twoStepVerificationMethods[1]);
+
+                                  },
+                                  value: AppStrings.twoStepVerificationMethods[1],
+                                  child: CustomText(
+                                    text: AppStrings.twoStepVerificationMethods[1],
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                    height: 1.4,
+                                    color: AppColors.kPrimaryBlack,
+                                  ),
+                                ),
+                              ];
+                            } ,
+                            icon: const Icon(Icons.keyboard_arrow_down_rounded),
                           ),
                         ],
                       ),

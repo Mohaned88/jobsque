@@ -102,4 +102,5 @@ class AppAssets{
     'assets/01_images/03_body/profile/country_flags/09_South_Korea.png',
     'assets/01_images/03_body/profile/country_flags/10_Portugal.png'
   ];
+  static const String externalDiskIcon = 'assets/01_images/03_body/profile/external_drive.png';
 }

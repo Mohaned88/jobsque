@@ -15,6 +15,7 @@ import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/05_login_an
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/login_and_security_tabs/01_email_update.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/login_and_security_tabs/02_phone_number_update.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/login_and_security_tabs/03_change_password.dart';
+import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/login_and_security_tabs/04_two_step_verification.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/privacy_policy.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/profile_tabs/terms_and_conditions.dart';
 //---------------------------OnBoarding
@@ -195,6 +196,12 @@ Route<dynamic> onGenerate(RouteSettings routeSettings) {
           builder: (context) => const ChangePasswordScreen(),
           settings: routeSettings,
         );
+
+    case AppRoutes.profileLoginNSecurity2StepVerificationRoute:
+      return MaterialPageRoute(
+        builder: (context) => const TwoStepVerificationScreen(),
+        settings: routeSettings,
+      );
 
     case AppRoutes.profileTermsNConditionsRoute:
       return MaterialPageRoute(

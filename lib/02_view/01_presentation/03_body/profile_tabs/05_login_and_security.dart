@@ -80,7 +80,9 @@ class LoginNSecurityScreen extends StatelessWidget {
                 ),
                 LoginNSecurityWidget(
                   settingTitle: AppStrings.loginNSecurity2StepVerification,
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.pushNamed(context, AppRoutes.profileLoginNSecurity2StepVerificationRoute);
+                  },
                   description: 'Non Active',
                 ),
                 LoginNSecurityWidget(

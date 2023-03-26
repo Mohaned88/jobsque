@@ -143,7 +143,7 @@ class _TwoStepAddPhoneNumberScreenState extends State<TwoStepAddPhoneNumberScree
                   if(formKey.currentState!.validate()){
                     twoStepVerificationCubit.counter=1;
                     twoStepVerificationCubit.counterFunction();
-                    Navigator.pushNamed(context, AppRoutes.profileLoginNSecurity2StepVerification6DigitRoute);
+                    Navigator.pushReplacementNamed(context, AppRoutes.profileLoginNSecurity2StepVerification6DigitRoute);
                   }
                 },
                 label: AppStrings.twoStepVerificationSendCode,

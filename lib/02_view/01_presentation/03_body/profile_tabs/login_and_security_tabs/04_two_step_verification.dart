@@ -238,7 +238,7 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
                 bottom: 0,
                 child: CustomElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, AppRoutes.profileLoginNSecurity2StepVerificationPhoneNoRoute);
+                    Navigator.pushReplacementNamed(context, AppRoutes.profileLoginNSecurity2StepVerificationPhoneNoRoute);
                   },
                   label: AppStrings.onBoardingNext,
                   width: 90.w,

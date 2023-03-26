@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/02_view/05_styles/colors.dart';
-import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
-import 'package:jobsque/03_controller/03_cubit/shared/shared_prefs_cubit.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../../../03_controller/01_helper/validation.dart';
@@ -29,8 +27,6 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    AuthCubit authCubit = AuthCubit.get(context);
-    SharedPCubit sharedPCubit = SharedPCubit.get(context);
     TextFieldCubit textFieldCubit = TextFieldCubit.get(context);
     return Scaffold(
       appBar: AppBar(

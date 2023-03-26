@@ -11,3 +11,6 @@ class BadPasswordState extends TextFieldStates{}
 
 class ListItemObscureTextState extends TextFieldStates{}
 class ListItemVisibleTextState extends TextFieldStates{}
+
+class TSVObscureTextState extends TextFieldStates{}
+class TSVVisibleTextState extends TextFieldStates{}

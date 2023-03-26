@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:jobsque/02_view/04_utilities/res/assets.dart';
 import 'package:jobsque/02_view/05_styles/colors.dart';
+import 'package:jobsque/03_controller/00_navigation/routes.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/two_step_verification/two_step_verification_states.dart';
 import 'package:sizer/sizer.dart';
 
@@ -191,7 +192,6 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
                                 PopupMenuItem(
                                   onTap: () {
                                     twoStepVerificationCubit.selectVerificationMethod(methodName: AppStrings.twoStepVerificationMethods[0]);
-
                                   },
                                   value: AppStrings.twoStepVerificationMethods[0],
                                   child: CustomText(
@@ -237,7 +237,9 @@ class _TwoStepVerificationScreenState extends State<TwoStepVerificationScreen> {
               Positioned(
                 bottom: 0,
                 child: CustomElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRoutes.profileLoginNSecurity2StepVerificationPhoneNoRoute);
+                  },
                   label: AppStrings.onBoardingNext,
                   width: 90.w,
                   alignment: Alignment.center,

@@ -11,11 +11,9 @@ class TextFieldCubit extends Cubit<TextFieldStates> {
 
   bool obscure = false;
   IconData passSuffixIcon = Icons.visibility;
+
   Color borderColor = AppColors.kPrimaryColor;
   Color passCheckTextColor = AppColors.midLightGrey;
-
-  List<bool> cpFieldsObscure = List.generate(3, (index) => false);
-  List<IconData> cpSuffixIcons = List.generate(3, (index) => Icons.visibility);
 
   visibilityChange() {
       if (obscure == false) {
@@ -47,6 +45,9 @@ class TextFieldCubit extends Cubit<TextFieldStates> {
     }
   }
 
+  List<bool> cpFieldsObscure = List.generate(3, (index) => false);
+  List<IconData> cpSuffixIcons = List.generate(3, (index) => Icons.visibility);
+
   changePasswordVisibilityChange(int index) {
     if (cpFieldsObscure[index] == false) {
       cpFieldsObscure[index] = true;
@@ -56,6 +57,21 @@ class TextFieldCubit extends Cubit<TextFieldStates> {
       cpFieldsObscure[index] =  false;
       cpSuffixIcons[index] = Icons.visibility;
       emit(ListItemVisibleTextState());
+    }
+  }
+
+  bool tsvObscure = false;
+  IconData tsvPassSuffixIcon = Icons.visibility;
+
+  twoStepVisibilityChange() {
+    if (tsvObscure == false) {
+      tsvObscure = true;
+      tsvPassSuffixIcon = Icons.visibility_off;
+      emit(TSVObscureTextState());
+    } else {
+      tsvObscure =  false;
+      tsvPassSuffixIcon = Icons.visibility;
+      emit(TSVVisibleTextState());
     }
   }
 

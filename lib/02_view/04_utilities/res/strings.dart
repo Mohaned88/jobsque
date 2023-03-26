@@ -430,7 +430,7 @@ class AppStrings {
   static const String twoStepVerificationEnterPassword = 'Enter your password';
   static const String twoStepVerification6DCodeQ = 'Enter the 6 digit code';
   static const String twoStepVerification6DCodeAuthQ = 'Please confirm your account by entering the authorization code sen to *-*-7234';
-  static const String twoStepVerificationResendCode = 'Resend code 42s';
+  static const String twoStepVerificationResendCode = 'Resend code ';
   static const String twoStepVerificationSendCode = 'Send Code';
   static const String twoStepVerificationVerify = 'Verify';
 

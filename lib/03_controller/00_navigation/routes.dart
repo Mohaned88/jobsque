@@ -43,6 +43,8 @@ class AppRoutes {
     static const String profileLoginNSecurityPhoneNoRoute = "profileLoginNSecurityPhoneNoRoute";
     static const String profileLoginNSecurityChangePassRoute = "profileLoginNSecurityChangePassRoute";
     static const String profileLoginNSecurity2StepVerificationRoute = "profileLoginNSecurity2StepVerificationRoute";
+      static const String profileLoginNSecurity2StepVerificationPhoneNoRoute = "profileLoginNSecurity2StepVerificationPhoneNoRoute";
+      static const String profileLoginNSecurity2StepVerification6DigitRoute = "profileLoginNSecurity2StepVerification6DigitRoute";
   static const String profileTermsNConditionsRoute = "profileTermsNConditionsRoute";
   static const String profilePrivacyPolicyRoute = "profilePrivacyPolicyRoute";
 }

@@ -33,19 +33,22 @@ class AppRoutes {
   static const String applyJobBackToHomePageRoute = "applyJobBackToHomePageRoute";
 
   //--------------Profile
-
+  //--------------Profile -----------Main
   static const String profileEditProfileRoute = "profileEditProfileRoute";
   static const String profilePortfolioRoute = "profilePortfolioRoute";
   static const String profileLanguageSelectionRoute = "profileLanguageSelectionRoute";
   static const String profileNotificationSettingsRoute = "profileNotificationSettingsRoute";
+  static const String profileHelpCenterRoute = "profileHelpCenterRoute";
+  static const String profileTermsNConditionsRoute = "profileTermsNConditionsRoute";
+  static const String profilePrivacyPolicyRoute = "profilePrivacyPolicyRoute";
+  //--------------Profile -----------Main -----------Login & Security
   static const String profileLoginNSecurityRoute = "profileLoginNSecurityRoute";
     static const String profileLoginNSecurityEmailAddressRoute = "profileLoginNSecurityEmailAddressRoute";
     static const String profileLoginNSecurityPhoneNoRoute = "profileLoginNSecurityPhoneNoRoute";
     static const String profileLoginNSecurityChangePassRoute = "profileLoginNSecurityChangePassRoute";
     static const String profileLoginNSecurity2StepVerificationRoute = "profileLoginNSecurity2StepVerificationRoute";
+  //--------------Profile -----------Main -----------Login & Security -----------Two Step Verification
       static const String profileLoginNSecurity2StepVerificationPhoneNoRoute = "profileLoginNSecurity2StepVerificationPhoneNoRoute";
       static const String profileLoginNSecurity2StepVerification6DigitRoute = "profileLoginNSecurity2StepVerification6DigitRoute";
-    static const String profileHelpCenterRoute = "profileHelpCenterRoute";
-  static const String profileTermsNConditionsRoute = "profileTermsNConditionsRoute";
-  static const String profilePrivacyPolicyRoute = "profilePrivacyPolicyRoute";
+
 }

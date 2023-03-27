@@ -120,4 +120,11 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
       emit(ChangeToUploadBoxState());
     }
   }
+
+  int stepIndex = 0;
+
+  changeStepIndexFunction(int index){
+    stepIndex = index;
+    emit(ChangeStepIndexState());
+  }
 }

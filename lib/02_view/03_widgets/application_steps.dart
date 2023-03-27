@@ -7,15 +7,16 @@ import 'package:jobsque/02_view/05_styles/colors.dart';
 import 'package:sizer/sizer.dart';
 
 class ApplicationSteps extends StatelessWidget {
-  final bool isDoneStep1;
-  final bool isDoneStep2;
-  final bool isDoneStep3;
+  bool isDoneStep1;
+  bool isDoneStep2;
+  bool isDoneStep3;
 
-  final bool isActiveStep1;
-  final bool isActiveStep2;
-  final bool isActiveStep3;
+  bool isActiveStep1;
+  bool isActiveStep2;
+  bool isActiveStep3;
+  int? stepNumber;
 
-  const ApplicationSteps({
+  ApplicationSteps({
     Key? key,
     this.isDoneStep1 = false,
     this.isDoneStep2 = false,
@@ -23,10 +24,34 @@ class ApplicationSteps extends StatelessWidget {
     this.isActiveStep1 = false,
     this.isActiveStep2 = false,
     this.isActiveStep3 = false,
+    this.stepNumber = 1,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if(stepNumber == 1){
+      isActiveStep1 = true;
+    }
+    else if(stepNumber == 2){
+      isActiveStep1 = true;
+      isActiveStep2 = true;
+      isDoneStep1 = true;
+    }
+    else if(stepNumber == 3){
+      isActiveStep1 = true;
+      isActiveStep2 = true;
+      isActiveStep3 = true;
+      isDoneStep1 = true;
+      isDoneStep2 = true;
+    }
+    else{
+      isActiveStep1 = true;
+      isActiveStep2 = true;
+      isActiveStep3 = true;
+      isDoneStep1 = true;
+      isDoneStep2 = true;
+      isDoneStep3 = true;
+    }
     return SizedBox(
       width: double.infinity,
       height: 18.w,

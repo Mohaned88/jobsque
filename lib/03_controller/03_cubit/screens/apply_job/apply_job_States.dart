@@ -13,3 +13,6 @@ class PickedFileFromStorageState extends ApplyJobStates{}
 
 class ChangeToUploadBoxState extends ApplyJobStates{}
 class ChangeToUploadedPreviewBoxState extends ApplyJobStates{}
+
+class ChangeStepIndexState extends ApplyJobStates{}
+

@@ -69,7 +69,7 @@ class _BioDataScreenState extends State<BioDataScreen> {
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          const ApplicationSteps(
+                          ApplicationSteps(
                             isActiveStep1: true,
                           ),
                           SizedBox(height: 6.w,),

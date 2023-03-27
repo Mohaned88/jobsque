@@ -64,7 +64,7 @@ class UploadDocsScreen extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            const ApplicationSteps(
+                            ApplicationSteps(
                               isActiveStep1: true,
                               isDoneStep1: true,
                               isActiveStep2: true,

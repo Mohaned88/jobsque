@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/apply_job/01_apply_job_main.dart';
 import 'package:jobsque/02_view/02_components/cards/job_preview_card.dart';
-import 'package:jobsque/02_view/02_components/cards/notification_card.dart';
 import 'package:jobsque/02_view/03_widgets/custom_elevated_button_ver2.dart';
 import 'package:jobsque/02_view/03_widgets/custom_text.dart';
 import 'package:jobsque/02_view/05_styles/colors.dart';
-import 'package:jobsque/03_controller/00_navigation/routes.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/notifications/notifications_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/notifications/notifications_states.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/saved_cubit/saved_cubit.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../04_utilities/res/assets.dart';

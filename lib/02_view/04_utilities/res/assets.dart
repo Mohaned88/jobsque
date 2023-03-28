@@ -103,4 +103,6 @@ class AppAssets{
     'assets/01_images/03_body/profile/country_flags/10_Portugal.png'
   ];
   static const String externalDiskIcon = 'assets/01_images/03_body/profile/external_drive.png';
+
+  static const String appliedJobNoActivesImage = 'assets/01_images/03_body/applied_job_no _applications.png';
 }

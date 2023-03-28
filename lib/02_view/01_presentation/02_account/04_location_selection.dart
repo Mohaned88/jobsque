@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:jobsque/02_view/02_components/cards/work_type_large_card.dart';
-import 'package:jobsque/02_view/02_components/custom_toggle_switch.dart';
 import 'package:jobsque/02_view/04_utilities/res/constants.dart';
 import 'package:jobsque/03_controller/00_navigation/routes.dart';
 import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
@@ -174,7 +172,7 @@ class LocationSelectionScreen extends StatelessWidget {
                       builder: (context,state)=> CustomElevatedButton(
                         onPressed: () {
                           authCubit.putSelectedWorkType(
-                            userId: authCubit.userModel!.id,
+                            userId: authCubit.userModel.id,
                             workType: workTypeCubit.selectedWorkTypeTitles,
                             offlinePlace: prefLocationCubit.offlineLocations,
                             onlinePlace: prefLocationCubit.remoteLocations,

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/02_view/05_styles/colors.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/apply_job/apply_job_States.dart';
 
+import '../../../../01_model/05_job_model/job_model.dart';
 import '../../../../02_view/04_utilities/res/assets.dart';
 import '../../../../02_view/04_utilities/res/strings.dart';
 
@@ -127,4 +128,39 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
     stepIndex = index;
     emit(ChangeStepIndexState());
   }
+
+  List<JobModel> appliedActiveJobs = [
+    JobModel(
+      image: AppAssets.twitterLogo,
+      location: 'مصر',
+      name: 'مهندس',
+      id: 1,
+      favorites: 0,
+      expired: 0,
+      description: 'أى حاجه',
+      companyWebSite: 'google.com',
+      companyMail: 'mohanedabdallah88@gmail.com',
+      aboutCompany: 'some info',
+      skills: 'bye3raf yedayya3 2l wa2t',
+      company: 'baklawez',
+      types: ['senior','full time','on site'],
+      salary: '15k-20k',
+    ),
+    JobModel(
+      image: AppAssets.twitterLogo,
+      location: '2مصر',
+      name: '2مهندس',
+      id: 2,
+      favorites: 0,
+      expired: 0,
+      description: 'أى حاجه',
+      companyWebSite: 'google.com',
+      companyMail: 'mohanedabdallah88@gmail.com',
+      aboutCompany: 'some info',
+      skills: 'bye3raf yedayya3 2l wa2t',
+      company: 'baklawez',
+      types: ['senior','full time','on site'],
+      salary: '15k-20k',
+    ),
+  ];
 }

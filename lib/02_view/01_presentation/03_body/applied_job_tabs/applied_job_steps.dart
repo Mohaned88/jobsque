@@ -3,20 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:sizer/sizer.dart';
-import '../../../01_model/04_file_model/file_model.dart';
-import '../../../03_controller/01_helper/validation.dart';
-import '../../../03_controller/03_cubit/screens/apply_job/apply_job_States.dart';
-import '../../../03_controller/03_cubit/screens/apply_job/apply_job_cubit.dart';
-import '../../02_components/cards/work_type_large_card.dart';
-import '../../02_components/upload_box.dart';
-import '../../02_components/uploaded_doc_preview.dart';
-import '../../03_widgets/application_steps.dart';
-import '../../03_widgets/custom_elevated_button.dart';
-import '../../03_widgets/custom_text.dart';
-import '../../03_widgets/custom_text_field.dart';
-import '../../04_utilities/res/assets.dart';
-import '../../04_utilities/res/strings.dart';
-import '../../05_styles/colors.dart';
+import '../../../../01_model/04_file_model/file_model.dart';
+import '../../../../03_controller/01_helper/validation.dart';
+import '../../../../03_controller/03_cubit/screens/apply_job/apply_job_States.dart';
+import '../../../../03_controller/03_cubit/screens/apply_job/apply_job_cubit.dart';
+import '../../../02_components/cards/work_type_large_card.dart';
+import '../../../02_components/upload_box.dart';
+import '../../../02_components/uploaded_doc_preview.dart';
+import '../../../03_widgets/application_steps.dart';
+import '../../../03_widgets/custom_elevated_button.dart';
+import '../../../03_widgets/custom_text.dart';
+import '../../../03_widgets/custom_text_field.dart';
+import '../../../04_utilities/res/assets.dart';
+import '../../../04_utilities/res/strings.dart';
+import '../../../05_styles/colors.dart';
 
 class AppliedJobScreen extends StatefulWidget {
   const AppliedJobScreen({Key? key}) : super(key: key);

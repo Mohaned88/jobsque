@@ -163,4 +163,5 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
       salary: '15k-20k',
     ),
   ];
+  List<JobModel> appliedRejectedJobs = [];
 }

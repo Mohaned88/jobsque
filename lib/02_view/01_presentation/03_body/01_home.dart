@@ -116,47 +116,44 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                if (homeCubit.suggestJobs.isNotEmpty) ...[
-                  SliverToBoxAdapter(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const CustomText(
-                              text: AppStrings.homeScreenSuggestedJob,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 18,
-                              height: 1.3,
-                              color: AppColors.kPrimaryBlack,
-                            ),
-                            InkWell(
-                              onTap: () {},
-                              child: const CustomText(
-                                text: AppStrings.homeScreenViewAll,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                height: 1.4,
-                                color: AppColors.kPrimaryColor,
+                // if (homeCubit.suggestJobs.isNotEmpty) ...[
+                  BlocConsumer<HomeCubit, HomeStates>(
+                    listener: (context, state) {},
+                    builder: (context, state) {
+                      if(homeCubit.suggestJobs.isNotEmpty) {
+                        return SliverToBoxAdapter(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const CustomText(
+                                    text: AppStrings.homeScreenSuggestedJob,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18,
+                                    height: 1.3,
+                                    color: AppColors.kPrimaryBlack,
+                                  ),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: const CustomText(
+                                      text: AppStrings.homeScreenViewAll,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14,
+                                      height: 1.4,
+                                      color: AppColors.kPrimaryColor,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5.w,
-                        ),
-                        BlocConsumer<HomeCubit, HomeStates>(
-                          listener: (context, state) {},
-                          builder: (context, state) {
-                            if (state is LoadingSuggestColorListState) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            } else {
-                              return SizedBox(
+                              SizedBox(
+                                height: 5.w,
+                              ),
+                              SizedBox(
                                 height: 50.w,
                                 child: BannerCarousel(
                                   viewportFraction: 0.9,
@@ -177,14 +174,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                 ),
-                              );
-                            }
-                          },
-                        ),
-                      ],
-                    ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      else{
+                        return const SliverToBoxAdapter(child: SizedBox());
+                      }
+                    },
                   ),
-                ], // Banner Carousel
+
+                // ], // Banner Carousel
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 3.w),

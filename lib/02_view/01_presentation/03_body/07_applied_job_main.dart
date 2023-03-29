@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/applied_job_tabs/01_active_jobs_tab.dart';
+import 'package:jobsque/02_view/01_presentation/03_body/applied_job_tabs/02_rejected_jobs_tab.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/apply_job/apply_job_States.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/apply_job/apply_job_cubit.dart';
 import 'package:sizer/sizer.dart';
@@ -61,10 +62,10 @@ class AppliedJobMainScreen extends StatelessWidget {
               Expanded(
                 child: BlocConsumer<ApplyJobCubit,ApplyJobStates>(
                   listener: (context,state){},
-                  builder: (context,state)=>TabBarView(
+                  builder: (context,state)=>const TabBarView(
                     children: [
                       ActiveJobsTab(),
-                      ActiveJobsTab(),
+                      RejectedJobsTab(),
                     ],
                   ),
                 ),

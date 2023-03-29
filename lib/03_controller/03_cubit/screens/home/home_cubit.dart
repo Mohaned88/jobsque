@@ -97,9 +97,9 @@ class HomeCubit extends Cubit<HomeStates> {
         );
         changeEnabledItemColor(0);
         /*print(response.data['data'][1]);*/
-        emit(RetrieveListSuccessState());
+        emit(RetrieveSuggestListSuccessState());
       } else {
-        emit(RetrieveListFailState());
+        emit(RetrieveSuggestListFailState());
       }
     } catch (e) {
       print(

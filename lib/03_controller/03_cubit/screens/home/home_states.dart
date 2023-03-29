@@ -9,3 +9,6 @@ class DisabledItemColorState extends HomeStates{}
 class LoadingJobsListState extends HomeStates{}
 class RetrieveListSuccessState extends HomeStates{}
 class RetrieveListFailState extends HomeStates{}
+
+class RetrieveSuggestListSuccessState extends HomeStates{}
+class RetrieveSuggestListFailState extends HomeStates{}

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobsque/02_view/01_presentation/03_body/applied_job_tabs/applied_job_steps.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/apply_job/01_apply_job_main.dart';
 import 'package:sizer/sizer.dart';
 
@@ -13,22 +14,24 @@ class JobPreviewCard extends StatelessWidget {
   final JobModel? jobModel;
   final VoidCallback? saveOnPressed;
   final String? suffixIcon;
+  final GestureTapCallback? gestureOnTap;
 
   const JobPreviewCard({
     Key? key,
     this.jobModel,
     this.saveOnPressed,
     this.suffixIcon,
+    this.gestureOnTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: gestureOnTap ?? () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ApplyJobScreen(
+            builder: (context) => AppliedJobScreen(
               jobModel: jobModel,
             ),
           ),

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:sizer/sizer.dart';
 import '../../../../01_model/04_file_model/file_model.dart';
+import '../../../../01_model/05_job_model/job_model.dart';
 import '../../../../03_controller/01_helper/validation.dart';
 import '../../../../03_controller/03_cubit/screens/apply_job/apply_job_States.dart';
 import '../../../../03_controller/03_cubit/screens/apply_job/apply_job_cubit.dart';
@@ -19,7 +20,8 @@ import '../../../04_utilities/res/strings.dart';
 import '../../../05_styles/colors.dart';
 
 class AppliedJobScreen extends StatefulWidget {
-  const AppliedJobScreen({Key? key}) : super(key: key);
+  final JobModel? jobModel;
+  const AppliedJobScreen({Key? key,this.jobModel}) : super(key: key);
 
   @override
   State<AppliedJobScreen> createState() => _AppliedJobScreenState();
@@ -55,7 +57,7 @@ class _AppliedJobScreenState extends State<AppliedJobScreen> {
         ),
         centerTitle: true,
         title: const CustomText(
-          text: "Applied Job",
+          text: AppStrings.appliedJobScreenTitle,
           fontSize: 20,
           fontWeight: FontWeight.w500,
           height: 1.2,
@@ -71,21 +73,21 @@ class _AppliedJobScreenState extends State<AppliedJobScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Image.asset(
-                AppAssets.twitterLogo,
+                widget.jobModel!.image!,
                 width: 13.w,
                 height: 13.w,
               ),
               SizedBox(height: 3.w),
-              const CustomText(
-                text: AppStrings.applyJobTitle,
+              CustomText(
+                text: widget.jobModel!.name!,
                 textAlign: TextAlign.center,
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
                 height: 1.2,
                 color: AppColors.kPrimaryBlack,
               ),
-              const CustomText(
-                text: '${AppStrings.applyJobLocationCompany} • ${AppStrings.applyJobLocationCountry}, ${AppStrings.applyJobLocationCity} ',
+              CustomText(
+                text: '${widget.jobModel!.company} • ${widget.jobModel!.location}',
                 textAlign: TextAlign.center,
                 fontWeight: FontWeight.w400,
                 fontSize: 12,
@@ -106,7 +108,7 @@ class _AppliedJobScreenState extends State<AppliedJobScreen> {
           Expanded(
             child: PageView(
               controller: pageController,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               onPageChanged: (int index) {},
               children: [
                 CustomScrollView(

@@ -7,6 +7,7 @@ import 'package:jobsque/03_controller/03_cubit/screens/location_selection/prefer
 import 'package:jobsque/03_controller/03_cubit/screens/messages/messages_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/notifications/notifications_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/saved_cubit/saved_cubit.dart';
+import 'package:jobsque/03_controller/03_cubit/screens/search/search_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/two_step_verification/two_step_verification_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/type_selection/work_type_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/shared/shared_prefs_cubit.dart';
@@ -74,6 +75,9 @@ void main() async {
         ),
         BlocProvider(
           create: (context) => TwoStepVerificationCubit(),
+        ),
+        BlocProvider(
+          create: (context) => SearchCubit(),
         ),
       ],
       child: MyApp(),

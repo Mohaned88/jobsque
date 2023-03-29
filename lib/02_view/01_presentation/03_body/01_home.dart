@@ -1,6 +1,7 @@
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jobsque/02_view/01_presentation/03_body/apply_job/01_apply_job_main.dart';
 import 'package:jobsque/02_view/02_components/cards/job_preview_card.dart';
 import 'package:jobsque/02_view/02_components/cards/suggested_job_card.dart';
 import 'package:jobsque/02_view/03_widgets/custom_text.dart';
@@ -116,76 +117,71 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                // if (homeCubit.suggestJobs.isNotEmpty) ...[
-                  BlocConsumer<HomeCubit, HomeStates>(
-                    listener: (context, state) {},
-                    builder: (context, state) {
-                      if(homeCubit.suggestJobs.isNotEmpty) {
-                        return SliverToBoxAdapter(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const CustomText(
-                                    text: AppStrings.homeScreenSuggestedJob,
+                BlocConsumer<HomeCubit, HomeStates>(
+                  listener: (context, state) {},
+                  builder: (context, state) {
+                    if (homeCubit.suggestJobs.isNotEmpty) {
+                      return SliverToBoxAdapter(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const CustomText(
+                                  text: AppStrings.homeScreenSuggestedJob,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
+                                  height: 1.3,
+                                  color: AppColors.kPrimaryBlack,
+                                ),
+                                InkWell(
+                                  onTap: () {},
+                                  child: const CustomText(
+                                    text: AppStrings.homeScreenViewAll,
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 18,
-                                    height: 1.3,
-                                    color: AppColors.kPrimaryBlack,
+                                    fontSize: 14,
+                                    height: 1.4,
+                                    color: AppColors.kPrimaryColor,
                                   ),
-                                  InkWell(
-                                    onTap: () {},
-                                    child: const CustomText(
-                                      text: AppStrings.homeScreenViewAll,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14,
-                                      height: 1.4,
-                                      color: AppColors.kPrimaryColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5.w,
-                              ),
-                              SizedBox(
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5.w,
+                            ),
+                            SizedBox(
+                              height: 50.w,
+                              child: BannerCarousel(
+                                viewportFraction: 0.9,
+                                showIndicator: false,
+                                disableColor: Colors.green,
+                                indicatorBottom: false,
+                                margin: const EdgeInsets.all(0),
                                 height: 50.w,
-                                child: BannerCarousel(
-                                  viewportFraction: 0.9,
-                                  showIndicator: false,
-                                  disableColor: Colors.green,
-                                  indicatorBottom: false,
-                                  margin: const EdgeInsets.all(0),
-                                  height: 50.w,
-                                  onPageChanged: (int index) {
-                                    homeCubit.changeEnabledItemColor(index);
-                                  },
-                                  customizedBanners: List.generate(
-                                    homeCubit.suggestJobs.length,
-                                    (index) => SuggestedJobCard(
-                                      fillColor: homeCubit.itemColors[index],
-                                      jobModel: homeCubit.suggestJobs[index],
-                                      saveOnPressed: () {},
-                                    ),
+                                onPageChanged: (int index) {
+                                  homeCubit.changeEnabledItemColor(index);
+                                },
+                                customizedBanners: List.generate(
+                                  homeCubit.suggestJobs.length,
+                                  (index) => SuggestedJobCard(
+                                    fillColor: homeCubit.itemColors[index],
+                                    jobModel: homeCubit.suggestJobs[index],
+                                    saveOnPressed: () {},
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
-                        );
-                      }
-                      else{
-                        return const SliverToBoxAdapter(child: SizedBox());
-                      }
-                    },
-                  ),
-
-                // ], // Banner Carousel
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      return const SliverToBoxAdapter(child: SizedBox());
+                    }
+                  },
+                ),
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 3.w),
@@ -214,21 +210,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                BlocConsumer<HomeCubit,HomeStates>(
-                  listener: (context,state){},
-                  builder: (context,state)=> SliverList(
+                BlocConsumer<HomeCubit, HomeStates>(
+                  listener: (context, state) {},
+                  builder: (context, state) => SliverList(
                     delegate: SliverChildListDelegate(
                       List.generate(
                         homeCubit.recentJobs.length,
-                            (index) =>JobPreviewCard(
+                        (index) => JobPreviewCard(
                           jobModel: homeCubit.recentJobs[index],
                           saveOnPressed: () {
                             savedCubit.addToSavedJobs(
-                              jobModel: AppConstants.suggestedJobs[index],
+                              jobModel: homeCubit.recentJobs[index],
+                            );
+                          },
+                          gestureOnTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    ApplyJobScreen(
+                                  jobModel: homeCubit.recentJobs[index],
+                                ),
+                              ),
                             );
                           },
                         ),
-
                       ),
                     ),
                   ),

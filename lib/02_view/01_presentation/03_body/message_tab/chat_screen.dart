@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/02_view/02_components/cards/message_card.dart';
 import 'package:jobsque/02_view/03_widgets/custom_text.dart';
-import 'package:jobsque/02_view/03_widgets/custom_text_field_ver2.dart';
 import 'package:jobsque/02_view/04_utilities/res/assets.dart';
 import 'package:jobsque/02_view/04_utilities/res/strings.dart';
 import 'package:jobsque/02_view/05_styles/colors.dart';
@@ -12,7 +11,6 @@ import 'package:jobsque/03_controller/03_cubit/screens/messages/messages_states.
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../02_components/job_filter_bottom_sheet.dart';
 import '../../../03_widgets/messages_filter.dart';
 import '../../../03_widgets/custom_text_field.dart';
 
@@ -46,7 +44,6 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     MessagesCubit messagesCubit = MessagesCubit.get(context);
-    AuthCubit authCubit = AuthCubit.get(context);
     return Scaffold(
       body: SafeArea(
         child: BlocConsumer<MessagesCubit, MessagesStates>(
@@ -100,9 +97,6 @@ class _ChatScreenState extends State<ChatScreen> {
                       IconButton(
                         onPressed: () {
                           showMaterialModalBottomSheet(
-                            ///////////////////
-                            useRootNavigator: true,
-
                             context: context,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
@@ -115,7 +109,7 @@ class _ChatScreenState extends State<ChatScreen> {
                               child: Padding(
                                 padding: EdgeInsets.all(5.w),
                                 child: SizedBox(
-                                  height: 55.h,
+                                  height: 48.h,
                                   child: const MessagesFilterBottomSheet(),
                                 ),
                               ),

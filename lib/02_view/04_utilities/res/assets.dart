@@ -105,4 +105,13 @@ class AppAssets{
   static const String externalDiskIcon = 'assets/01_images/03_body/profile/external_drive.png';
 
   static const String appliedJobNoActivesImage = 'assets/01_images/03_body/applied_job_no _applications.png';
+
+  static const List<String> chatScreenFilterIcon = [
+    'assets/01_images/03_body/filters_icons/01_briefcase.png',
+    'assets/01_images/03_body/filters_icons/02_note.png',
+    'assets/01_images/03_body/filters_icons/03_sms.png',
+    'assets/01_images/03_body/filters_icons/04_mute.png',
+    'assets/01_images/03_body/filters_icons/05_archive.png',
+    'assets/01_images/03_body/filters_icons/06_delete.png',
+  ];
 }

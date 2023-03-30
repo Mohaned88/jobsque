@@ -32,6 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     SearchCubit searchCubit = SearchCubit.get(context);
+    FilterBSCubit filterBSCubit = FilterBSCubit.get(context);
     //AuthCubit authCubit = AuthCubit.get(context);
     return SafeArea(
       child: Scaffold(
@@ -92,9 +93,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                         topLeft: Radius.circular(5.w),
                                       ),
                                     ),
-                                    builder: (_) =>BlocConsumer<FilterBSCubit,FilterBSStates>(
-                                      listener: (context,state){},
-                                      builder: (context,state)=>const MyCustomBottomSheet(),
+                                    builder: (_) => BlocProvider.value(
+                                      value: filterBSCubit,
+                                      child: const MyCustomBottomSheet(),
                                     ),
                                   );
                                 },

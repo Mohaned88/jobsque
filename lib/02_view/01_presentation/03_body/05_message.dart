@@ -114,10 +114,8 @@ class MessageScreen extends StatelessWidget {
                                       ),
                                       CustomElevatedButtonVer2(
                                         onPressed: () {},
-                                        label: 'Apply Job',
-                                        icon: Icons.cases,
+                                        label: 'Unread',
                                         backgroundColor: AppColors.white,
-                                        iconColor: AppColors.iconsBlack,
                                         labelColor: AppColors.kPrimaryBlack,
                                         width: double.infinity,
                                         height: 12.w,
@@ -130,10 +128,8 @@ class MessageScreen extends StatelessWidget {
                                       ),
                                       CustomElevatedButtonVer2(
                                         onPressed: () {},
-                                        label: 'Share via...',
-                                        icon: Icons.cases,
+                                        label: 'Spam',
                                         backgroundColor: AppColors.white,
-                                        iconColor: AppColors.iconsBlack,
                                         labelColor: AppColors.kPrimaryBlack,
                                         width: double.infinity,
                                         height: 12.w,
@@ -146,10 +142,8 @@ class MessageScreen extends StatelessWidget {
                                       ),
                                       CustomElevatedButtonVer2(
                                         onPressed: () {},
-                                        label: 'Cancel Save',
-                                        icon: Icons.cases,
+                                        label: 'Archived',
                                         backgroundColor: AppColors.white,
-                                        iconColor: AppColors.iconsBlack,
                                         labelColor: AppColors.kPrimaryBlack,
                                         width: double.infinity,
                                         height: 12.w,
@@ -226,7 +220,8 @@ class MessageScreen extends StatelessWidget {
                     ],
                   ),
                 );
-              } else {
+              }
+              else {
                 //if Not Empty
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(

@@ -27,15 +27,15 @@ class FilterBSCubit extends Cubit<FilterBSStates> {
 
   changeJobTypeCardColor(int index){
     if(fillColor[index] == AppColors.white){
-      fillColor[index] == AppColors.kBlue200;
-      borderColor[index] == AppColors.kPrimaryColor;
-      labelColor[index] == AppColors.kPrimaryColor;
+      fillColor[index] = AppColors.kBlue200;
+      borderColor[index] = AppColors.kPrimaryColor;
+      labelColor[index] = AppColors.kPrimaryColor;
       emit(SelectedJobTypeState());
     }
     else{
-      fillColor[index] == AppColors.white;
-      borderColor[index] == AppColors.lightGrey;
-      labelColor[index] == AppColors.midLightGrey;
+      fillColor[index] = AppColors.white;
+      borderColor[index] = AppColors.lightGrey;
+      labelColor[index] = AppColors.midLightGrey;
       emit(UnSelectedJobTypeState());
     }
   }

@@ -39,6 +39,11 @@ class _MyCustomBottomSheetState extends State<MyCustomBottomSheet> {
                 children: [
                   CustomScrollView(
                     slivers: [
+                      SliverToBoxAdapter(
+                        child: SizedBox(
+                          height: 5.w,
+                        ),
+                      ),
                       SliverAppBar(
                         backgroundColor: Colors.transparent,
                         elevation: 0,

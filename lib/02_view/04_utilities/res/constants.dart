@@ -196,4 +196,6 @@ class AppConstants {
   static const String userSendLink = '134.209.132.80/api/chat/user?';
   static const String editProfileLanguageLink = '134.209.132.80/api/user/profile/language/';
   static const String searchJobsLink = '134.209.132.80/api/jobs/search?name=';
+  static const String addToFavoritesLink = '134.209.132.80/api/favorites?';
+  static const String showFavoritesFromAPILink = '134.209.132.80/api/favorites/';
 }

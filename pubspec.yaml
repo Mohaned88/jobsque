@@ -50,6 +50,7 @@ dependencies:
   flutter_switch: ^0.3.2
   pin_code_fields: ^7.4.0
   expandable: ^5.0.1
+  mailer: ^6.0.0
 
   #control
   bloc: ^8.1.0

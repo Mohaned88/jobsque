@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobsque/02_view/02_components/cards/applied_job_preview_card.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/apply_job/apply_job_cubit.dart';
 import 'package:sizer/sizer.dart';
 
@@ -58,14 +59,16 @@ class ActiveJobsTab extends StatelessWidget {
           ],
         ),
       );
-    } else {
+    }
+    else {
       return CustomScrollView(
         slivers: [
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              (context, index) => JobPreviewCard(
+              (context, index) => AppliedJobPreviewCard(
                 jobModel: applyJobCubit.appliedActiveJobs[index],
                 saveOnPressed: (){},
+                stepNumber: index+2,
               ),
               childCount: applyJobCubit.appliedActiveJobs.length,
             ),

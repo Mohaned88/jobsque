@@ -325,6 +325,20 @@ class AppStrings {
 
   static const String homeScreenRecentJobs = 'Recent Job';
 
+  static const Map<String, List<String>> inSideFiltersTypesNames = {
+    'Remote': ['Remote', 'On Site', 'Hybrid', 'Any'],
+    'Full Time': ['Full Time', 'Part Time', 'Intern', 'Freelance'],
+    'Post Date': ['1 week', '2 Week', '1 Month', '3 Month'],
+    'Experience Level': ['Junior', 'Senior', 'Manager', 'CEO'],
+  };
+
+  static const List<String> searchScreenFilterNamesList = [
+    'Remote',
+    'Full Time',
+    'Post Date',
+    'Experience Level',
+  ];
+
   static const List<String> searchFilterJobTypes = [
     'Full Time',
     'Remote',
@@ -333,6 +347,7 @@ class AppStrings {
     'Onsite',
     'Internship',
   ];
+
   static const String searchNotFoundTitle = 'Search not found';
   static const String searchNotFoundSubTitle =
       'Try searching with different keywords so we can show you';
@@ -354,7 +369,8 @@ class AppStrings {
   static const String profileReviewed = 'Reviewed';
   static const String profileContacted = 'Contacted';
   static const String profileAbout = 'About';
-  static const String profileAboutInfo = "I'm Rafif Dian Axelingga, I’m UI/UX Designer, I have experience designing UI Design for approximately 1 year. I am currently joining the Vektora studio team based in Surakarta, Indonesia.I am a person who has a high spirit and likes to work to achieve what I dream of.";
+  static const String profileAboutInfo =
+      "I'm Rafif Dian Axelingga, I’m UI/UX Designer, I have experience designing UI Design for approximately 1 year. I am currently joining the Vektora studio team based in Surakarta, Indonesia.I am a person who has a high spirit and likes to work to achieve what I dream of.";
   static const String profileGeneral = 'General';
   static const String profileEdit = 'Edit';
   static const String profileEditProfile = 'Edit Profile';
@@ -411,35 +427,47 @@ class AppStrings {
 
   static const String emailAddressMainEmailAddress = 'Main e-mail address';
   static const String phoneNumberMainPhoneNumber = 'Main phone number';
-  static const String phoneNumberResetMsg = 'Use the phone number to reset your password';
+  static const String phoneNumberResetMsg =
+      'Use the phone number to reset your password';
   static const String changePasswordOldPassword = 'Enter your old password';
   static const String changePasswordNewPassword = 'Enter your new password';
-  static const String changePasswordConfirmPassword = 'Confirm your new password';
-  static const String twoStepVerificationSecureMsg = 'Secure your account with two-step verification';
-  static const String twoStepVerificationGSTR1 = 'Two-step verification provides additional security by asking for a verification code every time you log in on another device.';
-  static const String twoStepVerificationGSTR2 = 'Adding a phone number or using an authenticator will help keep your account safe from harm.';
-  static const String twoStepVerificationSelectMethodQ = 'Select a verification method';
+  static const String changePasswordConfirmPassword =
+      'Confirm your new password';
+  static const String twoStepVerificationSecureMsg =
+      'Secure your account with two-step verification';
+  static const String twoStepVerificationGSTR1 =
+      'Two-step verification provides additional security by asking for a verification code every time you log in on another device.';
+  static const String twoStepVerificationGSTR2 =
+      'Adding a phone number or using an authenticator will help keep your account safe from harm.';
+  static const String twoStepVerificationSelectMethodQ =
+      'Select a verification method';
   static const List<String> twoStepVerificationMethods = [
     'Telephone number (SMS)',
     'Telephone number (Call)',
     'Email',
   ];
-  static const String twoStepVerificationSelectMethodN = 'Note : Turning this feature will sign you out anywhere you’re currently signed in. We will then require you to enter a verification code the first time you sign with a new device or Joby mobile application.';
+  static const String twoStepVerificationSelectMethodN =
+      'Note : Turning this feature will sign you out anywhere you’re currently signed in. We will then require you to enter a verification code the first time you sign with a new device or Joby mobile application.';
   static const String twoStepVerificationAddPhoneNo = 'Add phone number';
-  static const String twoStepVerificationSendVCodeMsg = 'We will send a verification code to this number';
+  static const String twoStepVerificationSendVCodeMsg =
+      'We will send a verification code to this number';
   static const String twoStepVerificationEnterPassword = 'Enter your password';
   static const String twoStepVerification6DCodeQ = 'Enter the 6 digit code';
-  static const String twoStepVerification6DCodeAuthQ = 'Please confirm your account by entering the authorization code sen to *-*-7234';
+  static const String twoStepVerification6DCodeAuthQ =
+      'Please confirm your account by entering the authorization code sen to *-*-7234';
   static const String twoStepVerificationResendCode = 'Resend code ';
   static const String twoStepVerificationSendCode = 'Send Code';
   static const String twoStepVerificationVerify = 'Verify';
 
   static const String helpCenterQuery = 'What can we help?';
   static const String helpCenterSuggestionTitle = 'Lorem ipsum dolor sit amet';
-  static const String helpCenterSuggestionDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ultricies mi enim, quis vulputate nibh faucibus at. Maecenas est ante, suscipit vel sem non, blandit blandit erat. Praesent pulvinar ante et felis porta vulputate. Curabitur ornare velit nec fringilla finibus. Phasellus mollis pharetra ante, in ullamcorper massa ullamcorper et. Curabitur ac leo sit amet leo interdum mattis vel eu mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ultricies mi enim, quis vulputate nibh faucibus at. Maecenas est ante, suscipit vel sem non, blandit blandit erat. Praesent pulvinar ante et felis porta vulputate. Curabitur ornare velit nec fringilla finibus. Phasellus mollis pharetra ante, in ullamcorper massa ullamcorper et. Curabitur ac leo sit amet leo interdum mattis vel eu mauris.';
+  static const String helpCenterSuggestionDescription =
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ultricies mi enim, quis vulputate nibh faucibus at. Maecenas est ante, suscipit vel sem non, blandit blandit erat. Praesent pulvinar ante et felis porta vulputate. Curabitur ornare velit nec fringilla finibus. Phasellus mollis pharetra ante, in ullamcorper massa ullamcorper et. Curabitur ac leo sit amet leo interdum mattis vel eu mauris.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ultricies mi enim, quis vulputate nibh faucibus at. Maecenas est ante, suscipit vel sem non, blandit blandit erat. Praesent pulvinar ante et felis porta vulputate. Curabitur ornare velit nec fringilla finibus. Phasellus mollis pharetra ante, in ullamcorper massa ullamcorper et. Curabitur ac leo sit amet leo interdum mattis vel eu mauris.';
 
   static const String appliedJobScreenTitle = 'Applied Job';
-  static const List<String> appliedJobTabsTitles = ['Active','Rejected'];
-  static const String appliedJobNoActivesSubTitle = 'If there is an application that is rejected by the company it will appear here';
-  static const String appliedJobNoActivesTitle = 'No applications were rejected';
+  static const List<String> appliedJobTabsTitles = ['Active', 'Rejected'];
+  static const String appliedJobNoActivesSubTitle =
+      'If there is an application that is rejected by the company it will appear here';
+  static const String appliedJobNoActivesTitle =
+      'No applications were rejected';
 }

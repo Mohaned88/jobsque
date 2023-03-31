@@ -15,6 +15,7 @@ class JobModel {
   String? salary;
   int? favorites;
   int? expired;
+  String? createdAt;
 
   JobModel({
     this.id,
@@ -31,6 +32,7 @@ class JobModel {
     this.salary,
     this.favorites,
     this.expired,
+    this.createdAt,
   });
 
   Map<String, dynamic> toMap() {
@@ -52,6 +54,7 @@ class JobModel {
     data['data']['salary'] = salary;
     data['data']['expired'] = expired;
     data['data']['favorites'] = favorites;
+    data['data']['created_at'] = createdAt;
 
     return data;
   }
@@ -73,6 +76,7 @@ class JobModel {
       salary: map['salary'],
       expired: map['expired'],
       favorites: map['favorites'],
+      createdAt: map['created_at'],
     );
   }
 }

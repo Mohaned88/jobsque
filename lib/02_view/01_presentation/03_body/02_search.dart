@@ -7,6 +7,8 @@ import 'package:jobsque/02_view/03_widgets/custom_text.dart';
 import 'package:jobsque/02_view/03_widgets/custom_text_field_ver2.dart';
 import 'package:jobsque/02_view/05_styles/colors.dart';
 import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
+import 'package:jobsque/03_controller/03_cubit/screens/saved/saved_cubit.dart';
+import 'package:jobsque/03_controller/03_cubit/screens/saved/saved_states.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/search/search_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/search/search_states.dart';
 import 'package:jobsque/03_controller/03_cubit/widgets/body/filter_bottom_sheet/filter_bottom_sheet_cubit.dart';
@@ -33,7 +35,8 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     SearchCubit searchCubit = SearchCubit.get(context);
     FilterBSCubit filterBSCubit = FilterBSCubit.get(context);
-    //AuthCubit authCubit = AuthCubit.get(context);
+    SavedCubit savedCubit = SavedCubit.get(context);
+    AuthCubit authCubit = AuthCubit.get(context);
     return SafeArea(
       child: Scaffold(
         key: scaffoldKey,
@@ -62,8 +65,9 @@ class _SearchScreenState extends State<SearchScreen> {
             hintText: AppStrings.homeScreenSearch,
             hintColor: AppColors.textsGrey,
             controller: searchController,
-            onFieldSubmitted: (String text){
-              searchCubit.getSuggestJobList(token: AuthCubit.authorizationToken, searchText: text);
+            onFieldSubmitted: (String text) {
+              searchCubit.getSuggestJobList(
+                  token: AuthCubit.authorizationToken, searchText: text);
             },
           ),
         ),
@@ -74,58 +78,106 @@ class _SearchScreenState extends State<SearchScreen> {
             if (state is RetrieveSearchListSuccessState) {
               return CustomScrollView(
                 slivers: [
-                  SliverToBoxAdapter(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 12.w,
-                          width: double.infinity,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  showMaterialModalBottomSheet(
-                                    context: context,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(5.w),
-                                        topLeft: Radius.circular(5.w),
+                  BlocConsumer<SavedCubit, SavedStates>(
+                    listener: (context, state) {},
+                    builder: (context, state) =>
+                        BlocConsumer<FilterBSCubit, FilterBSStates>(
+                      listener: (context, state) {},
+                      builder: (context, state) => SliverToBoxAdapter(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 12.w,
+                              width: double.infinity,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (BuildContext context, int index) {
+                                  if (index == 0) {
+                                    return IconButton(
+                                      onPressed: () {
+                                        showMaterialModalBottomSheet(
+                                          context: context,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(5.w),
+                                              topLeft: Radius.circular(5.w),
+                                            ),
+                                          ),
+                                          builder: (_) => BlocProvider.value(
+                                            value: filterBSCubit,
+                                            child: const MyCustomBottomSheet(),
+                                          ),
+                                        );
+                                      },
+                                      icon: Image.asset(
+                                        AppAssets.settingsIcon,
+                                        width: 7.w,
+                                        height: 7.w,
                                       ),
-                                    ),
-                                    builder: (_) => BlocProvider.value(
-                                      value: filterBSCubit,
-                                      child: const MyCustomBottomSheet(),
-                                    ),
-                                  );
+                                    );
+                                  } else {
+                                    return FilterBottomSheetBtn(
+                                      title: AppStrings
+                                              .searchScreenFilterNamesList[
+                                          index - 1],
+                                      types: AppStrings.inSideFiltersTypesNames[
+                                          AppStrings
+                                                  .searchScreenFilterNamesList[
+                                              index - 1]]!,
+                                      fillColors: index - 1 == 0
+                                          ? filterBSCubit.remoteFillColor
+                                          : index - 1 == 1
+                                              ? filterBSCubit.fulltimeFillColor
+                                              : index - 1 == 2
+                                                  ? filterBSCubit
+                                                      .postdateFillColor
+                                                  : filterBSCubit.expFillColor,
+                                      borderNLabelColors: index - 1 == 0
+                                          ? filterBSCubit
+                                              .remoteBorderNLabelColor
+                                          : index - 1 == 1
+                                              ? filterBSCubit
+                                                  .fulltimeBorderNLabelColor
+                                              : index - 1 == 2
+                                                  ? filterBSCubit
+                                                      .postdateBorderNLabelColor
+                                                  : filterBSCubit
+                                                      .expBorderNLabelColor,
+                                      titles: index - 1 == 0
+                                          ? filterBSCubit.remoteSelectedTitles
+                                          : index - 1 == 1
+                                              ? filterBSCubit
+                                                  .fulltimeSelectedTitles
+                                              : index - 1 == 2
+                                                  ? filterBSCubit
+                                                      .postdateSelectedTitles
+                                                  : filterBSCubit
+                                                      .expSelectedTitles,
+                                    );
+                                  }
                                 },
-                                icon: Image.asset(
-                                  AppAssets.settingsIcon,
-                                  width: 7.w,
-                                  height: 7.w,
-                                ),
+                                itemCount: AppStrings
+                                        .searchScreenFilterNamesList.length +
+                                    1,
                               ),
-                              const FilterBottomSheetBtn(title: 'Remote'),
-                              const FilterBottomSheetBtn(title: 'Full time'),
-                              const FilterBottomSheetBtn(title: 'Post date'),
-                              const FilterBottomSheetBtn(title: 'Experience leve'),
-                            ],
-                          ),
+                            ),
+                            Container(
+                              width: double.infinity,
+                              color: AppColors.offWhite2,
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 3.w, vertical: 2.w),
+                              child: CustomText(
+                                text:
+                                    'Featuring ${searchCubit.searchResultList.length} jobs',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                                height: 1.4,
+                                color: AppColors.grey,
+                              ),
+                            ),
+                          ],
                         ),
-                        Container(
-                          width: double.infinity,
-                          color: AppColors.offWhite2,
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 3.w, vertical: 2.w),
-                          child: const CustomText(
-                            text: 'Featuring 120+ jobs',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                            height: 1.4,
-                            color: AppColors.grey,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                   SliverList(
@@ -134,7 +186,13 @@ class _SearchScreenState extends State<SearchScreen> {
                         if (searchCubit.searchResultList.isNotEmpty) {
                           return JobPreviewCard(
                             jobModel: searchCubit.searchResultList[index],
-
+                            saveOnPressed: () {
+                              savedCubit.addToFavoritesInAPI(
+                                token: AuthCubit.authorizationToken,
+                                userID: authCubit.userModel.id!,
+                                jobID: searchCubit.searchResultList[index].id!,
+                              );
+                            },
                           );
                         } else {
                           return Column(
@@ -186,7 +244,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ],
               );
-            }else if (state is LoadingSearchJobsListState) {
+            } else if (state is LoadingSearchJobsListState) {
               return Center(
                 child: SizedBox(
                   width: 20.w,
@@ -196,8 +254,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
               );
-            }
-            else {
+            } else {
               return CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(

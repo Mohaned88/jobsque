@@ -145,6 +145,7 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
       company: 'baklawez',
       types: ['senior','full time','on site'],
       salary: '15k-20k',
+      createdAt: '2023-03-12T14:01:03.000000Z',
     ),
     JobModel(
       image: AppAssets.twitterLogo,
@@ -161,6 +162,7 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
       company: 'baklawez',
       types: ['senior','full time','on site'],
       salary: '15k-20k',
+      createdAt: '2023-03-12T14:01:03.000000Z',
     ),
   ];
   List<JobModel> appliedRejectedJobs = [];

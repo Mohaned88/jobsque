@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/applied_job_tabs/applied_job_steps.dart';
-import 'package:jobsque/02_view/01_presentation/03_body/apply_job/01_apply_job_main.dart';
+import 'package:jobsque/02_view/03_widgets/application_steps.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../01_model/05_job_model/job_model.dart';
@@ -9,21 +9,23 @@ import 'job_type_card.dart';
 import '../../04_utilities/res/assets.dart';
 import '../../04_utilities/res/strings.dart';
 import '../../05_styles/colors.dart';
+import 'package:intl/intl.dart';
 
-class JobPreviewCard extends StatelessWidget {
+
+class AppliedJobPreviewCard extends StatelessWidget {
   final JobModel? jobModel;
   final VoidCallback? saveOnPressed;
   final String? suffixIcon;
   final GestureTapCallback? gestureOnTap;
-  final Color? suffixIconColor;
+  final int? stepNumber;
 
-  const JobPreviewCard({
+  const AppliedJobPreviewCard({
     Key? key,
     this.jobModel,
     this.saveOnPressed,
     this.suffixIcon,
     this.gestureOnTap,
-    this.suffixIconColor
+    this.stepNumber,
   }) : super(key: key);
 
   @override
@@ -40,9 +42,8 @@ class JobPreviewCard extends StatelessWidget {
         );
       },
       child: Container(
-        margin: EdgeInsets.only(bottom: 1.w),
-        padding: EdgeInsets.symmetric(vertical: 2.w),
-        height: 30.w,
+        padding: EdgeInsets.symmetric(vertical: 2.w,horizontal: 3.w),
+        height: 55.w,
         width: double.infinity,
         child: Card(
           child: Padding(
@@ -75,7 +76,7 @@ class JobPreviewCard extends StatelessWidget {
                           ),
                           CustomText(
                             text:
-                                '${jobModel!.company ?? AppStrings.applyJobLocationCompany} • ${jobModel!.location ?? AppStrings.applyJobLocationCity}',
+                            '${jobModel!.company ?? AppStrings.applyJobLocationCompany} • ${jobModel!.location ?? AppStrings.applyJobLocationCity}',
                             fontWeight: FontWeight.w400,
                             fontSize: 12,
                             height: 1.5,
@@ -89,7 +90,7 @@ class JobPreviewCard extends StatelessWidget {
                       padding: const EdgeInsets.all(0),
                       icon: Image.asset(
                         suffixIcon == null ? AppAssets.bottomBarIcon[3] : suffixIcon!,
-                        color: suffixIconColor ?? AppColors.iconsBlack,
+                        color: AppColors.iconsBlack,
                         width: 7.w,
                         height: 7.w,
                       ),
@@ -97,52 +98,59 @@ class JobPreviewCard extends StatelessWidget {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Expanded(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        mainAxisSize: MainAxisSize.max,
-                        children: List.generate(
-                          jobModel!.types!.length,
-                          (index) => JobTypeCard(
-                            label: jobModel!.types![index],
-                            fillColor: AppColors.kBlue200,
-                            labelColor: AppColors.kPrimaryColor,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                            height: 1.5,
-                            horizontalPadding: 4.w,
-                            verticalPadding: 1.w,
-                          ),
-                        ),
-                      ),
-                    ),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CustomText(
-                          text: '\$${jobModel!.salary!.split('-')[1].toString()}',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          height: 1.3,
-                          color: AppColors.green2,
+                      children:[
+                        JobTypeCard(
+                          label: jobModel!.types![1],
+                          fillColor: AppColors.kBlue200,
+                          labelColor: AppColors.kPrimaryColor,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          height: 1.5,
+                          horizontalPadding: 4.w,
+                          verticalPadding: 1.w,
                         ),
-                        const CustomText(
-                          text: '/Months',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          height: 1.4,
-                          color: AppColors.textsGrey,
+                        SizedBox(width: 2.w,),
+                        JobTypeCard(
+                          label: jobModel!.types![2],
+                          fillColor: AppColors.kBlue200,
+                          labelColor: AppColors.kPrimaryColor,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          height: 1.5,
+                          horizontalPadding: 4.w,
+                          verticalPadding: 1.w,
                         ),
                       ],
                     ),
+                    CustomText(
+                      text: 'Posted ${DateFormat.Md().format(DateTime.parse("${jobModel!.createdAt}")).compareTo('${DateTime.now()}')} days ago',
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      height: 1.5,
+                      color: AppColors.kBlack100,
+                    ),
                   ],
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 22.w,
+                  padding: EdgeInsets.symmetric(vertical: 2.w),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: AppColors.lightGrey,
+                    ),
+                    borderRadius: BorderRadius.circular(3.w),
+                  ),
+                  child: ApplicationSteps(
+                    stepNumber: stepNumber,
+                  ),
                 ),
               ],
             ),

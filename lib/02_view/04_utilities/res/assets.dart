@@ -114,4 +114,7 @@ class AppAssets{
     'assets/01_images/03_body/filters_icons/05_archive.png',
     'assets/01_images/03_body/filters_icons/06_delete.png',
   ];
+
+  static const String savedApplyJobFilterIcon= 'assets/01_images/03_body/filters_icons/08_directbox-notif.png';
+  static const String savedShareViaFilterIcon= 'assets/01_images/03_body/filters_icons/07_export.png';
 }

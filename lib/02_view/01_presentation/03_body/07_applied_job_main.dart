@@ -32,32 +32,41 @@ class AppliedJobMainScreen extends StatelessWidget {
       body: DefaultTabController(
         length: 2,
         child: Padding(
-          padding: EdgeInsets.all(5.w),
+          padding: EdgeInsets.symmetric(vertical: 4.w,horizontal: 3.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.max,
             children: [
-              TabBar(
-                indicator: ShapeDecoration(
-                  shape: RoundedRectangleBorder(
+              Padding(
+                padding: EdgeInsets.all(2.w),
+                child: Container(
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.w),
+                    color: AppColors.offWhite2,
                   ),
-                  color: AppColors.kDarkBlue,
-                ),
-                tabs: List.generate(
-                  AppStrings.appliedJobTabsTitles.length,
-                  (index) => Tab(
-                    icon: CustomText(
-                      text: AppStrings.appliedJobTabsTitles[index],
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      height: 1.4,
+                  child: TabBar(
+                    indicator: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.w),
+                      ),
+                      color: AppColors.kDarkBlue,
                     ),
+                    tabs: List.generate(
+                      AppStrings.appliedJobTabsTitles.length,
+                      (index) => Tab(
+                        icon: CustomText(
+                          text: AppStrings.appliedJobTabsTitles[index],
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          height: 1.4,
+                        ),
+                      ),
+                    ),
+                    onTap: (int index) {},
+                    labelColor: AppColors.white,
+                    unselectedLabelColor: AppColors.kPrimaryBlack,
                   ),
                 ),
-                onTap: (int index) {},
-                labelColor: AppColors.white,
-                unselectedLabelColor: AppColors.kPrimaryBlack,
               ),
               Expanded(
                 child: BlocConsumer<ApplyJobCubit,ApplyJobStates>(

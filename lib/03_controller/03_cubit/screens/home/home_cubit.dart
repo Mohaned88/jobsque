@@ -31,6 +31,7 @@ class HomeCubit extends Cubit<HomeStates> {
   }
 
   List<JobModel> recentJobs = [];
+  List<String> recentJobsSaveIcons = [];
 
   getRecentJobList({required String token}) async {
     recentJobs = [];
@@ -40,24 +41,21 @@ class HomeCubit extends Cubit<HomeStates> {
       var headers = {
         'Authorization': 'Bearer $token',
       };
-      //print(headers);
       var response = await Dio().get(
         '$url',
         options: Options(
           headers: headers,
         ),
       );
-      /*print(response.statusCode);
-      print(response.data['data']);*/
       if (response.statusCode == 200) {
         response.data['data'].forEach(
           (element) {
             recentJobs.add(
               JobModel.fromMap(element),
             );
+            recentJobsSaveIcons.add(AppAssets.bottomBarIcon[3]);
           },
         );
-       // print(response.data['data'][1]);
         emit(RetrieveListSuccessState());
       } else {
         emit(RetrieveListFailState());
@@ -67,6 +65,7 @@ class HomeCubit extends Cubit<HomeStates> {
           "Retrieve List failed with error =========================>>>>>>>>>> $e");
     }
   }
+
 
   List<JobModel> suggestJobs = [];
 

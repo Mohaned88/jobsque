@@ -6,16 +6,14 @@ import 'package:jobsque/02_view/02_components/cards/job_preview_card.dart';
 import 'package:jobsque/02_view/02_components/cards/suggested_job_card.dart';
 import 'package:jobsque/02_view/03_widgets/custom_text.dart';
 import 'package:jobsque/02_view/03_widgets/custom_text_field_ver2.dart';
-import 'package:jobsque/02_view/04_utilities/res/constants.dart';
 import 'package:jobsque/02_view/05_styles/colors.dart';
 import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/home/home_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/home/home_states.dart';
-import 'package:jobsque/03_controller/03_cubit/screens/saved_cubit/saved_cubit.dart';
-import 'package:jobsque/03_controller/03_cubit/screens/saved_cubit/saved_states.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../03_controller/00_navigation/routes.dart';
+import '../../../03_controller/03_cubit/screens/saved/saved_cubit.dart';
 import '../../04_utilities/res/assets.dart';
 import '../../04_utilities/res/strings.dart';
 
@@ -34,6 +32,11 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeCubit.get(context).getSuggestJobList(
         token: AuthCubit.authorizationToken,
         userID: AuthCubit.get(context).userModel.id!);
+    SavedCubit.get(context).showAllFavoritesFromAPI(
+      token: AuthCubit.authorizationToken,
+      userID: AuthCubit.get(context).userModel.id!,
+      context: context,
+    );
   }
 
   @override
@@ -149,9 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: 5.w,
-                            ),
+                            SizedBox(height: 5.w),
                             SizedBox(
                               height: 50.w,
                               child: BannerCarousel(
@@ -169,7 +170,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   (index) => SuggestedJobCard(
                                     fillColor: homeCubit.itemColors[index],
                                     jobModel: homeCubit.suggestJobs[index],
-                                    saveOnPressed: () {},
+                                    saveOnPressed: () {
+                                      savedCubit.addToFavoritesInAPI(
+                                        token: AuthCubit.authorizationToken,
+                                        userID: authCubit.userModel.id!,
+                                        jobID: homeCubit.suggestJobs[index].id!,
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
@@ -219,8 +226,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         (index) => JobPreviewCard(
                           jobModel: homeCubit.recentJobs[index],
                           saveOnPressed: () {
-                            savedCubit.addToSavedJobs(
-                              jobModel: homeCubit.recentJobs[index],
+                            savedCubit.addToFavoritesInAPI(
+                              token: AuthCubit.authorizationToken,
+                              userID: authCubit.userModel.id!,
+                              jobID: homeCubit.recentJobs[index].id!,
                             );
                           },
                           gestureOnTap: () {
@@ -234,6 +243,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             );
                           },
+                          suffixIcon: homeCubit.recentJobsSaveIcons[index],
+                          suffixIconColor:homeCubit.recentJobsSaveIcons[index] == AppAssets.bottomBarActiveIcon[3] ? AppColors.kPrimaryColor : AppColors.midLightGrey,
                         ),
                       ),
                     ),

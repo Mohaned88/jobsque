@@ -4,6 +4,7 @@ import 'package:jobsque/01_model/04_file_model/file_model.dart';
 import 'package:jobsque/02_view/02_components/uploaded_doc_preview.dart';
 import 'package:jobsque/02_view/03_widgets/application_steps.dart';
 import 'package:jobsque/02_view/04_utilities/res/assets.dart';
+import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/apply_job/apply_job_States.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/apply_job/apply_job_cubit.dart';
 import 'package:sizer/sizer.dart';
@@ -20,6 +21,7 @@ class UploadDocsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ApplyJobCubit applyJobCubit = ApplyJobCubit.get(context);
+    AuthCubit authCubit = AuthCubit.get(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -65,11 +67,7 @@ class UploadDocsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             ApplicationSteps(
-                              isActiveStep1: true,
-                              isDoneStep1: true,
-                              isActiveStep2: true,
-                              isDoneStep2: true,
-                              isActiveStep3: true,
+                              stepNumber: 3,
                             ),
                             SizedBox(
                               height: 6.w,
@@ -167,8 +165,7 @@ class UploadDocsScreen extends StatelessWidget {
                                   name: applyJobCubit.fileOF!.name,
                                   type: applyJobCubit.fileOF!.extension,
                                   photo: AppAssets.pdfLogo,
-                                  size: (applyJobCubit.fileOF!.size / 1000)
-                                      .toString(),
+                                  size: (applyJobCubit.fileOF!.size / 1000).toString(),
                                 ),
                                 onPressedEdit: () {
                                   applyJobCubit.pickFile(fileName: 'OF');
@@ -190,7 +187,14 @@ class UploadDocsScreen extends StatelessWidget {
               bottom: 5.w,
               child: CustomElevatedButton(
                 onPressed: () {
-                   Navigator.pushNamed(context, AppRoutes.applyJobBackToHomePageRoute);
+                  if(applyJobCubit.pickedFileCV != null){
+                    applyJobCubit.applyJobAPI(
+                        token: AuthCubit.authorizationToken,
+                        userID: authCubit.userModel.id!,
+                        jobID: applyJobCubit.selectedJobId,
+                    );
+                    Navigator.pushNamed(context, AppRoutes.applyJobBackToHomePageRoute);
+                  }
                 },
                 label: AppStrings.submit,
                 width: 88.w,

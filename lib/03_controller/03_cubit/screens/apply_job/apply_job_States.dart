@@ -16,3 +16,7 @@ class ChangeToUploadedPreviewBoxState extends ApplyJobStates{}
 
 class ChangeStepIndexState extends ApplyJobStates{}
 
+class AppliedToJobSuccessState extends ApplyJobStates{}
+class AppliedToJobFailState extends ApplyJobStates{}
+
+

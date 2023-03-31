@@ -1,14 +1,18 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jobsque/01_model/00_user_model/user_model.dart';
 import 'package:jobsque/02_view/05_styles/colors.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/apply_job/apply_job_States.dart';
 
 import '../../../../01_model/05_job_model/job_model.dart';
 import '../../../../02_view/04_utilities/res/assets.dart';
+import '../../../../02_view/04_utilities/res/constants.dart';
 import '../../../../02_view/04_utilities/res/strings.dart';
 
 class ApplyJobCubit extends Cubit<ApplyJobStates> {
@@ -46,6 +50,15 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
       (index) => Icons.radio_button_off_outlined);
 
   changeWorkTypeCardColors(int index) {
+    workTypeBorderColors = List.generate(
+        AppStrings.applyJobWorkTypeJobTitles.length,
+            (index) => AppColors.lightGrey);
+    workTypeFillColors = List.generate(
+        AppStrings.applyJobWorkTypeJobTitles.length,
+            (index) => Colors.transparent);
+    workTypeRadioIcon = List.generate(
+        AppStrings.applyJobWorkTypeJobTitles.length,
+            (index) => Icons.radio_button_off_outlined);
     workTypeBorderColors[index] =
         workTypeBorderColors[index] == AppColors.kPrimaryColor
             ? AppColors.lightGrey
@@ -57,6 +70,12 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
     workTypeFillColors[index] = workTypeFillColors[index] == Colors.transparent
         ? AppColors.kBlue200
         : Colors.transparent;
+    if(!applyUserModel.interestedWork!.contains(AppStrings.applyJobWorkTypeJobTitles[index])) {
+      applyUserModel.interestedWork!.add(AppStrings.applyJobWorkTypeJobTitles[index]);
+    }
+    else{
+      applyUserModel.interestedWork!.remove(AppStrings.applyJobWorkTypeJobTitles[index]);
+    }
     emit(ChangeWorkTypeCardColorsState());
   }
 
@@ -166,4 +185,49 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
     ),
   ];
   List<JobModel> appliedRejectedJobs = [];
+
+  UserModel applyUserModel = UserModel();
+  late int selectedJobId;
+
+  applyJobAPI({required String token, required int userID,required int jobID,})async{
+
+    try {
+      Uri url =
+      Uri.parse('http://134.209.132.80/api/apply?');
+      var headers = {
+        'Authorization': 'Bearer $token',
+        'Connection' : 'keep-alive',
+        'Accept-Encoding' : 'gzip, deflate, br',
+        'Keep-Alive' : 'timeout=5, max=100',
+      };
+      var body ={
+        'mobile' : applyUserModel.mobile,
+        'work_type' : applyUserModel.interestedWork,
+        'cv_file' : jsonEncode(fileToDisplayCV),
+        'other_file': jsonEncode(fileToDisplayOF),
+        'job_id' : jobID,
+        'user_id': userID,
+      };
+      var response = await Dio().post(
+        '$url',
+        data: body,
+        options: Options(
+          headers: headers,
+
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        print(response.data);
+        emit(AppliedToJobSuccessState());
+      } else {
+        emit(AppliedToJobFailState());
+      }
+    } catch (e) {
+      print(
+          "Applying for Job $jobID failed with error =========================>>>>>>>>>> $e");
+    }
+  }
+
+
 }

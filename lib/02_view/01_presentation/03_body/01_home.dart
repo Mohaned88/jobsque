@@ -8,12 +8,14 @@ import 'package:jobsque/02_view/03_widgets/custom_text.dart';
 import 'package:jobsque/02_view/03_widgets/custom_text_field_ver2.dart';
 import 'package:jobsque/02_view/05_styles/colors.dart';
 import 'package:jobsque/03_controller/03_cubit/auth/auth_cubit.dart';
+import 'package:jobsque/03_controller/03_cubit/screens/apply_job/apply_job_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/home/home_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/home/home_states.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../03_controller/00_navigation/routes.dart';
 import '../../../03_controller/03_cubit/screens/saved/saved_cubit.dart';
+import '../../../03_controller/03_cubit/screens/saved/saved_states.dart';
 import '../../04_utilities/res/assets.dart';
 import '../../04_utilities/res/strings.dart';
 
@@ -217,34 +219,38 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 ),
-                BlocConsumer<HomeCubit, HomeStates>(
-                  listener: (context, state) {},
-                  builder: (context, state) => SliverList(
-                    delegate: SliverChildListDelegate(
-                      List.generate(
-                        homeCubit.recentJobs.length,
-                        (index) => JobPreviewCard(
-                          jobModel: homeCubit.recentJobs[index],
-                          saveOnPressed: () {
-                            savedCubit.addToFavoritesInAPI(
-                              token: AuthCubit.authorizationToken,
-                              userID: authCubit.userModel.id!,
-                              jobID: homeCubit.recentJobs[index].id!,
-                            );
-                          },
-                          gestureOnTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    ApplyJobScreen(
-                                  jobModel: homeCubit.recentJobs[index],
+                BlocConsumer<SavedCubit,SavedStates>(
+                  listener: (context,state){},
+                  builder: (context,state)=> BlocConsumer<HomeCubit, HomeStates>(
+                    listener: (context, state) {},
+                    builder: (context, state) => SliverList(
+                      delegate: SliverChildListDelegate(
+                        List.generate(
+                          homeCubit.recentJobs.length,
+                              (index) => JobPreviewCard(
+                            jobModel: homeCubit.recentJobs[index],
+                            saveOnPressed: () {
+                              savedCubit.addToFavoritesInAPI(
+                                token: AuthCubit.authorizationToken,
+                                userID: authCubit.userModel.id!,
+                                jobID: homeCubit.recentJobs[index].id!,
+                              );
+                            },
+                            gestureOnTap: () {
+                              ApplyJobCubit.get(context).selectedJobId = homeCubit.recentJobs[index].id!;
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ApplyJobScreen(
+                                        jobModel: homeCubit.recentJobs[index],
+                                      ),
                                 ),
-                              ),
-                            );
-                          },
-                          suffixIcon: homeCubit.recentJobsSaveIcons[index],
-                          suffixIconColor:homeCubit.recentJobsSaveIcons[index] == AppAssets.bottomBarActiveIcon[3] ? AppColors.kPrimaryColor : AppColors.midLightGrey,
+                              );
+                            },
+                            suffixIcon: homeCubit.recentJobsSaveIcons[index],
+                            suffixIconColor:homeCubit.recentJobsSaveIcons[index] == AppAssets.bottomBarActiveIcon[3] ? AppColors.kPrimaryColor : AppColors.midLightGrey,
+                          ),
                         ),
                       ),
                     ),

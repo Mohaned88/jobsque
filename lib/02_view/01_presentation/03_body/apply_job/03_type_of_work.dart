@@ -11,8 +11,20 @@ import '../../../03_widgets/custom_text.dart';
 import '../../../04_utilities/res/strings.dart';
 import '../../../05_styles/colors.dart';
 
-class TypeOfWorkScreen extends StatelessWidget {
+class TypeOfWorkScreen extends StatefulWidget {
   const TypeOfWorkScreen({Key? key}) : super(key: key);
+
+  @override
+  State<TypeOfWorkScreen> createState() => _TypeOfWorkScreenState();
+}
+
+class _TypeOfWorkScreenState extends State<TypeOfWorkScreen> {
+
+  @override
+  void initState() {
+    ApplyJobCubit.get(context).applyUserModel.interestedWork = [];
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +69,9 @@ class TypeOfWorkScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         ApplicationSteps(
-                          isActiveStep1: true,
-                          isDoneStep1: true,
-                          isActiveStep2: true,
+                          stepNumber: 2,
                         ),
-                        SizedBox(
-                          height: 6.w,
-                        ),
+                        SizedBox(height: 6.w),
                         CustomText(
                           text: AppStrings.bioDataStepTitle[1],
                           fontWeight: FontWeight.w500,
@@ -71,9 +79,7 @@ class TypeOfWorkScreen extends StatelessWidget {
                           height: 1.2,
                           color: AppColors.kPrimaryBlack,
                         ),
-                        SizedBox(
-                          height: 2.w,
-                        ),
+                        SizedBox(height: 2.w),
                         const CustomText(
                           text: AppStrings.bioDataSubTitle,
                           fontWeight: FontWeight.w400,
@@ -81,29 +87,25 @@ class TypeOfWorkScreen extends StatelessWidget {
                           height: 1.4,
                           color: AppColors.grey,
                         ),
-                        SizedBox(
-                          height: 6.w,
-                        ),
+                        SizedBox(height: 6.w),
                         Expanded(
                           child: BlocConsumer<ApplyJobCubit, ApplyJobStates>(
                             listener: (BuildContext context, state) {},
                             builder: (BuildContext context, state) {
                               return ListView.separated(
-                                itemCount:
-                                    AppStrings.applyJobWorkTypeJobTitles.length,
+                                itemCount: AppStrings.applyJobWorkTypeJobTitles.length,
                                 itemBuilder: (BuildContext context, int index) =>
                                     WorkTypeLargeCard(
-                                  jobTitle: AppStrings.applyJobWorkTypeJobTitles[index],
-                                  requiredDocs: AppStrings.applyJobWorkTypeRequiredDocuments[index],
-                                  fillColor: applyJobCubit.workTypeFillColors[index],
-                                  borderColor: applyJobCubit.workTypeBorderColors[index],
-                                  radioButton: applyJobCubit.workTypeRadioIcon[index],
-                                  onTap: () {
-                                    applyJobCubit.changeWorkTypeCardColors(index);
-                                  },
+                                      jobTitle: AppStrings.applyJobWorkTypeJobTitles[index],
+                                      requiredDocs: AppStrings.applyJobWorkTypeRequiredDocuments[index],
+                                      fillColor: applyJobCubit.workTypeFillColors[index],
+                                      borderColor: applyJobCubit.workTypeBorderColors[index],
+                                      radioButton: applyJobCubit.workTypeRadioIcon[index],
+                                      onTap: () {
+                                        applyJobCubit.changeWorkTypeCardColors(index);
+                                      },
                                 ),
-                                separatorBuilder: (context, index) =>
-                                    SizedBox(height: 2.w),
+                                separatorBuilder: (context, index) => SizedBox(height: 2.w),
                               );
                             },
                           ),
@@ -113,7 +115,9 @@ class TypeOfWorkScreen extends StatelessWidget {
                   ),
                   CustomElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.applyJobUploadDocsPageRoute);
+                      if(applyJobCubit.applyUserModel.interestedWork!.isNotEmpty) {
+                        Navigator.pushNamed(context, AppRoutes.applyJobUploadDocsPageRoute);
+                      }
                     },
                     label: AppStrings.onBoardingNext,
                     width: 88.w,

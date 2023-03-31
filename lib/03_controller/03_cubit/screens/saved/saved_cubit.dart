@@ -65,9 +65,8 @@ class SavedCubit extends Cubit<SavedStates> {
           headers: headers,
         ),
       );
-      //print(response.data);
       if (response.statusCode == 200) {
-        print(response.data['data'].length);
+        //print(response.data['data'].length);
         for(int j = 0; j < response.data['data'].length; j++){
           var searchList = HomeCubit.get(context).recentJobs;
           for(int i = 0; i < searchList.length; i++){

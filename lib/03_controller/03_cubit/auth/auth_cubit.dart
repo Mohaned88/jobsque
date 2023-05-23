@@ -30,9 +30,9 @@ class AuthCubit extends Cubit<AuthStates> {
         authorizationToken = data['token'];
         print('success \n token = $authorizationToken');
         //print(password);
-        userModel.id =data['\$user']['id'];
-        userModel.name =data['\$user']['name'];
-        userModel.email =data['\$user']['email'];
+        userModel.id =data['user']['id'];
+        userModel.name =data['user']['name'];
+        userModel.email =data['user']['email'];
         userModel.password =password;
         print(userModel.name);
         emit(LoginSuccessfullyState());
@@ -59,11 +59,11 @@ class AuthCubit extends Cubit<AuthStates> {
       if (response.statusCode == 200) {
         authorizationToken = data['token'];
         print('success \n token = $authorizationToken');
-        userModel!.id =data['data']['id'];
-        userModel!.name =data['data']['name'];
-        userModel!.email =data['data']['email'];
-        userModel!.password =password;
-        print(userModel!.name);
+        userModel.id =data['data']['id'];
+        userModel.name =data['data']['name'];
+        userModel.email =data['data']['email'];
+        userModel.password =password;
+        print(userModel.name);
         emit(RegisterSuccessfullyState());
       } else {
         print('failed');

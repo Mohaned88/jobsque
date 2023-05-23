@@ -51,7 +51,7 @@ class SuggestedJobCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(2.w),
                   color: AppColors.white,
                 ),
-                child: Image.asset(jobModel!.image ?? AppAssets.excelLogo),
+                child: Image.asset(AppAssets.excelLogo),//jobModel!.image ??
               ),
               title: CustomText(
                 text: jobModel!.name ?? '',
@@ -67,6 +67,8 @@ class SuggestedJobCard extends StatelessWidget {
                 fontWeight: FontWeight.w400,
                 fontSize: 12,
                 height: 1.5,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 color: fillColor == AppColors.kDarkBlue
                     ? AppColors.midLightGrey
                     : AppColors.grey,

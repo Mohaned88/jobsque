@@ -49,8 +49,10 @@ class JobTypeCard extends StatelessWidget {
           fontSize: fontSize ?? 12,
           height: height ?? 1.5,
           color: labelColor ?? AppColors.kPrimaryColor,
+          overflow: TextOverflow.ellipsis,
         ),
       ),
+      constraints: BoxConstraints(maxWidth: 22.w),
     );
   }
 }

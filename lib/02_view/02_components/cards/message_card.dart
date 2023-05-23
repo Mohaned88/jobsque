@@ -20,45 +20,43 @@ class MessageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isIncoming == 'company') {
       return Padding(
-        padding: EdgeInsets.only(left: 4.w,right: 10.w),
+        padding: EdgeInsets.only(left: 4.w, right: 10.w),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Flexible(
-              fit: FlexFit.tight,
-              child: Container(
-                margin: EdgeInsets.only(bottom: 3.w),
-                decoration: BoxDecoration(
-                  color: AppColors.offWhite2,
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(3.w),
-                    bottomLeft: Radius.circular(3.w),
-                    topRight: Radius.circular(3.w),
-                  ),
+            Container(
+              margin: EdgeInsets.only(bottom: 3.w),
+              decoration: BoxDecoration(
+                color: AppColors.offWhite2,
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(3.w),
+                  bottomLeft: Radius.circular(3.w),
+                  topRight: Radius.circular(3.w),
                 ),
-                child: Padding(
-                  padding: EdgeInsets.all(3.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomText(
-                        text: message,
-                        color: AppColors.kPrimaryBlack,
-                        textAlign: TextAlign.left,
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: CustomText(
-                          text: DateFormat.Hm().format(dateTime),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          height: 1.5,
-                          color: AppColors.midLightGrey,
-                          textAlign: TextAlign.right,
+              ),
+              child: Padding(
+                padding: EdgeInsets.all(3.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Wrap(
+                      children: [
+                        CustomText(
+                          text: message,
+                          color: AppColors.kPrimaryBlack,
+                          textAlign: TextAlign.left,
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                    CustomText(
+                      text: DateFormat.Hm().format(dateTime),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                      height: 1.5,
+                      color: AppColors.midLightGrey,
+                      textAlign: TextAlign.right,
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -66,38 +64,40 @@ class MessageCard extends StatelessWidget {
           ],
         ),
       );
-    } else {
+    }
+    else {
       return Padding(
-        padding: EdgeInsets.only(left: 10.w,right: 4.w),
+        padding: EdgeInsets.only(left: 10.w, right: 4.w),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const Expanded(child: SizedBox()),
-            Flexible(
-              fit: FlexFit.tight,
-              child: Container(
-                margin: EdgeInsets.only(bottom: 3.w),
-                decoration: BoxDecoration(
-                  color: AppColors.kPrimaryColor,
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(3.w),
-                    bottomLeft: Radius.circular(3.w),
-                    topLeft: Radius.circular(3.w),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 3.w),
+                  decoration: BoxDecoration(
+                    color: AppColors.kPrimaryColor,
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(3.w),
+                      bottomLeft: Radius.circular(3.w),
+                      topLeft: Radius.circular(3.w),
+                    ),
                   ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(3.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      CustomText(
-                        text: message,
-                        color: AppColors.whiteGrey,
-                        textAlign: TextAlign.left,
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: CustomText(
+                  child: Padding(
+                    padding: EdgeInsets.all(3.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Flexible(
+                          child: CustomText(
+                            text: message,
+                            color: AppColors.whiteGrey,
+                            textAlign: TextAlign.left,
+                          ),
+                        ),
+                        CustomText(
                           text: DateFormat.Hm().format(dateTime),
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
@@ -105,8 +105,8 @@ class MessageCard extends StatelessWidget {
                           color: AppColors.offWhite2,
                           textAlign: TextAlign.right,
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

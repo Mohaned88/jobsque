@@ -7,13 +7,14 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobsque/01_model/00_user_model/user_model.dart';
+import 'package:jobsque/02_view/04_utilities/res/constants.dart';
 import 'package:jobsque/02_view/05_styles/colors.dart';
 import 'package:jobsque/03_controller/03_cubit/screens/apply_job/apply_job_States.dart';
 
 import '../../../../01_model/05_job_model/job_model.dart';
 import '../../../../02_view/04_utilities/res/assets.dart';
-import '../../../../02_view/04_utilities/res/constants.dart';
 import '../../../../02_view/04_utilities/res/strings.dart';
+import 'package:http/http.dart' as http;
 
 class ApplyJobCubit extends Cubit<ApplyJobStates> {
   ApplyJobCubit() : super(InitialApplyJobState());
@@ -52,13 +53,13 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
   changeWorkTypeCardColors(int index) {
     workTypeBorderColors = List.generate(
         AppStrings.applyJobWorkTypeJobTitles.length,
-            (index) => AppColors.lightGrey);
+        (index) => AppColors.lightGrey);
     workTypeFillColors = List.generate(
         AppStrings.applyJobWorkTypeJobTitles.length,
-            (index) => Colors.transparent);
+        (index) => Colors.transparent);
     workTypeRadioIcon = List.generate(
         AppStrings.applyJobWorkTypeJobTitles.length,
-            (index) => Icons.radio_button_off_outlined);
+        (index) => Icons.radio_button_off_outlined);
     workTypeBorderColors[index] =
         workTypeBorderColors[index] == AppColors.kPrimaryColor
             ? AppColors.lightGrey
@@ -70,11 +71,13 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
     workTypeFillColors[index] = workTypeFillColors[index] == Colors.transparent
         ? AppColors.kBlue200
         : Colors.transparent;
-    if(!applyUserModel.interestedWork!.contains(AppStrings.applyJobWorkTypeJobTitles[index])) {
-      applyUserModel.interestedWork!.add(AppStrings.applyJobWorkTypeJobTitles[index]);
-    }
-    else{
-      applyUserModel.interestedWork!.remove(AppStrings.applyJobWorkTypeJobTitles[index]);
+    if (!applyUserModel.interestedWork!
+        .contains(AppStrings.applyJobWorkTypeJobTitles[index])) {
+      applyUserModel.interestedWork!
+          .add(AppStrings.applyJobWorkTypeJobTitles[index]);
+    } else {
+      applyUserModel.interestedWork!
+          .remove(AppStrings.applyJobWorkTypeJobTitles[index]);
     }
     emit(ChangeWorkTypeCardColorsState());
   }
@@ -143,7 +146,7 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
 
   int stepIndex = 0;
 
-  changeStepIndexFunction(int index){
+  changeStepIndexFunction(int index) {
     stepIndex = index;
     emit(ChangeStepIndexState());
   }
@@ -162,7 +165,7 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
       aboutCompany: 'some info',
       skills: 'bye3raf yedayya3 2l wa2t',
       company: 'baklawez',
-      types: ['senior','full time','on site'],
+      types: ['senior', 'full time', 'on site'],
       salary: '15k-20k',
       createdAt: '2023-03-12T14:01:03.000000Z',
     ),
@@ -179,7 +182,7 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
       aboutCompany: 'some info',
       skills: 'bye3raf yedayya3 2l wa2t',
       company: 'baklawez',
-      types: ['senior','full time','on site'],
+      types: ['senior', 'full time', 'on site'],
       salary: '15k-20k',
       createdAt: '2023-03-12T14:01:03.000000Z',
     ),
@@ -188,32 +191,69 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
 
   UserModel applyUserModel = UserModel();
   late int selectedJobId;
+  /* try{
+      var headers = {'Authorization': 'Bearer $token'};
+      var request = http.MultipartRequest(
+          'POST',
+          Uri.parse(
+              'http://134.209.132.80/api/apply?mobile=01114578733&work_type=ui designer&job_id=$jobID&user_id=$userID'));
+      request.fields.addAll({
+        'name': 'Mohaned Abdallah',
+        'email': 'mohanedwork95@gmail.com',
+        'mobile': '01117454429',
+        'work_type': 'full',
+        'other_file': 'dsdsad',
+        'job_id': '1',
+        'user_id': '1'
+      });
+      request.files
+          .add(await http.MultipartFile.fromPath('cv_file', '${fileCV!.path}'));
+      request.headers.addAll(headers);
 
-  applyJobAPI({required String token, required int userID,required int jobID,})async{
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        print(await response.stream.bytesToString());
+      } else {
+        print(response.reasonPhrase);
+      }
+    }
+    catch(e){
+      print('object ======================>>>>>>>>>>>>>>>>>>> $e');
+    }*/
+  applyJobAPI({
+    required String token,
+    required int userID,
+    required int jobID,
+  }) async {
+
 
     try {
-      Uri url =
-      Uri.parse('http://134.209.132.80/api/apply?');
+      Uri url = Uri.parse(
+          'http://${AppConstants.applyJobLink}mobile=${applyUserModel.mobile}&work_type=${applyUserModel.interestedWork}&cv_file=$fileToDisplayCV&other_file=$fileToDisplayOF&job_id=$jobID&user_id=$userID');
       var headers = {
         'Authorization': 'Bearer $token',
-        'Connection' : 'keep-alive',
+       /* 'Connection' : 'keep-alive',
         'Accept-Encoding' : 'gzip, deflate, br',
-        'Keep-Alive' : 'timeout=5, max=100',
+        'Keep-Alive' : 'timeout=5, max=100',*/
       };
-      var body ={
-        'mobile' : applyUserModel.mobile,
-        'work_type' : applyUserModel.interestedWork,
-        'cv_file' : jsonEncode(fileToDisplayCV),
-        'other_file': jsonEncode(fileToDisplayOF),
-        'job_id' : jobID,
+      var body = {
+        'mobile': applyUserModel.mobile,
+        'work_type': applyUserModel.interestedWork,
+        'job_id': jobID,
         'user_id': userID,
       };
-      var response = await Dio().post(
-        '$url',
-        data: body,
+      File file = File(fileToDisplayCV!);
+      Stream<List<int>> stream = file.openRead();
+
+      FormData formData = FormData.fromMap({
+        'cv_file': await MultipartFile.fromBytes(await stream.reduce((value, element) => value + element), filename: fileToDisplayCV),
+      });
+      var response = await Dio().postUri(
+        url,
+        data: formData,
         options: Options(
           headers: headers,
-
         ),
       );
 
@@ -228,6 +268,4 @@ class ApplyJobCubit extends Cubit<ApplyJobStates> {
           "Applying for Job $jobID failed with error =========================>>>>>>>>>> $e");
     }
   }
-
-
 }

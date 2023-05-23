@@ -187,15 +187,16 @@ class AppConstants {
     ),
   ];
 
-  static const String loginLink = '134.209.132.80/api/auth/login?';
-  static const String registerLink ='134.209.132.80/api/auth/register?';
-  static const String workTypeLink ='134.209.132.80/api/user/profile/';
-  static const String jobsLink = '134.209.132.80/api/jobs';
-  static const String suggestJobsLink = '134.209.132.80/api/jobs/sugest/';
-  static const String getChatLink = '134.209.132.80/api/chat?';
-  static const String userSendLink = '134.209.132.80/api/chat/user?';
-  static const String editProfileLanguageLink = '134.209.132.80/api/user/profile/language/';
-  static const String searchJobsLink = '134.209.132.80/api/jobs/search?name=';
-  static const String addToFavoritesLink = '134.209.132.80/api/favorites?';
-  static const String showFavoritesFromAPILink = '134.209.132.80/api/favorites/';
+  static const String loginLink = '164.92.246.77/api/auth/login?';
+  static const String registerLink ='164.92.246.77/api/auth/register?';
+  static const String workTypeLink ='164.92.246.77/api/user/profile/';
+  static const String jobsLink = '164.92.246.77/api/jobs';
+  static const String suggestJobsLink = '164.92.246.77/api/jobs/sugest/';
+  static const String getChatLink = '164.92.246.77/api/chat?';
+  static const String userSendLink = '164.92.246.77/api/chat/user?';
+  static const String editProfileLanguageLink = '164.92.246.77/api/user/profile/language/';
+  static const String searchJobsLink = '164.92.246.77/api/jobs/search?name=';
+  static const String addToFavoritesLink = '164.92.246.77/api/favorites?';
+  static const String showFavoritesFromAPILink = '164.92.246.77/api/favorites/';
+  static const String applyJobLink = '164.92.246.77/api/apply?';
 }

@@ -57,7 +57,7 @@ class JobPreviewCard extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 3.w),
                       child: Image.asset(
-                        jobModel!.image ?? AppAssets.twitterLogo,
+                         AppAssets.twitterLogo, //'${jobModel!.image}' ??
                         width: 10.w,
                         height: 10.w,
                       ),
@@ -72,6 +72,7 @@ class JobPreviewCard extends StatelessWidget {
                             fontSize: 18,
                             height: 1.3,
                             color: AppColors.kPrimaryBlack,
+                            overflow: TextOverflow.ellipsis,
                           ),
                           CustomText(
                             text:
@@ -80,6 +81,7 @@ class JobPreviewCard extends StatelessWidget {
                             fontSize: 12,
                             height: 1.5,
                             color: AppColors.midLightGrey,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       ),

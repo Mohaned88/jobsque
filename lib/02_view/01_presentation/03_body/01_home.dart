@@ -1,6 +1,7 @@
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jobsque/01_model/05_job_model/job_model.dart';
 import 'package:jobsque/02_view/01_presentation/03_body/apply_job/01_apply_job_main.dart';
 import 'package:jobsque/02_view/02_components/cards/job_preview_card.dart';
 import 'package:jobsque/02_view/02_components/cards/suggested_job_card.dart';
@@ -29,16 +30,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    HomeCubit.get(context)
-        .getRecentJobList(token: AuthCubit.authorizationToken);
+    HomeCubit.get(context).getRecentJobList(token: AuthCubit.authorizationToken);
     HomeCubit.get(context).getSuggestJobList(
         token: AuthCubit.authorizationToken,
         userID: AuthCubit.get(context).userModel.id!);
-    SavedCubit.get(context).showAllFavoritesFromAPI(
-      token: AuthCubit.authorizationToken,
-      userID: AuthCubit.get(context).userModel.id!,
-      context: context,
-    );
   }
 
   @override
@@ -230,11 +225,30 @@ class _HomeScreenState extends State<HomeScreen> {
                               (index) => JobPreviewCard(
                             jobModel: homeCubit.recentJobs[index],
                             saveOnPressed: () {
-                              savedCubit.addToFavoritesInAPI(
-                                token: AuthCubit.authorizationToken,
-                                userID: authCubit.userModel.id!,
-                                jobID: homeCubit.recentJobs[index].id!,
-                              );
+                              List<int> jodIDs =[];
+                              savedCubit.savedJobs.forEach((element) {jodIDs.add(element.jobId!);},);
+                              print(jodIDs);
+                              if(jodIDs.contains(homeCubit.recentJobs[index].id)){
+                                List<JobModel> x = savedCubit.savedJobs.where((element) => element.jobId==homeCubit.recentJobs[index].id).toList();
+                                x.forEach((element) {
+                                  savedCubit.deleteFavoriteFromAPIList(
+                                    token: AuthCubit.authorizationToken,
+                                    jobID: element.id!,
+                                  );
+                                });
+                                homeCubit.recentJobsSaveIcons[index] = AppAssets.bottomBarIcon[3];
+                                print('delete');
+
+                              }
+                              else{
+                                savedCubit.addToFavoritesInAPI(
+                                  token: AuthCubit.authorizationToken,
+                                  userID: authCubit.userModel.id!,
+                                  jobID: homeCubit.recentJobs[index].id!,
+                                );
+                                homeCubit.recentJobsSaveIcons[index] = AppAssets.bottomBarActiveIcon[3];
+                                print('add');
+                              }
                             },
                             gestureOnTap: () {
                               ApplyJobCubit.get(context).selectedJobId = homeCubit.recentJobs[index].id!;

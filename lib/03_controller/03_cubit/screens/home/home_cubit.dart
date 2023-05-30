@@ -56,6 +56,7 @@ class HomeCubit extends Cubit<HomeStates> {
             recentJobsSaveIcons.add(AppAssets.bottomBarIcon[3]);
           },
         );
+        //print(response.data['data']);
         emit(RetrieveListSuccessState());
       } else {
         emit(RetrieveListFailState());

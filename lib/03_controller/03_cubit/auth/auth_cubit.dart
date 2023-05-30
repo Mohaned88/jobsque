@@ -72,7 +72,7 @@ class AuthCubit extends Cubit<AuthStates> {
       }
     }
     catch (e) {
-      print("login failed with error =========================>>>>>>>>>> $e");
+      print("Register failed with error =========================>>>>>>>>>> $e");
       throw Exception('failed to get response error => $e');
     }
   }

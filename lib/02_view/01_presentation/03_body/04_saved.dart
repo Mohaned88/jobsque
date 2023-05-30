@@ -160,6 +160,9 @@ class _SavedScreenState extends State<SavedScreen> {
                                                 ),
                                                 CustomElevatedButtonVer3(
                                                   onPressed: () {
+
+                                                    print('deleting  job with ID = ${savedCubit.savedJobs[index].id}');
+                                                    print('and jobID = ${savedCubit.savedJobs[index].jobId}');
                                                     savedCubit.deleteFavoriteFromAPIList(
                                                       token: AuthCubit.authorizationToken,
                                                       jobID: savedCubit.savedJobs[index].id!,
@@ -167,7 +170,9 @@ class _SavedScreenState extends State<SavedScreen> {
                                                     savedCubit.removeFromSavedJobs(
                                                       jobModel: savedCubit.savedJobs[index],
                                                     );
+                                                   // savedCubit.savedJobs.forEach((element) {print('job ID = ${element.jobId}');});
                                                     Navigator.pop(context);
+                                                    savedCubit.showAllFavoritesFromAPI(token: AuthCubit.authorizationToken, userID: AuthCubit.get(context).userModel.id!);
                                                     setState(() {});
                                                   },
                                                   label: 'Cancel Save',

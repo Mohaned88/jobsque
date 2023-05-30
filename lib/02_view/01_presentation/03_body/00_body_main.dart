@@ -7,6 +7,10 @@ import 'package:jobsque/03_controller/00_navigation/routes.dart';
 import 'package:jobsque/03_controller/03_cubit/widgets/body/bottom_nav_bar/bottom_nav_bar_cubit.dart';
 import 'package:jobsque/03_controller/03_cubit/widgets/body/bottom_nav_bar/bottom_nav_bar_states.dart';
 
+import '../../../03_controller/03_cubit/auth/auth_cubit.dart';
+import '../../../03_controller/03_cubit/screens/home/home_cubit.dart';
+import '../../../03_controller/03_cubit/screens/saved/saved_cubit.dart';
+
 class BodyMainScreen extends StatelessWidget {
   const BodyMainScreen({Key? key}) : super(key: key);
 
@@ -24,9 +28,24 @@ class BodyMainScreen extends StatelessWidget {
           currentIndex: bottomBarCubit.currentIndex,
           onTap: (int index) {
             bottomBarCubit.changeIndex(index);
-            /*if (index == 2) {
-              Navigator.pushNamed(context, AppRoutes.applyJobDetailsPageRoute);
-            }*/
+            if (index == 3) {
+              SavedCubit.get(context).showAllFavoritesFromAPI(
+                token: AuthCubit.authorizationToken,
+                userID: AuthCubit.get(context).userModel.id!,
+                context: context,
+              );
+            }
+            if(index ==0){
+              HomeCubit.get(context).getRecentJobList(token: AuthCubit.authorizationToken);
+              HomeCubit.get(context).getSuggestJobList(
+                  token: AuthCubit.authorizationToken,
+                  userID: AuthCubit.get(context).userModel.id!);
+              SavedCubit.get(context).showAllFavoritesFromAPI(
+                token: AuthCubit.authorizationToken,
+                userID: AuthCubit.get(context).userModel.id!,
+                context: context,
+              );
+            }
           },
           unselectedLabelStyle: const TextStyle(
             color: AppColors.midLightGrey,

@@ -2,6 +2,7 @@ import 'package:jobsque/02_view/04_utilities/res/assets.dart';
 
 class JobModel {
   int? id;
+  int? jobId;
   String? name;
   String? image;
   List<String>? types;
@@ -19,6 +20,7 @@ class JobModel {
 
   JobModel({
     this.id,
+    this.jobId,
     this.name,
     this.image,
     this.types,
@@ -39,6 +41,7 @@ class JobModel {
     Map<String, dynamic> data = {};
 
     data['data']['id'] = id;
+    data['data']['job_id'] = jobId;
     data['data']['name'] = name;
     data['data']['image'] = image;
     data['data']['job_time_type'] = types![0];
@@ -63,9 +66,10 @@ class JobModel {
     //var data = map['data'];
     return JobModel(
       id: map['id'],
+      jobId: map['job_id'],
       name: map['name'],
       image: map['image'] ?? AppAssets.twitterLogo,
-      types: [map['job_time_type'],map['job_type'],map['job_level']],
+      types: [map['job_time_type'],map['job_type'],map['job_level']]??['1','2','3'],
       description: map['job_description'],
       skills: map['job_skill'],
       company: map['comp_name'],

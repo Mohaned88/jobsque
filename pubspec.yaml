@@ -66,10 +66,19 @@ dependencies:
   firebase_storage: ^11.0.6
   firebase_auth: ^4.1.4
   google_sign_in: ^5.4.2
+  flutter_launcher_icons: ^0.10.0
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+flutter_launcher_name:
+  name: "JobsQue"
+flutter_icons:
+  image_path: "assets/01_images/01_onboarding/splash/Logo.png"
+  android: true
+  min_sdk_android: 21
+  ios: true
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

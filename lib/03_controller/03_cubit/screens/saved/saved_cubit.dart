@@ -26,8 +26,13 @@ class SavedCubit extends Cubit<SavedStates> {
     emit(AddToSavedState());
   }
 
-  addToFavoritesInAPI({required String token, required int userID, required int jobID}) async {
+  addToFavoritesInAPI(
+      {required String token, required int userID, required int jobID}) async {
     try {
+      showAllFavoritesFromAPI(
+        token: token,
+        userID: userID,
+      );
       Uri url = Uri.parse(
           'http://${AppConstants.addToFavoritesLink}user_id=$userID&job_id=$jobID');
       var headers = {
@@ -51,7 +56,10 @@ class SavedCubit extends Cubit<SavedStates> {
     }
   }
 
-  showAllFavoritesFromAPI({required String token, required int userID, BuildContext? context}) async {
+  showAllFavoritesFromAPI(
+      {required String token,
+      required int userID,
+      BuildContext? context}) async {
     savedJobs = [];
     try {
       Uri url =
@@ -67,7 +75,7 @@ class SavedCubit extends Cubit<SavedStates> {
       );
       if (response.statusCode == 200) {
         //print(response.data['data'].length);
-        for(int j = 0; j < response.data['data'].length; j++){
+        /*for(int j = 0; j < response.data['data'].length; j++){
           var searchList = HomeCubit.get(context).recentJobs;
           for(int i = 0; i < searchList.length; i++){
             if(searchList[i].id == response.data['data'][j]['job_id']){
@@ -75,7 +83,23 @@ class SavedCubit extends Cubit<SavedStates> {
               HomeCubit.get(context).recentJobsSaveIcons[i] = AppAssets.bottomBarActiveIcon[3];
             }
           }
-        }
+        }*/
+        response.data['data'].forEach(
+          (element) {
+            savedJobs.add(
+              JobModel(
+                id: element['id'],
+                jobId: element['job_id'],
+                name: element['name'],
+                location: element['location'],
+                image: element['image'],
+                createdAt: element['created_at'],
+                favorites: element['like'],
+              ),
+            );
+          },
+        );
+      //  print(response.data['data']);
         emit(GetFavoriteListSuccessState());
       } else {
         emit(GetFavoriteListFailState());
@@ -88,13 +112,13 @@ class SavedCubit extends Cubit<SavedStates> {
 
   deleteFavoriteFromAPIList({required String token, required int jobID}) async {
     try {
-      Uri url = Uri.parse(
-          'http://${AppConstants.showFavoritesFromAPILink}$jobID');
+      Uri url =
+          Uri.parse('http://${AppConstants.showFavoritesFromAPILink}$jobID');
       var headers = {
         'Authorization': 'Bearer $token',
       };
-      var response = await Dio().delete(
-        '$url',
+      var response = await Dio().deleteUri(
+        url,
         options: Options(
           headers: headers,
         ),
